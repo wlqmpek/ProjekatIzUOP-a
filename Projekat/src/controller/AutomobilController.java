@@ -76,6 +76,7 @@ public class AutomobilController {
 	
 	//konvertuje iz niza stringova u niz automobila
 	public static void konvertujSveAutomobile() {
+		automobili.clear();
 		for (ArrayList<String> auto : podaci) {
 			automobili.add(stringUAutomobil(auto));
 		}
@@ -87,6 +88,8 @@ public class AutomobilController {
 	}
 	
 	public static void inicijalizujAutomobile() {
+		automobili.clear();
+		podaci.clear();
 		procitajFajl();
 		konvertujSveAutomobile();
 	}

@@ -83,6 +83,8 @@ public class MusterijaController {
 	}
 	
 	public static void inicijalizujMusterije() {
+		musterije.clear();
+		podaci.clear();
 		procitajFajl();
 		konvertujSveMusterije();
 	}

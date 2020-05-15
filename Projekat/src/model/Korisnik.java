@@ -22,8 +22,6 @@ abstract class Korisnik {
 	private String lozinka;
 	private boolean obrisan;
 	
-	
-	
 	public Korisnik(String oznaka, String ime, String prezime, String JMBG, Pol pol, String adresa, String brojTelefona,
 			String korisnickoIme, String lozinka, boolean obrisan) {
 		super();
