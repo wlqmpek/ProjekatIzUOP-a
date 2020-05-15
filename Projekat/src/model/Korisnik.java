@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.UUID;
 
+import controller.MusterijaController;
 import enumi.Pol;
 
 
@@ -120,7 +121,15 @@ abstract class Korisnik {
 	public void setObrisan(boolean obrisan) {
 		this.obrisan = obrisan;
 	}
+
 	
+	
+	@Override
+	public String toString() {
+		return "Korisnik [oznaka=" + oznaka + ", ime=" + ime + ", prezime=" + prezime + ", JMBG=" + JMBG + ", pol="
+				+ pol + ", adresa=" + adresa + ", brojTelefona=" + brojTelefona + ", korisnickoIme=" + korisnickoIme
+				+ ", lozinka=" + lozinka + ", obrisan=" + obrisan + "]";
+	}
 	
 	
 }

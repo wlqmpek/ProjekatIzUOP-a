@@ -8,8 +8,8 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
-
 import enumi.Pol;
+import model.Automobil;
 import model.Musterija;
 import view.MusterijaView;
 
@@ -18,8 +18,8 @@ public class MusterijaController {
 	private Musterija model;
 	private MusterijaView view;
 	private static File file = new File(".\\podaci\\musterije.txt");
-	static ArrayList<ArrayList<String>> podaci = new ArrayList<ArrayList<String>>();
-	static ArrayList<Musterija> musterije = new ArrayList<Musterija>();
+	public static ArrayList<ArrayList<String>> podaci = new ArrayList<ArrayList<String>>();
+	public static ArrayList<Musterija> musterije = new ArrayList<Musterija>();
 	
 	public MusterijaController(Musterija model, MusterijaView view) {
 		super();
@@ -37,11 +37,8 @@ public class MusterijaController {
 		try {
 			FileWriter fw = new FileWriter(file, true);
 			PrintWriter pw = new PrintWriter(fw);
-			pw.append((musterijaKaoString));
+			pw.append(musterijaKaoString);
 			pw.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -71,6 +68,7 @@ public class MusterijaController {
 		return new ArrayList<String>(Arrays.asList(musterija.getOznaka(), musterija.getIme(), musterija.getPrezime(), musterija.getJMBG(), musterija.getPol().toString(), musterija.getAdresa(), musterija.getBrojTelefona(), musterija.getKorisnickoIme(), musterija.getLozinka(), String.valueOf(musterija.getBrojPoena()), String.valueOf(musterija.isObrisan())));
 	}
 	
+	//konvertuje iz niza stringova u niz musterija
 	public static void konvertujSveMusterije() {
 		for (ArrayList<String> mus : podaci) {
 			musterije.add(stringUMusteriju(mus));
@@ -78,4 +76,23 @@ public class MusterijaController {
 	}
 	
 	
+	public static ArrayList<Automobil> nadjiAutomobilePoIdVlasnika(String oznaka) {
+		return AutomobilController.nadjiAutomobilePoIdVlasnika(oznaka);
+	}
+	
+	public static void inicijalizujMusterije() {
+		procitajFajl();
+		konvertujSveMusterije();
+	}
+	
+	public static Musterija nadjiMusteriju(String oznaka) {
+		inicijalizujMusterije();
+		Musterija trazenaMusterija = null;
+		for(Musterija musterija : musterije) {
+			if(oznaka.equals(musterija.getOznaka())) {
+				trazenaMusterija = musterija;
+			}
+		}
+		return trazenaMusterija;
+	}
 }

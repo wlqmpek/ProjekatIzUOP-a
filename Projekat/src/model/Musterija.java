@@ -1,5 +1,9 @@
 package model;
 
+import java.util.ArrayList;
+
+import controller.AutomobilController;
+import controller.MusterijaController;
 import enumi.Pol;
 
 public class Musterija extends Korisnik {
@@ -11,16 +15,12 @@ public class Musterija extends Korisnik {
 		super(oznaka, ime, prezime, JMBG, pol, adresa, brojTelefona, korisnickoIme, lozinka, obrisan);
 		this.brojPoena = brojPoena;
 	}
-	
-	
 
 	public Musterija(String ime, String prezime, String JMBG, String adresa, String brojTelefona, String korisnickoIme,
 			String lozinka, byte brojPoena) {
 		super(ime, prezime, JMBG, adresa, brojTelefona, korisnickoIme, lozinka);
 		this.brojPoena = brojPoena;
 	}
-
-
 
 	public byte getBrojPoena() {
 		return brojPoena;
@@ -30,7 +30,10 @@ public class Musterija extends Korisnik {
 		if (brojPoena > 10) {
 			throw new IllegalArgumentException("Uneta vrednost mora biti <= 10");
 		}
-		
+	}
+	
+	public ArrayList<Automobil> getAutomobili() {
+		return AutomobilController.nadjiAutomobilePoIdVlasnika(this.getOznaka());
 	}
 
 	@Override

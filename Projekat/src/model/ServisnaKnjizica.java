@@ -39,6 +39,7 @@ public class ServisnaKnjizica {
 
 	public void setAutomobil(Automobil automobil) {
 		this.automobil = automobil;
+		this.oznaka = automobil.getOznaka();
 	}
 
 	public ArrayList<Servis> getServisi() {

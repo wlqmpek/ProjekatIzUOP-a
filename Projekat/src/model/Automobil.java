@@ -2,13 +2,11 @@ package model;
 
 import java.util.UUID;
 
-enum Marka {
-	TESLA, BMW, VOLVO, FIAT, FORD;
-}
+import controller.AutomobilController;
+import enumi.Gorivo;
+import enumi.Marka;
+import enumi.Model;
 
-enum Model {
-	P100D, M100, A20, I3, MODEL_S, GOLF;
-}
 
 public class Automobil {
 	private String oznaka;
@@ -18,12 +16,12 @@ public class Automobil {
 	private short godinaProizvodnje;
 	private short zapreminaMotora;
 	private short snagaMotora;
-	private String gorivo;
+	private Gorivo gorivo;
 	private boolean obrisan;
 	private ServisnaKnjizica servisnaKnjizica;
 	
 	public Automobil(Musterija vlasnik, Marka marka, Model model, short godinaProizvodnje,
-			short zapreminaMotora, short snagaMotora, String gorivo) {
+			short zapreminaMotora, short snagaMotora, Gorivo gorivo) {
 		super();
 		this.oznaka = generisiOznaku();
 		this.vlasnik = vlasnik;
@@ -36,6 +34,39 @@ public class Automobil {
 		this.obrisan = false;
 	}
 	
+	
+	
+	public Automobil(String oznaka, Musterija vlasnik, Marka marka, Model model, short godinaProizvodnje,
+			short zapreminaMotora, short snagaMotora, Gorivo gorivo, boolean obrisan) {
+		super();
+		this.oznaka = oznaka;
+		this.vlasnik = vlasnik;
+		this.marka = marka;
+		this.model = model;
+		this.godinaProizvodnje = godinaProizvodnje;
+		this.zapreminaMotora = zapreminaMotora;
+		this.snagaMotora = snagaMotora;
+		this.gorivo = gorivo;
+		this.servisnaKnjizica = null;
+		this.obrisan = obrisan;
+	}
+	
+	public Automobil(String oznaka, String vlasnik, Marka marka, Model model, short godinaProizvodnje,
+			short zapreminaMotora, short snagaMotora, Gorivo gorivo, boolean obrisan) {
+		super();
+		this.oznaka = oznaka;
+		this.vlasnik = AutomobilController.nadjiVlasnika(vlasnik);
+		this.marka = marka;
+		this.model = model;
+		this.godinaProizvodnje = godinaProizvodnje;
+		this.zapreminaMotora = zapreminaMotora;
+		this.snagaMotora = snagaMotora;
+		this.gorivo = gorivo;
+		this.servisnaKnjizica = null;
+		this.obrisan = obrisan;
+	}
+	
+
 	public String getOznaka() {
 		return oznaka;
 	}
@@ -92,13 +123,26 @@ public class Automobil {
 		this.snagaMotora = snagaMotora;
 	}
 
-	public String getGorivo() {
+	public Gorivo getGorivo() {
 		return gorivo;
 	}
 
-	public void setGorivo(String gorivo) {
+	public void setGorivo(Gorivo gorivo) {
 		this.gorivo = gorivo;
 	}
+	
+
+	public ServisnaKnjizica getServisnaKnjizica() {
+		return servisnaKnjizica;
+	}
+
+
+	public void setServisnaKnjizica(ServisnaKnjizica servisnaKnjizica) {
+		this.servisnaKnjizica = servisnaKnjizica;
+		this.servisnaKnjizica.setAutomobil(this);
+	}
+
+
 
 	public boolean isObrisan() {
 		return obrisan;
@@ -106,6 +150,16 @@ public class Automobil {
 
 	public void setObrisan(boolean obrisan) {
 		this.obrisan = obrisan;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "Automobil [oznaka=" + oznaka + ", vlasnik=" + vlasnik + ", marka=" + marka + ", model=" + model
+				+ ", godinaProizvodnje=" + godinaProizvodnje + ", zapreminaMotora=" + zapreminaMotora + ", snagaMotora="
+				+ snagaMotora + ", gorivo=" + gorivo + ", obrisan=" + obrisan + ", servisnaKnjizica=" + servisnaKnjizica
+				+ "]";
 	}
 
 	

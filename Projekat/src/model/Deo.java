@@ -2,6 +2,9 @@ package model;
 
 import java.util.UUID;
 
+import enumi.Marka;
+import enumi.Model;
+
 public class Deo {
 	
 	private String oznaka;

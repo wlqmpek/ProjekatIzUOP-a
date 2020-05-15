@@ -1,0 +1,3 @@
+auto001|asdasda|TESLA|MODEL_S|1996|100|130|STRUJA|true
+auto002|lololololo|FIAT|MODEL_X|1996|100|130|BENZIN|true
+auto003|asdasda|VOLVO|GOLF|2019|111|112|NAFTA|false
