@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.UUID;
 
 enum Status {
 	
@@ -19,11 +20,10 @@ public class Servis {
 	private boolean obrisan;
 	
 	
-	public Servis(Automobil automobil, Serviser serviser, Date datum, String opis,
-			Status status) {
+	public Servis(Automobil automobil, Serviser serviser, Date datum, String opis, Status status) {
 		
 		super();
-		generisiOznaku();
+		this.oznaka = generisiOznaku();
 		this.automobil = automobil;
 		this.serviser = serviser;
 		this.datum = datum;
@@ -36,8 +36,12 @@ public class Servis {
 		return oznaka;
 	}
 
-	public void generisiOznaku() {
-		this.oznaka = oznaka;
+	public String generisiOznaku() {
+		return UUID.randomUUID().toString();
+	}
+	
+	public void dodajDeo(Deo deo) {
+		this.delovi.add(deo);
 	}
 
 	public Automobil getAutomobil() {
@@ -94,6 +98,12 @@ public class Servis {
 
 	public void setObrisan(boolean obrisan) {
 		this.obrisan = obrisan;
+	}
+
+	@Override
+	public String toString() {
+		return "Servis [oznaka=" + oznaka + ", automobil=" + automobil + ", serviser=" + serviser + ", datum=" + datum
+				+ ", opis=" + opis + ", delovi=" + delovi + ", status=" + status + ", obrisan=" + obrisan + "]";
 	}
 	
 	

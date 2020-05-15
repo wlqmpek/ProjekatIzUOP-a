@@ -1,16 +1,26 @@
 package model;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
+
+import enumi.Specijalizacija;
 
 public class Serviser extends Korisnik {
 	
 	private Specijalizacija specijalizacija;
 	private double plata;
 
-	public Serviser(String ime, String prezime, String jMBG, Pol pol, String adresa, String brojTelefona,
+	public Serviser(String ime, String prezime, String JMBG, String adresa, String brojTelefona,
 			String korisnickoIme, String lozinka, Specijalizacija specijalizacija, double plata) {
-		super(ime, prezime, jMBG, pol, adresa, brojTelefona, korisnickoIme, lozinka);
+		super(ime, prezime, JMBG, adresa, brojTelefona, korisnickoIme, lozinka);
 		this.plata = plata;
-		this.specijalizacija = specijalizacija;
-		
+		this.specijalizacija = randomSpecijalizacija(); //kapiram da ce ovde umesto random stvari biti nekakav drop meni za selektovanje
+	}
+	
+	//privremeno resenje za prikazivanje enum-a kada se odradi gui bice neki drop meni
+	public Specijalizacija randomSpecijalizacija() {
+		ArrayList<Specijalizacija> specijalizacije = new ArrayList<Specijalizacija>(Arrays.asList(Specijalizacija.values()));
+		return specijalizacije.get(new Random().nextInt(4));
 	}
 
 	public Specijalizacija getSpecijalizacija() {
@@ -28,6 +38,14 @@ public class Serviser extends Korisnik {
 	public void setPlata(double plata) {
 		this.plata = plata;
 	}
+
+	@Override
+	public String toString() {
+		return "Serviser [specijalizacija=" + specijalizacija + ", plata=" + plata + ", toString()=" + super.toString()
+				+ "]";
+	}
+
+	
 	
 	
 

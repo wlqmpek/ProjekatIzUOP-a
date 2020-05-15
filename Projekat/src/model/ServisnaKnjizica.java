@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class ServisnaKnjizica {
 	
@@ -11,25 +12,25 @@ public class ServisnaKnjizica {
 	
 	public ServisnaKnjizica(Automobil automobil) {
 		super();
-		generisiOznaku();
+		this.oznaka = this.getAutomobil().getOznaka();
 		this.automobil = automobil;
 		obrisan = false;
 	}
 	
 	public ServisnaKnjizica(Automobil automobil, ArrayList<Servis> servisi) {
 		super();
-		generisiOznaku();
 		this.automobil = automobil;
+		this.oznaka = this.getAutomobil().getOznaka(); //posto su servisna knjizica i automobil u relaciji 1-1 ima mi smila da dele zajednicku oznaku
 		this.servisi = servisi;
 		obrisan = false;
+	}
+	
+	public void dodajServis(Servis servis) {
+		this.servisi.add(servis);
 	}
 
 	public String getOznaka() {
 		return oznaka;
-	}
-
-	public void generisiOznaku() {
-		this.oznaka = oznaka;
 	}
 
 	public Automobil getAutomobil() {
@@ -54,6 +55,12 @@ public class ServisnaKnjizica {
 
 	public void setObrisan(boolean obrisan) {
 		this.obrisan = obrisan;
+	}
+
+	@Override
+	public String toString() {
+		return "ServisnaKnjizica [oznaka=" + oznaka + ", automobil=" + automobil + ", servisi=" + servisi + ", obrisan="
+				+ obrisan + "]";
 	}
 	
 	

@@ -1,8 +1,12 @@
 package model;
 
-enum Pol {
-	MUSKI, ZENSKI;
-}
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
+import java.util.UUID;
+
+import enumi.Pol;
+
 
 abstract class Korisnik {
 	
@@ -16,15 +20,16 @@ abstract class Korisnik {
 	private String korisnickoIme;
 	private String lozinka;
 	private boolean obrisan;
-	public Korisnik(String ime, String prezime, String jMBG, Pol pol, String adresa, String brojTelefona,
+	
+	public Korisnik(String ime, String prezime, String JMBG, String adresa, String brojTelefona,
 			String korisnickoIme, String lozinka) {
 		
 		super();
-		generisiOznaku();
+		this.oznaka = generisiOznaku();
 		this.ime = ime;
 		this.prezime = prezime;
-		JMBG = jMBG;
-		this.pol = pol;
+		this.JMBG = JMBG;
+		this.pol = randomPol();
 		this.adresa = adresa;
 		this.brojTelefona = brojTelefona;
 		this.korisnickoIme = korisnickoIme;
@@ -32,8 +37,14 @@ abstract class Korisnik {
 		this.obrisan = false;
 	}
 	
+	//privremeno, pseudo-random izabran pol iz enuma
+	public Pol randomPol() {
+		ArrayList<Pol> pol = new ArrayList<Pol>(Arrays.asList(Pol.values()));
+		return pol.get(new Random().nextInt(2));
+	}
+	
 	public String generisiOznaku() {
-		return oznaka;
+		return UUID.randomUUID().toString();
 	}
 	public void setOznaka() {
 		this.oznaka = oznaka;

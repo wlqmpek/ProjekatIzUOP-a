@@ -1,5 +1,7 @@
 package model;
 
+import java.util.UUID;
+
 enum Marka {
 	TESLA, BMW, VOLVO, FIAT, FORD;
 }
@@ -18,11 +20,12 @@ public class Automobil {
 	private short snagaMotora;
 	private String gorivo;
 	private boolean obrisan;
+	private ServisnaKnjizica servisnaKnjizica;
 	
 	public Automobil(Musterija vlasnik, Marka marka, Model model, short godinaProizvodnje,
 			short zapreminaMotora, short snagaMotora, String gorivo) {
 		super();
-		setOznaka();
+		this.oznaka = generisiOznaku();
 		this.vlasnik = vlasnik;
 		this.marka = marka;
 		this.model = model;
@@ -37,8 +40,8 @@ public class Automobil {
 		return oznaka;
 	}
 
-	public void generisiOznaku() {
-		this.oznaka = oznaka;
+	public String generisiOznaku() {
+		return UUID.randomUUID().toString();
 	}
 
 	public Musterija getVlasnik() {

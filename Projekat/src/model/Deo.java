@@ -1,5 +1,7 @@
 package model;
 
+import java.util.UUID;
+
 public class Deo {
 	
 	private String oznaka;
@@ -12,7 +14,7 @@ public class Deo {
 	
 	public Deo(Marka marka, Model model, String naziv, double cena) {
 		super();
-		generisiOznaku();
+		this.oznaka = generisiOznaku();
 		this.marka = marka;
 		this.model = model;
 		this.naziv = naziv;
@@ -26,8 +28,8 @@ public class Deo {
 	}
 
 
-	public void generisiOznaku() {
-		this.oznaka = oznaka;
+	public String generisiOznaku() {
+		return UUID.randomUUID().toString();
 	}
 
 
