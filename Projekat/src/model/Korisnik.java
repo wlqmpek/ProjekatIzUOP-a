@@ -21,6 +21,23 @@ abstract class Korisnik {
 	private String lozinka;
 	private boolean obrisan;
 	
+	
+	
+	public Korisnik(String oznaka, String ime, String prezime, String JMBG, Pol pol, String adresa, String brojTelefona,
+			String korisnickoIme, String lozinka, boolean obrisan) {
+		super();
+		this.oznaka = oznaka;
+		this.ime = ime;
+		this.prezime = prezime;
+		this.JMBG = JMBG;
+		this.pol = pol;
+		this.adresa = adresa;
+		this.brojTelefona = brojTelefona;
+		this.korisnickoIme = korisnickoIme;
+		this.lozinka = lozinka;
+		this.obrisan = obrisan;
+	}
+
 	public Korisnik(String ime, String prezime, String JMBG, String adresa, String brojTelefona,
 			String korisnickoIme, String lozinka) {
 		
@@ -46,8 +63,8 @@ abstract class Korisnik {
 	public String generisiOznaku() {
 		return UUID.randomUUID().toString();
 	}
-	public void setOznaka() {
-		this.oznaka = oznaka;
+	public String getOznaka() {
+		return oznaka;
 	}
 	public String getIme() {
 		return ime;
