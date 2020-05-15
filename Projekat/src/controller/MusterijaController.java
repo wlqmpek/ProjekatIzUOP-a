@@ -32,12 +32,8 @@ public class MusterijaController {
 		super();
 	}
 	
-	
-	
-	public static void upisiMusterijuUFajl(Musterija musterija) {
-		
-		String musterijaKaoString = String.join("|", musterijaUStringArray(musterija)) + "\n";
-		
+	public static void upisiMusterijuUFajl(Musterija musterija) {	
+		String musterijaKaoString = String.join("|", musterijaUStringArray(musterija)) + "\n";	
 		try {
 			FileWriter fw = new FileWriter(file, true);
 			PrintWriter pw = new PrintWriter(fw);
@@ -67,8 +63,6 @@ public class MusterijaController {
 		}
 	}
 	
-	
-	
 	public static Musterija stringUMusteriju(ArrayList<String> podaci) {
 		return new Musterija(podaci.get(0), podaci.get(1), podaci.get(2), podaci.get(3), Pol.valueOf(podaci.get(4)), podaci.get(5), podaci.get(6), podaci.get(7), podaci.get(8), Byte.valueOf(podaci.get(9)), false);
 	}
@@ -80,7 +74,6 @@ public class MusterijaController {
 	public static void konvertujSveMusterije() {
 		for (ArrayList<String> mus : podaci) {
 			musterije.add(stringUMusteriju(mus));
-			System.out.println("Done! " + musterije.get(1));
 		}
 	}
 	
