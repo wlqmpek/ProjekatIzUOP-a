@@ -48,6 +48,7 @@ public class MusterijaController {
 	
 	//cita fajl i upisuje podatke u niz nizova atributa 
 	public static void procitajFajl() {
+		podaci.clear();
 		try {
 			Scanner sc = new Scanner(file);
 			while(sc.hasNextLine()) {
@@ -70,6 +71,7 @@ public class MusterijaController {
 	
 	//konvertuje iz niza stringova u niz musterija
 	public static void konvertujSveMusterije() {
+		musterije.clear();
 		for (ArrayList<String> mus : podaci) {
 			musterije.add(stringUMusteriju(mus));
 		}
@@ -95,4 +97,19 @@ public class MusterijaController {
 		}
 		return trazenaMusterija;
 	}
+	
+	//metode za demonstraciju funkcionalnosti
+	
+	public static void ispisiSveMusterije() {
+		for(Musterija musterija : musterije) {
+			System.out.println(musterija);
+		}
+	}
+	
+	public static void ispisiSveAutomobileMusterije(String oznaka) {
+		for(Automobil auto : MusterijaController.nadjiAutomobilePoIdVlasnika(oznaka)) {
+			System.out.println(auto);
+		}
+	}
+	
 }

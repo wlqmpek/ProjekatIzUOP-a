@@ -104,6 +104,18 @@ public class AutomobilController {
 		return sviAutomobiliVlasnika;
 	}
 	
+	public static void ispisiSveAutomobile() {
+		for(Automobil auto : automobili) {
+			System.out.println(auto);
+		}
+	}
 	
+	public static void ispisiVlasnikaAutomobila(String oznaka) {
+		for(Automobil auto:automobili) {
+			if(auto.getOznaka().equals(oznaka)) {
+				System.out.println(auto.getVlasnik());
+			}
+		}
+	}
 	
 }

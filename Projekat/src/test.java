@@ -21,15 +21,25 @@ public class test {
 	
 	public static void main(String[] args) {
 		
-//		Musterija m = MusterijaController.stringUMusteriju(new ArrayList<String>(Arrays.asList("asdasda", "Milos", "Vlku", "11111111111111111", "MUSKI", "Nikole Tesle 1", "0603433426", "wlqmpek", "lozinka", "10", "true")));
-//		MusterijaController.upisiMusterijuUFajl(m);
 		MusterijaController.inicijalizujMusterije();
 		AutomobilController.inicijalizujAutomobile();
 		
-//		Musterija m = MusterijaController.musterije.get(1);
-//		Automobil a = new Automobil("auto001", m, Marka.valueOf("TESLA"), Model.valueOf("MODEL_S"), (short)1996, (short)100, (short)130, Gorivo.valueOf("STRUJA"), true);
-//		AutomobilController.upisiAutomobilUFajl(a);
-//		System.out.println("Done");
+		System.out.println("Pre ikakvog dodavanja!");
+		
+		System.out.println("Ispis svih musterija");
+		MusterijaController.ispisiSveMusterije();
+		
+		System.out.println("Ispis svih automobila za odredjenu musteriju");
+		MusterijaController.ispisiSveAutomobileMusterije("asdasda");
+		
+		System.out.println("Ispis svih automobila");
+		AutomobilController.ispisiSveAutomobile();
+		
+		System.out.println("Ispis vlasnika automobila");
+		AutomobilController.ispisiVlasnikaAutomobila("auto002");
+		
+		
+
 	}
 
 }
