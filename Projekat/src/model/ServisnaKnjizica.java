@@ -1,33 +1,29 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.UUID;
+import controller.ServisnaKnjizicaController;
 
 public class ServisnaKnjizica {
 	
 	private String oznaka;
 	private Automobil automobil;
-	private ArrayList<Servis> servisi = new ArrayList<Servis>();
 	private boolean obrisan;
+	
 	
 	public ServisnaKnjizica(Automobil automobil) {
 		super();
-		this.oznaka = this.getAutomobil().getOznaka();
-		this.automobil = automobil;
-		obrisan = false;
-	}
-	
-	public ServisnaKnjizica(Automobil automobil, ArrayList<Servis> servisi) {
-		super();
 		this.automobil = automobil;
 		this.oznaka = this.getAutomobil().getOznaka(); //posto su servisna knjizica i automobil u relaciji 1-1 ima mi smila da dele zajednicku oznaku
-		this.servisi = servisi;
+		this.obrisan = this.getAutomobil().isObrisan();
+	}
+	
+	//koristi se za kreiranje objekta iz fajla
+	public ServisnaKnjizica(String automobil) {
+		super();
+		this.automobil = ServisnaKnjizicaController.nadjiAutomobil(automobil);
+		this.oznaka = this.getAutomobil().getOznaka(); //posto su servisna knjizica i automobil u relaciji 1-1 ima mi smila da dele zajednicku oznaku
 		obrisan = false;
 	}
 	
-	public void dodajServis(Servis servis) {
-		this.servisi.add(servis);
-	}
 
 	public String getOznaka() {
 		return oznaka;
@@ -42,13 +38,6 @@ public class ServisnaKnjizica {
 		this.oznaka = automobil.getOznaka();
 	}
 
-	public ArrayList<Servis> getServisi() {
-		return servisi;
-	}
-
-	public void setServisi(ArrayList<Servis> servisi) {
-		this.servisi = servisi;
-	}
 
 	public boolean isObrisan() {
 		return obrisan;
@@ -60,10 +49,9 @@ public class ServisnaKnjizica {
 
 	@Override
 	public String toString() {
-		return "ServisnaKnjizica [oznaka=" + oznaka + ", automobil=" + automobil + ", servisi=" + servisi + ", obrisan="
-				+ obrisan + "]";
+		return "ServisnaKnjizica [oznaka=" + oznaka + ", automobil=" + automobil + ", obrisan=" + obrisan + "]";
 	}
-	
+
 	
 	
 }

@@ -2,6 +2,7 @@ package model;
 
 import java.util.UUID;
 
+import controller.DeoController;
 import enumi.Marka;
 import enumi.Model;
 
@@ -12,9 +13,10 @@ public class Deo {
 	private Model model;
 	private String naziv;
 	private double cena;
+	private Servis iskoriscenUSevisu = null;
 	private boolean obrisan;
 	
-	
+	//ovaj konstruktor se koristi za kreiranje novog objekta deo iz aplikacije
 	public Deo(Marka marka, Model model, String naziv, double cena) {
 		super();
 		this.oznaka = generisiOznaku();
@@ -24,7 +26,18 @@ public class Deo {
 		this.cena = cena;
 		this.obrisan = false;
 	}
-
+	
+	//ovaj konstruktor se koristi za kreiranje novog objekta deo iz fajla
+	public Deo(String oznaka, Marka marka, Model model, String naziv, double cena, String iskoriscenUServisu, boolean obrisan) {
+		super();
+		this.oznaka = oznaka;
+		this.marka = marka;
+		this.model = model;
+		this.naziv = naziv;
+		this.cena = cena;
+		this.iskoriscenUSevisu = DeoController.nadjiServis(iskoriscenUServisu);
+		this.obrisan = obrisan;
+	}
 
 	public String getOznaka() {
 		return oznaka;
@@ -73,6 +86,15 @@ public class Deo {
 
 	public void setCena(double cena) {
 		this.cena = cena;
+	}
+
+	
+	public Servis getIskoriscenUSevisu() {
+		return iskoriscenUSevisu;
+	}
+
+	public void setIskoriscenUSevisu(Servis iskoriscenUSevisu) {
+		this.iskoriscenUSevisu = iskoriscenUSevisu;
 	}
 
 

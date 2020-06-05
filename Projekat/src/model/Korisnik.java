@@ -39,7 +39,6 @@ abstract class Korisnik {
 
 	public Korisnik(String ime, String prezime, String JMBG, String adresa, String brojTelefona,
 			String korisnickoIme, String lozinka) {
-		
 		super();
 		this.oznaka = generisiOznaku();
 		this.ime = ime;
@@ -53,6 +52,23 @@ abstract class Korisnik {
 		this.obrisan = false;
 	}
 	
+	
+	
+	public Korisnik(String ime, String prezime, String jMBG, Pol pol, String adresa, String brojTelefona,
+			String korisnickoIme, String lozinka, boolean obrisan) {
+		super();
+		this.oznaka = this.generisiOznaku();
+		this.ime = ime;
+		this.prezime = prezime;
+		JMBG = jMBG;
+		this.pol = pol;
+		this.adresa = adresa;
+		this.brojTelefona = brojTelefona;
+		this.korisnickoIme = korisnickoIme;
+		this.lozinka = lozinka;
+		this.obrisan = obrisan;
+	}
+
 	//privremeno, pseudo-random izabran pol iz enuma
 	public Pol randomPol() {
 		ArrayList<Pol> pol = new ArrayList<Pol>(Arrays.asList(Pol.values()));

@@ -1,0 +1,3 @@
+fbd373fb-8af1-4ce3-ae74-b435ba65a7c7|ServiserGoran|ServiserGoranovic|6666666666666|MUSKI|Bulevar Bulevara|060333555|majstorgoran|jasammajstor|false|AUTOELEKTRICAR|36000.69
+aa6ffa73-94ae-44d0-8463-181247bf0c38|ServiserJanko|ServiserJankovic|8888888888888|MUSKI|Oslobodilac Slobode|5553330060|majstorjanko|automehanicar|false|AUTOMEHANICAR|220000
+f1197d00-e95f-48b1-b601-bf55f54e1c25|ServiserGordana|ServiserGordanovic|9999999999999|ZENSKI|UNKNOWN|0633381658|gordanathebest|siframijejaka|false|AUTOMEHANICAR|130000

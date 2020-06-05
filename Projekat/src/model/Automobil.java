@@ -34,8 +34,7 @@ public class Automobil {
 		this.obrisan = false;
 	}
 	
-	
-	
+	//koristi se da odmah dodamo vlasnika
 	public Automobil(String oznaka, Musterija vlasnik, Marka marka, Model model, short godinaProizvodnje,
 			short zapreminaMotora, short snagaMotora, Gorivo gorivo, boolean obrisan) {
 		super();
@@ -51,6 +50,7 @@ public class Automobil {
 		this.obrisan = obrisan;
 	}
 	
+	//koristi se kod iscitavanja iz fajla Note: promeni za oznaku
 	public Automobil(String oznaka, String vlasnik, Marka marka, Model model, short godinaProizvodnje,
 			short zapreminaMotora, short snagaMotora, Gorivo gorivo, boolean obrisan) {
 		super();
@@ -66,10 +66,30 @@ public class Automobil {
 		this.obrisan = obrisan;
 	}
 	
+	
+	
+
+	public Automobil(String vlasnik, Marka marka, Model model, short godinaProizvodnje,
+			short zapreminaMotora, short snagaMotora, Gorivo gorivo, boolean obrisan,
+			ServisnaKnjizica servisnaKnjizica) {
+		super();
+		this.oznaka = generisiOznaku();
+		this.vlasnik = AutomobilController.nadjiVlasnika(vlasnik);
+		this.marka = marka;
+		this.model = model;
+		this.godinaProizvodnje = godinaProizvodnje;
+		this.zapreminaMotora = zapreminaMotora;
+		this.snagaMotora = snagaMotora;
+		this.gorivo = gorivo;
+		this.obrisan = obrisan;
+		this.servisnaKnjizica = servisnaKnjizica;
+	}
 
 	public String getOznaka() {
 		return oznaka;
 	}
+	
+	
 
 	public String generisiOznaku() {
 		return UUID.randomUUID().toString();

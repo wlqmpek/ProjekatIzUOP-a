@@ -1,36 +1,52 @@
 package model;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
 
-enum Status {
-	
-}
+import controller.AutomobilController;
+import controller.ServiserController;
+import controller.ServisnaKnjizicaController;
+import enumi.Status;
+
 
 public class Servis {
 	
 	private String oznaka;
-	private Automobil automobil;
+	private ServisnaKnjizica servisnaKnjizica;
 	private Serviser serviser;
 	private Date datum;
 	private String opis;
-	private ArrayList<Deo> delovi = new ArrayList<Deo>();
 	private Status status;
 	private boolean obrisan;
+	private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
 	
-	
-	public Servis(Automobil automobil, Serviser serviser, Date datum, String opis, Status status) {
-		
+	//koristi se da odmah kreiramo servis
+	public Servis(ServisnaKnjizica servisnaKnjizica, Serviser serviser, Date datum, String opis, Status status) {
 		super();
 		this.oznaka = generisiOznaku();
-		this.automobil = automobil;
+		this.servisnaKnjizica = servisnaKnjizica;
 		this.serviser = serviser;
 		this.datum = datum;
 		this.opis = opis;
 		this.status = status;
 		this.obrisan = false;
 	}
+	
+	//kreiraj servis iz fajla
+	public Servis(String oznaka, String servisnaKnjizica, String serviser, String datum, String opis, Status status, boolean obrisan) {
+		super();
+		this.oznaka = oznaka;
+		this.servisnaKnjizica = ServisnaKnjizicaController.nadjiServisnuKnjizicuPoOznaci(servisnaKnjizica);
+		this.serviser = ServiserController.nadjiServiseraPoOznaci(serviser);
+		this.setDatum(datum);
+		this.opis = opis;
+		this.status = status;
+		this.obrisan = obrisan;
+	}
+
+
 
 	public String getOznaka() {
 		return oznaka;
@@ -40,16 +56,18 @@ public class Servis {
 		return UUID.randomUUID().toString();
 	}
 	
-	public void dodajDeo(Deo deo) {
-		this.delovi.add(deo);
+	
+
+	public ServisnaKnjizica getServisnaKnjizica() {
+		return servisnaKnjizica;
 	}
 
-	public Automobil getAutomobil() {
-		return automobil;
+	public void setServisnaKnjizica(ServisnaKnjizica servisnaKnjizica) {
+		this.servisnaKnjizica = servisnaKnjizica;
 	}
 
-	public void setAutomobil(Automobil automobil) {
-		this.automobil = automobil;
+	public void setOznaka(String oznaka) {
+		this.oznaka = oznaka;
 	}
 
 	public Serviser getServiser() {
@@ -64,8 +82,12 @@ public class Servis {
 		return datum;
 	}
 
-	public void setDatum(Date datum) {
-		this.datum = datum;
+	public void setDatum(String datum) {
+		try {
+			this.datum = sdf.parse(datum);
+		} catch (Exception e) {
+			System.out.println("Datum nije validan!");
+		}
 	}
 
 	public String getOpis() {
@@ -76,13 +98,6 @@ public class Servis {
 		this.opis = opis;
 	}
 
-	public ArrayList<Deo> getDelovi() {
-		return delovi;
-	}
-
-	public void setDelovi(ArrayList<Deo> delovi) {
-		this.delovi = delovi;
-	}
 
 	public Status getStatus() {
 		return status;
@@ -102,11 +117,12 @@ public class Servis {
 
 	@Override
 	public String toString() {
-		return "Servis [oznaka=" + oznaka + ", automobil=" + automobil + ", serviser=" + serviser + ", datum=" + datum
-				+ ", opis=" + opis + ", delovi=" + delovi + ", status=" + status + ", obrisan=" + obrisan + "]";
+		return "Servis [oznaka=" + oznaka + ", servisnaKnjizica=" + servisnaKnjizica + ", serviser=" + serviser
+				+ ", datum=" + datum + ", opis=" + opis + ", status=" + status + ", obrisan=" + obrisan + "]";
 	}
+
 	
-	
+		
 	
 	
 }

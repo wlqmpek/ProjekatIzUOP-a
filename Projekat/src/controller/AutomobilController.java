@@ -35,9 +35,14 @@ public class AutomobilController {
 	//privremen
 	public AutomobilController() {
 		super();
-	}	
+	}
+	
+	static {
+		inicijalizujAutomobile();
+	}
 	
 	public static void upisiAutomobilUFajl(Automobil automobil) {
+		automobili.add(automobil);
 		String automobilKaoString = String.join("|", automobilUStringArray(automobil)) + "\n";
 		FileWriter fw;
 		try {
@@ -71,7 +76,10 @@ public class AutomobilController {
 	
 
 	public static ArrayList<String> automobilUStringArray(Automobil automobil) {
-		return new ArrayList<String>(Arrays.asList(automobil.getOznaka(), automobil.getVlasnik().getOznaka(), automobil.getMarka().toString(), automobil.getModel().toString(), String.valueOf(automobil.getGodinaProizvodnje()), String.valueOf(automobil.getZapreminaMotora()), String.valueOf(automobil.getSnagaMotora()), automobil.getGorivo().toString(), String.valueOf(automobil.isObrisan())));
+		
+		String niz[] = {automobil.getOznaka(), automobil.getVlasnik().getOznaka(), automobil.getMarka().toString(), automobil.getModel().toString(), String.valueOf(automobil.getGodinaProizvodnje()), String.valueOf(automobil.getZapreminaMotora()), String.valueOf(automobil.getSnagaMotora()), automobil.getGorivo().toString(), String.valueOf(automobil.isObrisan())};
+		ArrayList<String> array = new ArrayList<String>(Arrays.asList(niz));
+		return array;
 	}
 	
 	//konvertuje iz niza stringova u niz automobila
@@ -84,10 +92,11 @@ public class AutomobilController {
 	
 	//pribavlja vlasnika/musteriju pomocu oznake
 	public static Musterija nadjiVlasnika(String oznaka) {
-		return MusterijaController.nadjiMusteriju(oznaka);
+		return MusterijaController.nadjiMusterijuPoOznaci(oznaka);
 	}
 	
 	public static void inicijalizujAutomobile() {
+		System.out.println("Inicijalizacija automobila");
 		automobili.clear();
 		podaci.clear();
 		procitajFajl();
@@ -97,7 +106,7 @@ public class AutomobilController {
 	public static ArrayList<Automobil> nadjiAutomobilePoIdVlasnika(String oznaka) {
 		ArrayList<Automobil> sviAutomobiliVlasnika = new ArrayList<Automobil>();
 		for(Automobil auto : automobili) {
-			if(auto.getVlasnik().getOznaka().equals(oznaka)) {
+			if(auto.getVlasnik().getOznaka().equalsIgnoreCase(oznaka)) {
 				sviAutomobiliVlasnika.add(auto);
 			}
 		}	
@@ -120,5 +129,16 @@ public class AutomobilController {
 			}
 		}
 	}
+	
+	public static Automobil nadjiAutomobilPoOznaci(String oznaka) {
+		Automobil trazenAutomobil = null;
+		for(Automobil automobil : automobili) {
+			if(oznaka.equalsIgnoreCase(automobil.getOznaka())) {
+				trazenAutomobil = automobil;
+			}
+		}
+		return trazenAutomobil;
+	}
+	
 	
 }

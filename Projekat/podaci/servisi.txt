@@ -1,0 +1,2 @@
+71cdbeb1-c96e-4764-96b3-e4eef6739567|6eb7bb37-4f6e-413f-a9ba-22ac2d74d1f5|f1197d00-e95f-48b1-b601-bf55f54e1c25|04/06/2020 11:03|Potrebno je uraditi potpunu rest...|ZAKAZAN|false
+a74563cc-63ba-43eb-8077-b9035d214405|6eb7bb37-4f6e-413f-a9ba-22ac2d74d1f5|f1197d00-e95f-48b1-b601-bf55f54e1c25|04/03/1998 11:03|Treba promeniti tecnost za zmigavac|ODRADJEN|false

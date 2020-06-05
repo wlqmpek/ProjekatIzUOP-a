@@ -32,7 +32,12 @@ public class MusterijaController {
 		super();
 	}
 	
-	public static void upisiMusterijuUFajl(Musterija musterija) {	
+	static {
+		inicijalizujMusterije();
+	}
+	
+	public static void upisiMusterijuUFajl(Musterija musterija) {
+		musterije.add(musterija);
 		String musterijaKaoString = String.join("|", musterijaUStringArray(musterija)) + "\n";	
 		try {
 			FileWriter fw = new FileWriter(file, true);
@@ -83,17 +88,17 @@ public class MusterijaController {
 	}
 	
 	public static void inicijalizujMusterije() {
+		System.out.println("Inicijalizacija musterija");
 		musterije.clear();
 		podaci.clear();
 		procitajFajl();
 		konvertujSveMusterije();
 	}
 	
-	public static Musterija nadjiMusteriju(String oznaka) {
-		inicijalizujMusterije();
+	public static Musterija nadjiMusterijuPoOznaci(String oznaka) {
 		Musterija trazenaMusterija = null;
 		for(Musterija musterija : musterije) {
-			if(oznaka.equals(musterija.getOznaka())) {
+			if(oznaka.equalsIgnoreCase(musterija.getOznaka())) {
 				trazenaMusterija = musterija;
 			}
 		}

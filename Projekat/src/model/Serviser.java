@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
+import enumi.Pol;
 import enumi.Specijalizacija;
 
 public class Serviser extends Korisnik {
@@ -17,11 +18,21 @@ public class Serviser extends Korisnik {
 		this.specijalizacija = randomSpecijalizacija(); //kapiram da ce ovde umesto random stvari biti nekakav drop meni za selektovanje
 	}
 	
+	//konstruktor za kreiranje objekta iz fajla
+	public Serviser(String oznaka, String ime, String prezime, String JMBG, Pol pol, String adresa, String brojTelefona,
+			String korisnickoIme, String lozinka, boolean obrisan, Specijalizacija specijalizacija, double plata) {
+		super(oznaka, ime, prezime, JMBG, pol, adresa, brojTelefona, korisnickoIme, lozinka, obrisan);
+		this.specijalizacija = specijalizacija;
+		this.plata = plata;
+	}
+	
 	//privremeno resenje za prikazivanje enum-a kada se odradi gui bice neki drop meni
 	public Specijalizacija randomSpecijalizacija() {
 		ArrayList<Specijalizacija> specijalizacije = new ArrayList<Specijalizacija>(Arrays.asList(Specijalizacija.values()));
 		return specijalizacije.get(new Random().nextInt(4));
 	}
+
+	
 
 	public Specijalizacija getSpecijalizacija() {
 		return specijalizacija;
