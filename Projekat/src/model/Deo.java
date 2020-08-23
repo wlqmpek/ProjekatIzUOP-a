@@ -106,6 +106,12 @@ public class Deo {
 	public void setObrisan(boolean obrisan) {
 		this.obrisan = obrisan;
 	}
+
+	@Override
+	public String toString() {
+		return "Deo [oznaka=" + oznaka + ", marka=" + marka + ", model=" + model + ", naziv=" + naziv + ", cena=" + cena
+				+ ", iskoriscenUSevisu=" + iskoriscenUSevisu + ", obrisan=" + obrisan + "]";
+	}
 	
 	
 	

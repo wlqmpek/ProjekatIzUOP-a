@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 import enumi.Pol;
+import model.Administrator;
 import model.Automobil;
 import model.Musterija;
 import view.MusterijaView;
@@ -67,7 +68,7 @@ public class MusterijaController {
 	}
 	
 	public static Musterija stringUMusteriju(ArrayList<String> podaci) {
-		return new Musterija(podaci.get(0), podaci.get(1), podaci.get(2), podaci.get(3), Pol.valueOf(podaci.get(4)), podaci.get(5), podaci.get(6), podaci.get(7), podaci.get(8), Byte.valueOf(podaci.get(9)), false);
+		return new Musterija(podaci.get(0), podaci.get(1), podaci.get(2), podaci.get(3), Pol.valueOf(podaci.get(4)), podaci.get(5), podaci.get(6), podaci.get(7), podaci.get(8), Byte.valueOf(podaci.get(9)), Boolean.valueOf(podaci.get(10)));
 	}
 	
 	public static ArrayList<String> musterijaUStringArray(Musterija musterija) {
@@ -105,8 +106,25 @@ public class MusterijaController {
 		return trazenaMusterija;
 	}
 	
-	//metode za demonstraciju funkcionalnosti
+	public static Musterija nadjiMusterijuPoKorisnickomImenu(String korisnickoIme) {
+		Musterija trazenaMusterija = null;
+		for(Musterija musterija : musterije) {
+			if(korisnickoIme.equalsIgnoreCase(musterija.getKorisnickoIme())) {
+				trazenaMusterija = musterija;
+			}
+		}
+		return trazenaMusterija;
+	}
 	
+	public static void izbrisiMusteriju(Musterija musterija) {
+		if(musterija == null) {
+			System.out.println("Molim vas izaberite validnu musteriju");
+		} else {
+			musterija.setObrisan(true);
+		}
+	}
+	
+	//metode za demonstraciju funkcionalnosti
 	public static void ispisiSveMusterije() {
 		for(Musterija musterija : musterije) {
 			System.out.println(musterija);

@@ -9,7 +9,7 @@ import controller.MusterijaController;
 import enumi.Pol;
 
 
-abstract class Korisnik {
+public abstract class Korisnik {
 	
 	private String oznaka;
 	private String ime;

@@ -24,7 +24,7 @@ public class ServisnaKnjizicaController {
 		inicijalizujServisneKnjizice();
 	}
 	
-	public static void upisiMusterijuUFajl(ServisnaKnjizica servisnaKnjizica) {
+	public static void upisiServisnuKnjizicuUFajl(ServisnaKnjizica servisnaKnjizica) {
 		servisneKnjizice.add(servisnaKnjizica);
 		String servisnaKnjizicaKaoString = String.join("|", servisnaKnjizicaUStringArray(servisnaKnjizica)) + "\n";	
 		try {
@@ -94,13 +94,23 @@ public class ServisnaKnjizicaController {
 				listaTrazenihServisa.add(servis);
 			}
 		}
-		
-		System.out.printf("Servisna knizica: %s ima %d uradjenih servisa", servisnaKnjizica.getOznaka(), listaTrazenihServisa.size());
 		return listaTrazenihServisa;
 	}
 	
-	public static Automobil nadjiAutomobil(String oznaka) {
+	public static Automobil nadjiAutomobilPoOznaci(String oznaka) {
 		return AutomobilController.nadjiAutomobilPoOznaci(oznaka);
+	}
+	
+	public static Automobil automobilServsneKnjizice(ServisnaKnjizica servisnaKnjizica) {
+		return AutomobilController.nadjiAutomobilPoOznaci(servisnaKnjizica.getOznaka());
+	}
+	
+	public static void izbrisiServisnuKnjizicu(ServisnaKnjizica servisnaKnjizica) {
+		if(servisnaKnjizica == null) {
+			System.out.println("Molim vas izaberite validnu servisnu knjizicu");
+		} else {
+			servisnaKnjizica.setObrisan(true);
+		}
 	}
 	
 	public static void ispisiSveServisneKnjizice() {
@@ -108,5 +118,26 @@ public class ServisnaKnjizicaController {
 			System.out.println(servisna.toString());
 		}
 	}
+	
+	public static ServisnaKnjizica generisiServisnuKnjizicuZaAutomobil(Automobil automobil) {
+		ServisnaKnjizica generisanaServisnaKnjizica = new ServisnaKnjizica(automobil);
+		upisiServisnuKnjizicuUFajl(generisanaServisnaKnjizica);
+		return generisanaServisnaKnjizica;
+	}
+	
+	public static ServisnaKnjizica servisnaKnjizicaAutomobila(Automobil automobil) {
+		ServisnaKnjizica nadjenaServisnaKnjizica = null;
+		
+		nadjenaServisnaKnjizica = nadjiServisnuKnjizicuPoOznaci(automobil.getOznaka());
+		
+		if(nadjenaServisnaKnjizica == null) {
+			System.out.println("Generisemo servisnu knjizicu");
+			nadjenaServisnaKnjizica = generisiServisnuKnjizicuZaAutomobil(automobil);
+		}
+		
+		return nadjenaServisnaKnjizica;
+	}
+	
+	
 	
 }

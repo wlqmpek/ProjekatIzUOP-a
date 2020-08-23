@@ -11,6 +11,8 @@ import java.util.Scanner;
 
 import enumi.Pol;
 import enumi.Specijalizacija;
+import model.Administrator;
+import model.Automobil;
 import model.Servis;
 import model.Serviser;
 import model.ServisnaKnjizica;
@@ -97,10 +99,29 @@ public class ServiserController {
 		}
 	}
 	
+	//ovo bi trebalo da obrise i servise
+	public static void izbrisiServisera(Serviser serviser) {
+		if(serviser == null) {
+			System.out.println("Molim vas izaberite validan automobil");
+		} else {
+			serviser.setObrisan(true);
+		}
+	}
+	
 	public static Serviser nadjiServiseraPoOznaci(String oznaka) {
 		Serviser trazenServiser = null;
 		for(Serviser serviser : serviseri) {
 			if(oznaka.equalsIgnoreCase(serviser.getOznaka())) {
+				trazenServiser = serviser;
+			}
+		}
+		return trazenServiser;
+	}
+	
+	public static Serviser nadjiServiseraPoKorisnickomImenu(String korisnickoIme) {
+		Serviser trazenServiser = null;
+		for(Serviser serviser : serviseri) {
+			if(korisnickoIme.equalsIgnoreCase(serviser.getKorisnickoIme())) {
 				trazenServiser = serviser;
 			}
 		}

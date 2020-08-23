@@ -102,4 +102,18 @@ public class DeoController {
 		}
 	}
 	
+	public static void izbrisiDeo(Deo deo) {
+		if(deo == null) {
+			System.out.println("Molim vas izaberite validan deo");
+		} else {
+			deo.setObrisan(true);
+		}
+	}
+	
+	public static void ispisiSveDelove() {
+		for(Deo deo:delovi) {
+			System.out.println(deo.toString());
+		}
+	}
+	
 }

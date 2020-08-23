@@ -1,5 +1,7 @@
 package model;
 
+import enumi.Pol;
+
 public class Administrator extends Korisnik{
 	
 	private double plata;
@@ -10,6 +12,17 @@ public class Administrator extends Korisnik{
 		this.plata = plata;
 	}
 	
+	
+	//koristi se za kreiranje Objekta iz fajla
+	
+	public Administrator(String oznaka, String ime, String prezime, String JMBG, Pol pol, String adresa,
+			String brojTelefona, String korisnickoIme, String lozinka, boolean obrisan, double plata) {
+		super(oznaka, ime, prezime, JMBG, pol, adresa, brojTelefona, korisnickoIme, lozinka, obrisan);
+		this.plata = plata;
+	}
+
+
+
 	public double getPlata() {
 		return plata;
 	}

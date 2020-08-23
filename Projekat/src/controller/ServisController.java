@@ -115,6 +115,14 @@ public class ServisController {
 		konvertujSveServise();
 	}
 	
+	public static void izbrisiServis(Servis servis) {
+		if(servis == null) {
+			System.out.println("Molim vas izaberite validan servis");
+		} else {
+			servis.setObrisan(true);
+		}
+	}
+	
 	public static void ispisiSveServise() {
 		for(Servis servis:servisi) {
 			System.out.println(servis);

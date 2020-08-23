@@ -130,6 +130,14 @@ public class AutomobilController {
 		}
 	}
 	
+	public static void izbrisiAutomobil(Automobil automobil) {
+		if(automobil == null) {
+			System.out.println("Molim vas izaberite validan automobil");
+		} else {
+			automobil.setObrisan(true);
+		}
+	}
+	
 	public static Automobil nadjiAutomobilPoOznaci(String oznaka) {
 		Automobil trazenAutomobil = null;
 		for(Automobil automobil : automobili) {
@@ -138,6 +146,10 @@ public class AutomobilController {
 			}
 		}
 		return trazenAutomobil;
+	}
+	
+	public static ServisnaKnjizica servisnaKnjizicaAutomobila(Automobil automobil) {
+		return ServisnaKnjizicaController.servisnaKnjizicaAutomobila(automobil);
 	}
 	
 	

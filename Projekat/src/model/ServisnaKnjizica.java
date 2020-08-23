@@ -19,9 +19,9 @@ public class ServisnaKnjizica {
 	//koristi se za kreiranje objekta iz fajla
 	public ServisnaKnjizica(String automobil) {
 		super();
-		this.automobil = ServisnaKnjizicaController.nadjiAutomobil(automobil);
+		this.automobil = ServisnaKnjizicaController.nadjiAutomobilPoOznaci(automobil);
 		this.oznaka = this.getAutomobil().getOznaka(); //posto su servisna knjizica i automobil u relaciji 1-1 ima mi smila da dele zajednicku oznaku
-		obrisan = false;
+		this.obrisan = this.getAutomobil().isObrisan();
 	}
 	
 
