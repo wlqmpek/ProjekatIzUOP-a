@@ -9,7 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class AdministratorGlavniMeni extends Stage {
+public class AdministratorGlavniMeniView extends Stage {
 
 
 	public Button radSaAdministratorima = new Button("Rad sa Administratorima");
@@ -21,7 +21,7 @@ public class AdministratorGlavniMeni extends Stage {
 	public Button radSaDelovima = new Button("Rad sa Delovima");
 	public final int VELICINA_DUGMETA = 180;
 	
-	public AdministratorGlavniMeni() {
+	public AdministratorGlavniMeniView() {
 		super();
 		VBox vBox = new VBox();
 		kreirajRaspored(vBox);
@@ -44,9 +44,11 @@ public class AdministratorGlavniMeni extends Stage {
 		vBox.setSpacing(10);
 	}
 	
-	public void dodajFunkcionalnost(EventHandler<ActionEvent> event) {
+	public void dodajFunkcionalnostDugmetuRadSaServiserima(EventHandler<ActionEvent> event) {
 		radSaServiserima.setOnAction(event);
 	}
+	
+	
 }
 
 

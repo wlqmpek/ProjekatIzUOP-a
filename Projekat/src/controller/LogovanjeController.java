@@ -4,8 +4,9 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
-import view.AdministratorGlavniMeni;
+import view.AdministratorGlavniMeniView;
 import view.LogovanjeView;
+import view.ServiserGlavniMeni;
 import model.Administrator;
 import model.Korisnik;
 import model.Musterija;
@@ -37,14 +38,16 @@ public class LogovanjeController {
 					if(korisnik instanceof Administrator) {
 						
 						logovanjeView.primaryStage.close();
-						logovanjeView.primaryStage = new AdministratorGlavniMeni();
+						logovanjeView.primaryStage = new AdministratorGlavniMeniView();
 						new AdministratorGlavniMeniController(logovanjeView.primaryStage);
 						
 						
 					} else if(korisnik instanceof Serviser) {
 						
 						
+						
 						System.out.println("Serviser");
+						
 					} else if(korisnik instanceof Musterija) {
 						System.out.println("Musterija");
 					}
@@ -57,6 +60,7 @@ public class LogovanjeController {
 		};
 	}
 	
+	//proverava da li se poklapaju username i pw iz labela
 	private Korisnik ulogujSe() {
 		
 		Korisnik korisnik = null;
@@ -64,6 +68,8 @@ public class LogovanjeController {
 		korisnik = AdministratorController.nadjiAdministratoraPoKorisnickomImenu(logovanjeView.getKorisnickoIme());
 		
 		if(korisnik != null) {
+			//proveravamo da li se lozinka poklapa ako se poklapa administrator ostaje a ako se ne poklopi
+			//administrator otpada
 			if(!korisnik.getLozinka().equals(logovanjeView.getLozinka())) {
 				korisnik = null;
 			}
@@ -73,17 +79,20 @@ public class LogovanjeController {
 			korisnik = ServiserController.nadjiServiseraPoKorisnickomImenu(logovanjeView.getKorisnickoIme());
 			
 			if(korisnik != null) {
+				//proveravamo da li se lozinka poklapa ako se poklapa serviser ostaje a ako se ne poklopi
+				//serviser otpada
 				if(!korisnik.getLozinka().equals(logovanjeView.getLozinka())) {
 					korisnik = null;
 				}
 			}
-			
 		}
 		
 		if(korisnik == null) {
 			korisnik = MusterijaController.nadjiMusterijuPoKorisnickomImenu(logovanjeView.getKorisnickoIme());
 			
 			if(korisnik != null) {
+				//proveravamo da li se lozinka poklapa ako se poklapa musterija ostaje a ako se ne poklopi
+				//musterija otpada
 				if(!korisnik.getLozinka().equals(logovanjeView.getLozinka())) {
 					korisnik = null;
 				}
@@ -91,6 +100,7 @@ public class LogovanjeController {
 			
 		}
 		
+		//ako se ne poklopi lozinka vraca se null
 		return  korisnik;
 	}
 

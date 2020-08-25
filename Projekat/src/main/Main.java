@@ -12,7 +12,6 @@ public class Main extends Application {
 		LogovanjeView lv = new LogovanjeView();
 		LogovanjeController lc = new LogovanjeController(lv);
 		lv.start(arg0);
-		
 	}
 
 }

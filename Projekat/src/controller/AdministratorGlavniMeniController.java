@@ -2,20 +2,25 @@ package controller;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import view.AdministratorGlavniMeni;
+import view.AdministratorGlavniMeniView;
+import view.RadSaServiserimaView;
 
 public class AdministratorGlavniMeniController {
-	public AdministratorGlavniMeni agm;
+	
+	public AdministratorGlavniMeniView agmv;
 
 	public AdministratorGlavniMeniController(Stage primaryStage) {
-		this.agm = ((AdministratorGlavniMeni)primaryStage);
-		this.agm.dodajFunkcionalnost(new EventHandler<ActionEvent>() {
-			
+		this.agmv = ((AdministratorGlavniMeniView)primaryStage);
+		this.agmv.dodajFunkcionalnostDugmetuRadSaServiserima(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
-				System.out.println("Boo!");
-				
+				agmv.close();
+				//do ovde sam stigao
+				new RadSaServiserimaController(new RadSaServiserimaView());
 			}
 		});
 	}
