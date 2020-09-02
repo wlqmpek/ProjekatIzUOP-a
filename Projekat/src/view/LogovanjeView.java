@@ -19,8 +19,8 @@ public class LogovanjeView extends Application {
 
 	
 
-	TextField korisnickoIme = new TextField();
-	TextField lozinka = new TextField();
+	TextField korisnickoIme = new TextField("wlqmpek");
+	TextField lozinka = new TextField("aepali0011");
 	Button dugme = new Button("Uloguj se");
 	public Stage primaryStage;
 	
@@ -46,6 +46,7 @@ public class LogovanjeView extends Application {
 		Label nalepnica1 = new Label("Molim vas unesite svoje korisnicko ime i lozinku!");
 		Label nalepnica2 = new Label("Korisnicko ime: ");
 		Label nalepnica3 = new Label("Lozinka: ");
+		
 		nalepnica3.setMinWidth(85);
 		nalepnica3.setAlignment(Pos.CENTER_RIGHT);
 		

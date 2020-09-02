@@ -11,11 +11,11 @@ public class Serviser extends Korisnik {
 	private Specijalizacija specijalizacija;
 	private double plata;
 
-	public Serviser(String ime, String prezime, String JMBG, String adresa, String brojTelefona,
+	public Serviser(String ime, String prezime, String JMBG, Pol pol, String adresa, String brojTelefona,
 			String korisnickoIme, String lozinka, Specijalizacija specijalizacija, double plata) {
-		super(ime, prezime, JMBG, adresa, brojTelefona, korisnickoIme, lozinka);
+		super(ime, prezime, JMBG, pol, adresa, brojTelefona, korisnickoIme, lozinka, false);
 		this.plata = plata;
-		this.specijalizacija = randomSpecijalizacija(); //kapiram da ce ovde umesto random stvari biti nekakav drop meni za selektovanje
+		this.specijalizacija = specijalizacija;
 	}
 	
 	//konstruktor za kreiranje objekta iz fajla

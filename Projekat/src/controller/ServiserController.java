@@ -20,8 +20,8 @@ import model.ServisnaKnjizica;
 public class ServiserController {
 	
 	private static File file = new File(".\\podaci\\serviseri.txt");
-	public static ArrayList<ArrayList<String>> podaci = new ArrayList<ArrayList<String>>();
-	public static ArrayList<Serviser> serviseri = new ArrayList<Serviser>();
+	private static ArrayList<ArrayList<String>> podaci = new ArrayList<ArrayList<String>>();
+	private static ArrayList<Serviser> serviseri = new ArrayList<Serviser>();
 	
 	static {
 		inicijalizujServisere();
@@ -39,6 +39,24 @@ public class ServiserController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	//zapisuje sve iznova iz servisera u fajl
+	public static void sacuvajIzmeneUFajl() {
+		FileWriter fw;
+		try {
+			fw = new FileWriter(file, false);
+			PrintWriter pw = new PrintWriter(fw);
+			for(Serviser serviser : ServiserController.serviseri) {
+				System.out.println(serviser);
+				pw.append(String.join("|", serviserUStringArray(serviser)));
+				pw.append("\r\n");
+			}
+			pw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	public static void procitajFajl() {
@@ -64,12 +82,13 @@ public class ServiserController {
 	
 	//konvertuje iz niza stringova u niz servisera
 	public static void konvertujSveAutomobile() {
-		serviseri.clear();
+		ServiserController.serviseri.clear();
 		for (ArrayList<String> serv : podaci) {
-			serviseri.add(stringUServisera(serv));
+			ServiserController.serviseri.add(stringUServisera(serv));
 		}
 	}
 	
+	//Vraca listu SVIH servisa u kojima je servser ucestvovao
 	public static ArrayList<Servis> listaServisaServisera(Serviser serviser) {
 		ArrayList<Servis> listaTrazenihServisa = new ArrayList<Servis>();
 		
@@ -83,34 +102,47 @@ public class ServiserController {
 		return listaTrazenihServisa;
 	}
 	
+	
 	public static void inicijalizujServisere() {
 		System.out.println("Inicijalizacija servisera");
-		serviseri.clear();
-		podaci.clear();
+		ServiserController.serviseri.clear();
+		ServiserController.podaci.clear();
 		procitajFajl();
 		konvertujSveServisere();
 	}
 	
+	
+	
 	//konvertuje iz niza stringova u niz servisera
 	public static void konvertujSveServisere() {
 		serviseri.clear();
-		for (ArrayList<String> ser : podaci) {
-			serviseri.add(stringUServisera(ser));
+		for (ArrayList<String> ser : ServiserController.podaci) {
+			ServiserController.serviseri.add(stringUServisera(ser));
 		}
 	}
 	
 	//ovo bi trebalo da obrise i servise
 	public static void izbrisiServisera(Serviser serviser) {
 		if(serviser == null) {
-			System.out.println("Molim vas izaberite validan automobil");
+			System.out.println("Molim vas izaberite validan servis");
 		} else {
 			serviser.setObrisan(true);
+			izbrisiServiseServisera(serviser);
+			//treba dodati da se ove izmene sacuvaju u fajlu servisa
+			sacuvajIzmeneUFajl();
+		}
+	}
+	
+	//brise sve servise u kojima je serviser ucestvovao
+	public static void izbrisiServiseServisera(Serviser serviser) {
+		for(Servis servis : listaServisaServisera(serviser)) {
+			ServisController.izbrisiServis(servis);
 		}
 	}
 	
 	public static Serviser nadjiServiseraPoOznaci(String oznaka) {
 		Serviser trazenServiser = null;
-		for(Serviser serviser : serviseri) {
+		for(Serviser serviser : ServiserController.serviseri) {
 			if(oznaka.equalsIgnoreCase(serviser.getOznaka())) {
 				trazenServiser = serviser;
 			}
@@ -129,10 +161,36 @@ public class ServiserController {
 	}
 	
 	public static void ispisiSveServisere() {
-		for(Serviser ser:serviseri) {
+		for(Serviser ser : ServiserController.serviseri) {
 			System.out.println(ser);
 		}
 	}
+
+	public static ArrayList<Serviser> getServiseri() {
+		inicijalizujServisere();
+		return ServiserController.serviseri;
+	}
+	
+	public static ArrayList<Serviser> getNeObrisaniServiseri() {
+		ArrayList<Serviser> neObrisaniServiseri = new ArrayList<Serviser>();
+		inicijalizujServisere();
+		
+		for(Serviser ser : serviseri) {
+			if(ser.isObrisan() == false) {
+				neObrisaniServiseri.add(ser);
+			}
+		}
+		return neObrisaniServiseri;
+	}
+	
+	public static void izbrisiIzUcitanihServiseraSaOznakom(String oznaka) {
+		ServiserController.serviseri.remove(nadjiServiseraPoOznaci(oznaka));
+	}
+
+	public static void setServiseri(ArrayList<Serviser> serviseri) {
+		ServiserController.serviseri = serviseri;
+	}
+	
 	
 	
 }

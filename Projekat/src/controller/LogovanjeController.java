@@ -22,7 +22,6 @@ public class LogovanjeController {
 		logovanjeView.dodajFunkcionalnostDugmetuOK(generisiFunkcionalnost());
 	}
 	
-	
 	public EventHandler<ActionEvent> generisiFunkcionalnost() {
 		return new EventHandler<ActionEvent>() {
 
