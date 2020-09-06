@@ -18,7 +18,6 @@ import model.Serviser;
 import model.ServisnaKnjizica;
 
 public class ServiserController {
-	
 	private static File file = new File(".\\podaci\\serviseri.txt");
 	private static ArrayList<ArrayList<String>> podaci = new ArrayList<ArrayList<String>>();
 	private static ArrayList<Serviser> serviseri = new ArrayList<Serviser>();
@@ -28,7 +27,7 @@ public class ServiserController {
 	}
 	
 	public static void upisiServiseraUFajl(Serviser serviser) {
-		serviseri.add(serviser);
+		ServiserController.serviseri.add(serviser);
 		String serviserKaoString = String.join("|", serviserUStringArray(serviser));
 		FileWriter fw;
 		try {
@@ -48,7 +47,6 @@ public class ServiserController {
 			fw = new FileWriter(file, false);
 			PrintWriter pw = new PrintWriter(fw);
 			for(Serviser serviser : ServiserController.serviseri) {
-				System.out.println(serviser);
 				pw.append(String.join("|", serviserUStringArray(serviser)));
 				pw.append("\r\n");
 			}
@@ -56,14 +54,14 @@ public class ServiserController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
 	}
 	
 	public static void procitajFajl() {
+		ServiserController.podaci.clear();
 		try {
 			Scanner sc = new Scanner(file);
 			while(sc.hasNextLine()) {
-				podaci.add(new ArrayList<String>(Arrays.asList((sc.nextLine()).split("\\|"))));
+				ServiserController.podaci.add(new ArrayList<String>(Arrays.asList((sc.nextLine()).split("\\|"))));
 			}
 			sc.close();
 		} catch (FileNotFoundException e) {
@@ -83,7 +81,7 @@ public class ServiserController {
 	//konvertuje iz niza stringova u niz servisera
 	public static void konvertujSveAutomobile() {
 		ServiserController.serviseri.clear();
-		for (ArrayList<String> serv : podaci) {
+		for (ArrayList<String> serv : ServiserController.podaci) {
 			ServiserController.serviseri.add(stringUServisera(serv));
 		}
 	}
@@ -105,20 +103,18 @@ public class ServiserController {
 	
 	public static void inicijalizujServisere() {
 		System.out.println("Inicijalizacija servisera");
-		ServiserController.serviseri.clear();
-		ServiserController.podaci.clear();
 		procitajFajl();
 		konvertujSveServisere();
 	}
 	
 	
-	
 	//konvertuje iz niza stringova u niz servisera
 	public static void konvertujSveServisere() {
-		serviseri.clear();
+		ServiserController.serviseri.clear();
 		for (ArrayList<String> ser : ServiserController.podaci) {
 			ServiserController.serviseri.add(stringUServisera(ser));
 		}
+		
 	}
 	
 	//ovo bi trebalo da obrise i servise
@@ -152,7 +148,7 @@ public class ServiserController {
 	
 	public static Serviser nadjiServiseraPoKorisnickomImenu(String korisnickoIme) {
 		Serviser trazenServiser = null;
-		for(Serviser serviser : serviseri) {
+		for(Serviser serviser : ServiserController.serviseri) {
 			if(korisnickoIme.equalsIgnoreCase(serviser.getKorisnickoIme())) {
 				trazenServiser = serviser;
 			}
@@ -166,20 +162,17 @@ public class ServiserController {
 		}
 	}
 
-	public static ArrayList<Serviser> getServiseri() {
-		inicijalizujServisere();
-		return ServiserController.serviseri;
-	}
 	
 	public static ArrayList<Serviser> getNeObrisaniServiseri() {
 		ArrayList<Serviser> neObrisaniServiseri = new ArrayList<Serviser>();
 		inicijalizujServisere();
-		
-		for(Serviser ser : serviseri) {
+		System.out.println("Pre neobrisanih ser " +ServiserController.serviseri);
+		for(Serviser ser : ServiserController.serviseri) {
 			if(ser.isObrisan() == false) {
 				neObrisaniServiseri.add(ser);
 			}
 		}
+		System.out.println("Neobrisani serviseri " + neObrisaniServiseri);
 		return neObrisaniServiseri;
 	}
 	
@@ -187,6 +180,11 @@ public class ServiserController {
 		ServiserController.serviseri.remove(nadjiServiseraPoOznaci(oznaka));
 	}
 
+	public static ArrayList<Serviser> getServiseri() {
+		inicijalizujServisere();
+		return ServiserController.serviseri;
+	}
+	
 	public static void setServiseri(ArrayList<Serviser> serviseri) {
 		ServiserController.serviseri = serviseri;
 	}

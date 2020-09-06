@@ -40,10 +40,7 @@ public class Musterija extends Korisnik {
 		return AutomobilController.nadjiAutomobilePoIdVlasnika(this.getOznaka());
 	}
 
-	@Override
-	public String toString() {
-		return "Musterija [brojPoena=" + brojPoena + ", toString()=" + super.toString() + "]";
-	}
+
 	
 	
 	

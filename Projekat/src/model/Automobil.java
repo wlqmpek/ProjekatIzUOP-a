@@ -3,6 +3,7 @@ package model;
 import java.util.UUID;
 
 import controller.AutomobilController;
+import controller.ServisnaKnjizicaController;
 import enumi.Gorivo;
 import enumi.Marka;
 import enumi.Model;
@@ -18,7 +19,6 @@ public class Automobil {
 	private short snagaMotora;
 	private Gorivo gorivo;
 	private boolean obrisan;
-	private ServisnaKnjizica servisnaKnjizica;
 	
 	public Automobil(Musterija vlasnik, Marka marka, Model model, short godinaProizvodnje,
 			short zapreminaMotora, short snagaMotora, Gorivo gorivo) {
@@ -46,7 +46,6 @@ public class Automobil {
 		this.zapreminaMotora = zapreminaMotora;
 		this.snagaMotora = snagaMotora;
 		this.gorivo = gorivo;
-		this.servisnaKnjizica = null;
 		this.obrisan = obrisan;
 	}
 	
@@ -62,7 +61,6 @@ public class Automobil {
 		this.zapreminaMotora = zapreminaMotora;
 		this.snagaMotora = snagaMotora;
 		this.gorivo = gorivo;
-		this.servisnaKnjizica = null;
 		this.obrisan = obrisan;
 	}
 	
@@ -70,8 +68,7 @@ public class Automobil {
 	
 
 	public Automobil(String vlasnik, Marka marka, Model model, short godinaProizvodnje,
-			short zapreminaMotora, short snagaMotora, Gorivo gorivo, boolean obrisan,
-			ServisnaKnjizica servisnaKnjizica) {
+			short zapreminaMotora, short snagaMotora, Gorivo gorivo, boolean obrisan) {
 		super();
 		this.oznaka = generisiOznaku();
 		this.vlasnik = AutomobilController.nadjiVlasnika(vlasnik);
@@ -82,7 +79,6 @@ public class Automobil {
 		this.snagaMotora = snagaMotora;
 		this.gorivo = gorivo;
 		this.obrisan = obrisan;
-		this.servisnaKnjizica = servisnaKnjizica;
 	}
 
 	public String getOznaka() {
@@ -152,17 +148,6 @@ public class Automobil {
 	}
 	
 
-	public ServisnaKnjizica getServisnaKnjizica() {
-		return servisnaKnjizica;
-	}
-
-
-	public void setServisnaKnjizica(ServisnaKnjizica servisnaKnjizica) {
-		this.servisnaKnjizica = servisnaKnjizica;
-		this.servisnaKnjizica.setAutomobil(this);
-	}
-
-
 
 	public boolean isObrisan() {
 		return obrisan;
@@ -172,14 +157,10 @@ public class Automobil {
 		this.obrisan = obrisan;
 	}
 
-
-
 	@Override
 	public String toString() {
-		return "Automobil [oznaka=" + oznaka + ", vlasnik=" + vlasnik + ", marka=" + marka + ", model=" + model
-				+ ", godinaProizvodnje=" + godinaProizvodnje + ", zapreminaMotora=" + zapreminaMotora + ", snagaMotora="
-				+ snagaMotora + ", gorivo=" + gorivo + ", obrisan=" + obrisan + ", servisnaKnjizica=" + servisnaKnjizica
-				+ "]";
+		return "Automobil [vlasnik=" + vlasnik + ", marka=" + marka + ", model=" + model + ", godinaProizvodnje="
+				+ godinaProizvodnje + "]";
 	}
 
 	

@@ -78,8 +78,8 @@ public class Servis {
 		this.serviser = serviser;
 	}
 
-	public Date getDatum() {
-		return datum;
+	public String getDatum() {
+		return sdf.format(datum);
 	}
 
 	public void setDatum(String datum) {

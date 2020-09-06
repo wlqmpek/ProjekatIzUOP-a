@@ -37,6 +37,22 @@ public class AdministratorController {
 		}
 	}
 	
+	//zapisuje sve iznova iz administratora u fajl
+	public static void sacuvajIzmeneUFajl() {
+		FileWriter fw;
+		try {
+			fw = new FileWriter(file, false);
+			PrintWriter pw = new PrintWriter(fw);
+			for(Administrator administrator : AdministratorController.administratori) {
+				pw.append(String.join("|", administratorUStringArray(administrator)));
+				pw.append("\r\n");
+			}
+			pw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	//cita fajl i stavlja podatke u niz nizova atributa 
 	public static void procitajFajl() {
 		podaci.clear();
@@ -60,20 +76,31 @@ public class AdministratorController {
 		return new ArrayList<String>(Arrays.asList(administrator.getOznaka(), administrator.getIme(), administrator.getPrezime(), administrator.getJMBG(), administrator.getPol().toString(), administrator.getAdresa(), administrator.getBrojTelefona(), administrator.getKorisnickoIme(), administrator.getLozinka(), String.valueOf(administrator.isObrisan()), String.valueOf(administrator.getPlata())));
 	}
 	
-	public static void konvertujSveAdministratore() {
-		administratori.clear();
-		for (ArrayList<String> admin : podaci) {
-			administratori.add(stringUAdministratora(admin));
-		}
-	}
 	
 	public static void inicijalizujAdministratore() {
-		System.out.println("Inicijalizacija administratora");
-		administratori.clear();
-		podaci.clear();
+		AdministratorController.administratori.clear();
+		AdministratorController.podaci.clear();
 		procitajFajl();
 		konvertujSveAdministratore();
 	}
+	
+	
+	public static void konvertujSveAdministratore() {
+		AdministratorController.administratori.clear();
+		for (ArrayList<String> admin : AdministratorController.podaci) {
+			AdministratorController.administratori.add(stringUAdministratora(admin));
+		}
+	}
+	
+	public static void izbrisiAdministratora(Administrator administrator) {
+		if(administrator == null) {
+			System.out.println("Molim vas izaberite validnog administratora");
+		} else {
+			administrator.setObrisan(true);
+		}
+	}
+	
+	
 	
 	public static Administrator nadjiAdministratoraPoOznaci(String oznaka) {
 		Administrator trazenAdministrator = null;
@@ -85,6 +112,7 @@ public class AdministratorController {
 		return trazenAdministrator;
 	}
 	
+	
 	public static Administrator nadjiAdministratoraPoKorisnickomImenu(String korisnickoIme) {
 		Administrator trazenAdministrator = null;
 		for(Administrator administrator : administratori) {
@@ -95,18 +123,41 @@ public class AdministratorController {
 		return trazenAdministrator;
 	}
 	
-	public static void izbrisiAdministratora(Administrator administrator) {
-		if(administrator == null) {
-			System.out.println("Molim vas izaberite validnog administratora");
-		} else {
-			administrator.setObrisan(true);
-		}
-	}
 	
 	public static void ispisiSveAdministratore() {
 		for(Administrator admin : administratori) {
 			System.out.println(admin.toString());
 		}
+	}
+	
+
+	public static ArrayList<Administrator> getNeObrisaniAdministratori() {
+		ArrayList<Administrator> neObrisanAdministratori = new ArrayList<Administrator>();
+		inicijalizujAdministratore();
+		
+		for(Administrator admin : administratori) {
+			if(admin.isObrisan() == false) {
+				System.out.println(admin);
+				neObrisanAdministratori.add(admin);
+			}
+		}
+		return neObrisanAdministratori;
+	}
+	
+	
+	public static void izbrisiIzUcitanihAdministratoraSaOznakom(String oznaka) {
+		AdministratorController.administratori.remove(nadjiAdministratoraPoOznaci(oznaka));
+	}
+
+	
+	public static ArrayList<Administrator> getAdministratori() {
+		inicijalizujAdministratore();
+		return AdministratorController.administratori;
+	}
+	
+	
+	public static void setAdministratori(ArrayList<Administrator> administratori) {
+		AdministratorController.administratori = administratori;
 	}
 	
 }

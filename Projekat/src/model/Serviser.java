@@ -52,11 +52,9 @@ public class Serviser extends Korisnik {
 
 	@Override
 	public String toString() {
-		return "Serviser [specijalizacija=" + specijalizacija + ", plata=" + plata + ", toString()=" + super.toString()
+		return "Serviser [Oznaka=" + getOznaka() + ", Ime=" + getIme() + ", Prezime=" + getPrezime()
 				+ "]";
-	}
-
-	
+	}	
 	
 	
 

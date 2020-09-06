@@ -12,26 +12,15 @@ import enumi.Pol;
 import model.Administrator;
 import model.Automobil;
 import model.Musterija;
+import model.Servis;
+import model.Serviser;
 import view.MusterijaView;
 
 public class MusterijaController {
 	
-	private Musterija model;
-	private MusterijaView view;
 	private static File file = new File(".\\podaci\\musterije.txt");
 	public static ArrayList<ArrayList<String>> podaci = new ArrayList<ArrayList<String>>();
 	public static ArrayList<Musterija> musterije = new ArrayList<Musterija>();
-	
-	public MusterijaController(Musterija model, MusterijaView view) {
-		super();
-		this.model = model;
-		this.view = view;
-	}
-	
-	//privremen
-	public MusterijaController() {
-		super();
-	}
 	
 	static {
 		inicijalizujMusterije();
@@ -49,12 +38,29 @@ public class MusterijaController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
+	
+	
+	//zapisuje sve iznova iz musterija u fajl
+	public static void sacuvajIzmeneUFajl() {
+		FileWriter fw;
+		try {
+			fw = new FileWriter(file, false);
+			PrintWriter pw = new PrintWriter(fw);
+			for(Musterija musterija : MusterijaController.musterije) {
+				pw.append(String.join("|", musterijaUStringArray(musterija)));
+				pw.append("\r\n");
+			}
+			pw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	
 	//cita fajl i upisuje podatke u niz nizova atributa 
 	public static void procitajFajl() {
-		podaci.clear();
+		MusterijaController.podaci.clear();
 		try {
 			Scanner sc = new Scanner(file);
 			while(sc.hasNextLine()) {
@@ -67,6 +73,7 @@ public class MusterijaController {
 		}
 	}
 	
+	
 	public static Musterija stringUMusteriju(ArrayList<String> podaci) {
 		return new Musterija(podaci.get(0), podaci.get(1), podaci.get(2), podaci.get(3), Pol.valueOf(podaci.get(4)), podaci.get(5), podaci.get(6), podaci.get(7), podaci.get(8), Byte.valueOf(podaci.get(9)), Boolean.valueOf(podaci.get(10)));
 	}
@@ -75,14 +82,7 @@ public class MusterijaController {
 		return new ArrayList<String>(Arrays.asList(musterija.getOznaka(), musterija.getIme(), musterija.getPrezime(), musterija.getJMBG(), musterija.getPol().toString(), musterija.getAdresa(), musterija.getBrojTelefona(), musterija.getKorisnickoIme(), musterija.getLozinka(), String.valueOf(musterija.getBrojPoena()), String.valueOf(musterija.isObrisan())));
 	}
 	
-	//konvertuje iz niza stringova u niz musterija
-	public static void konvertujSveMusterije() {
-		musterije.clear();
-		for (ArrayList<String> mus : podaci) {
-			musterije.add(stringUMusteriju(mus));
-		}
-	}
-	
+
 	
 	public static ArrayList<Automobil> nadjiAutomobilePoIdVlasnika(String oznaka) {
 		return AutomobilController.nadjiAutomobilePoIdVlasnika(oznaka);
@@ -90,15 +90,55 @@ public class MusterijaController {
 	
 	public static void inicijalizujMusterije() {
 		System.out.println("Inicijalizacija musterija");
-		musterije.clear();
-		podaci.clear();
+		MusterijaController.musterije.clear();
+		MusterijaController.podaci.clear();
 		procitajFajl();
 		konvertujSveMusterije();
 	}
 	
+	//konvertuje iz niza stringova u niz musterija
+	public static void konvertujSveMusterije() {
+		MusterijaController.musterije.clear();
+		for (ArrayList<String> mus : MusterijaController.podaci) {
+			musterije.add(stringUMusteriju(mus));
+		}
+	}
+	
+	//Vraca listu SVIH automobila korisnika
+	public static ArrayList<Automobil> listaAutomobilaMusterije(Musterija musterija) {
+		ArrayList<Automobil> listaTrazenihAutomobila = new ArrayList<Automobil>();
+		
+		for(Automobil automobil : AutomobilController.automobili) {
+			if(automobil.getVlasnik().getOznaka().equalsIgnoreCase(musterija.getOznaka())) {
+				listaTrazenihAutomobila.add(automobil);
+			}
+		}
+		System.out.printf("Broj AUTOMOBILA musteije: %s je %d", musterija.getOznaka(), listaTrazenihAutomobila.size());
+		return listaTrazenihAutomobila;
+	}
+	
+	//ovo bi trebalo da obrise i automobile
+	public static void izbrisiMusteriju(Musterija musterija) {
+		if(musterija == null) {
+			System.out.println("Molim vas izaberite validan servis");
+		} else {
+			musterija.setObrisan(true);
+			izbrisiAutomobileMusterije(musterija);
+			//treba dodati da se ove izmene sacuvaju u fajlu servisa
+			sacuvajIzmeneUFajl();
+		}
+	}
+	
+	private static void izbrisiAutomobileMusterije(Musterija musterija) {
+		for(Automobil automobil : listaAutomobilaMusterije(musterija)) {
+			AutomobilController.izbrisiAutomobil(automobil);
+		}
+	}
+
+
 	public static Musterija nadjiMusterijuPoOznaci(String oznaka) {
 		Musterija trazenaMusterija = null;
-		for(Musterija musterija : musterije) {
+		for(Musterija musterija : MusterijaController.musterije) {
 			if(oznaka.equalsIgnoreCase(musterija.getOznaka())) {
 				trazenaMusterija = musterija;
 			}
@@ -108,33 +148,55 @@ public class MusterijaController {
 	
 	public static Musterija nadjiMusterijuPoKorisnickomImenu(String korisnickoIme) {
 		Musterija trazenaMusterija = null;
-		for(Musterija musterija : musterije) {
+		for(Musterija musterija : MusterijaController.musterije) {
 			if(korisnickoIme.equalsIgnoreCase(musterija.getKorisnickoIme())) {
 				trazenaMusterija = musterija;
 			}
 		}
 		return trazenaMusterija;
 	}
-	
-	public static void izbrisiMusteriju(Musterija musterija) {
-		if(musterija == null) {
-			System.out.println("Molim vas izaberite validnu musteriju");
-		} else {
-			musterija.setObrisan(true);
-		}
-	}
+
 	
 	//metode za demonstraciju funkcionalnosti
 	public static void ispisiSveMusterije() {
-		for(Musterija musterija : musterije) {
+		for(Musterija musterija : MusterijaController.musterije) {
 			System.out.println(musterija);
 		}
 	}
+	
 	
 	public static void ispisiSveAutomobileMusterije(String oznaka) {
 		for(Automobil auto : MusterijaController.nadjiAutomobilePoIdVlasnika(oznaka)) {
 			System.out.println(auto);
 		}
 	}
+
+	
+	public static ArrayList<Musterija> getNeObrisaniMusterije() {
+		ArrayList<Musterija> neObrisaneMusterije = new ArrayList<Musterija>();
+		inicijalizujMusterije();
+		for(Musterija mus : musterije) {
+			if(mus.isObrisan() == false) {
+				neObrisaneMusterije.add(mus);
+			}
+		}
+		return neObrisaneMusterije;
+	}
+	
+	
+	public static void izbrisiIzUcitanihMusterijaSaOznakom(String oznaka) {
+		MusterijaController.musterije.remove(nadjiMusterijuPoOznaci(oznaka));
+	}
+
+	public static ArrayList<Musterija> getMusterije() {
+		inicijalizujMusterije();
+		return MusterijaController.musterije;
+	}
+
+
+	public static void setMusterije(ArrayList<Musterija> musterije) {
+		MusterijaController.musterije = musterije;
+	}
+	
 	
 }

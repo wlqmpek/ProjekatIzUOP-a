@@ -13,6 +13,7 @@ import enumi.Pol;
 import model.Automobil;
 import model.Musterija;
 import model.Servis;
+import model.Serviser;
 import model.ServisnaKnjizica;
 
 public class ServisnaKnjizicaController {
@@ -25,7 +26,7 @@ public class ServisnaKnjizicaController {
 	}
 	
 	public static void upisiServisnuKnjizicuUFajl(ServisnaKnjizica servisnaKnjizica) {
-		servisneKnjizice.add(servisnaKnjizica);
+		ServisnaKnjizicaController.servisneKnjizice.add(servisnaKnjizica);
 		String servisnaKnjizicaKaoString = String.join("|", servisnaKnjizicaUStringArray(servisnaKnjizica)) + "\n";	
 		try {
 			FileWriter fw = new FileWriter(file, true);
@@ -40,11 +41,11 @@ public class ServisnaKnjizicaController {
 	
 	//cita fajl i upisuje podatke u niz nizova atributa 
 	public static void procitajFajl() {
-		podaci.clear();
+		ServisnaKnjizicaController.podaci.clear();
 		try {
 			Scanner sc = new Scanner(file);
 			while(sc.hasNextLine()) {
-				podaci.add(new ArrayList<String>(Arrays.asList((sc.nextLine()).split("\\|"))));
+				ServisnaKnjizicaController.podaci.add(new ArrayList<String>(Arrays.asList((sc.nextLine()).split("\\|"))));
 			}
 			sc.close();
 		} catch (FileNotFoundException e) {
@@ -62,23 +63,21 @@ public class ServisnaKnjizicaController {
 	}
 	
 	public static void konvertujSveServisneKnjizice() {
-		servisneKnjizice.clear();
-		for (ArrayList<String> serKnji : podaci) {
-			servisneKnjizice.add(stringUServisnuKnjizicu(serKnji));
+		ServisnaKnjizicaController.servisneKnjizice.clear();
+		for (ArrayList<String> serKnji : ServisnaKnjizicaController.podaci) {
+			ServisnaKnjizicaController.servisneKnjizice.add(stringUServisnuKnjizicu(serKnji));
 		}
 	}
 	
 	public static void inicijalizujServisneKnjizice() {
 		System.out.println("Inicijalizacija servisnih knjizica");
-		servisneKnjizice.clear();
-		podaci.clear();
 		procitajFajl();
 		konvertujSveServisneKnjizice();
 	}
 	
 	public static ServisnaKnjizica nadjiServisnuKnjizicuPoOznaci(String oznaka) {
 		ServisnaKnjizica trazenaServisnaKnjizica = null;
-		for(ServisnaKnjizica servisnaKnjizica : servisneKnjizice) {
+		for(ServisnaKnjizica servisnaKnjizica : ServisnaKnjizicaController.servisneKnjizice) {
 			if(oznaka.equalsIgnoreCase(servisnaKnjizica.getOznaka())) {
 				trazenaServisnaKnjizica = servisnaKnjizica;
 			}
@@ -98,6 +97,7 @@ public class ServisnaKnjizicaController {
 	}
 	
 	public static Automobil nadjiAutomobilPoOznaci(String oznaka) {
+		System.out.println("Nadji aut");
 		return AutomobilController.nadjiAutomobilPoOznaci(oznaka);
 	}
 	
@@ -105,12 +105,14 @@ public class ServisnaKnjizicaController {
 		return AutomobilController.nadjiAutomobilPoOznaci(servisnaKnjizica.getOznaka());
 	}
 	
+	// treba pozvati metodu iz automobila koja brise automobile a ne oov
 	public static void izbrisiServisnuKnjizicu(ServisnaKnjizica servisnaKnjizica) {
-		if(servisnaKnjizica == null) {
-			System.out.println("Molim vas izaberite validnu servisnu knjizicu");
-		} else {
-			servisnaKnjizica.setObrisan(true);
-		}
+//		if(servisnaKnjizica == null) {
+//			System.out.println("Molim vas izaberite validnu servisnu knjizicu");
+//		} else {
+//			servisnaKnjizica.setObrisan(true);
+//		}
+		System.out.println("Pogresna metoda pozvana");
 	}
 	
 	public static void ispisiSveServisneKnjizice() {
@@ -137,7 +139,31 @@ public class ServisnaKnjizicaController {
 		
 		return nadjenaServisnaKnjizica;
 	}
+
 	
+	public static ArrayList<ServisnaKnjizica> getNeObrisaneServisneKnjizice() {
+		ArrayList<ServisnaKnjizica> neObrisaneServisneKnjizice = new ArrayList<ServisnaKnjizica>();
+		inicijalizujServisneKnjizice();
+		for(ServisnaKnjizica sk : ServisnaKnjizicaController.servisneKnjizice) {
+			if(sk.isObrisan() == false) {
+				neObrisaneServisneKnjizice.add(sk);
+			}
+		}
+		return neObrisaneServisneKnjizice;
+	}
+	
+	public static void izbrisiIzUcitanihServisnihKnjizicaSaOznakom(String oznaka) {
+		ServisnaKnjizicaController.servisneKnjizice.remove(nadjiServisnuKnjizicuPoOznaci(oznaka));
+	}
+
+	public static ArrayList<ServisnaKnjizica> getServisneKnjizice() {
+		inicijalizujServisneKnjizice();
+		return ServisnaKnjizicaController.servisneKnjizice;
+	}
+	
+	public static void setServisneKnjizice(ArrayList<ServisnaKnjizica> servisneKnjizice) {
+		ServisnaKnjizicaController.servisneKnjizice = servisneKnjizice;
+	}
 	
 	
 }

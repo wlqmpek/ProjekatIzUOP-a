@@ -37,14 +37,14 @@ public abstract class Korisnik {
 		this.obrisan = obrisan;
 	}
 
-	public Korisnik(String ime, String prezime, String JMBG, String adresa, String brojTelefona,
+	public Korisnik(String ime, String prezime, String JMBG, Pol pol, String adresa, String brojTelefona,
 			String korisnickoIme, String lozinka) {
 		super();
 		this.oznaka = generisiOznaku();
 		this.ime = ime;
 		this.prezime = prezime;
 		this.JMBG = JMBG;
-		this.pol = randomPol();
+		this.pol = pol;
 		this.adresa = adresa;
 		this.brojTelefona = brojTelefona;
 		this.korisnickoIme = korisnickoIme;
@@ -136,14 +136,12 @@ public abstract class Korisnik {
 		this.obrisan = obrisan;
 	}
 
-	
-	
 	@Override
 	public String toString() {
-		return "Korisnik [oznaka=" + oznaka + ", ime=" + ime + ", prezime=" + prezime + ", JMBG=" + JMBG + ", pol="
-				+ pol + ", adresa=" + adresa + ", brojTelefona=" + brojTelefona + ", korisnickoIme=" + korisnickoIme
-				+ ", lozinka=" + lozinka + ", obrisan=" + obrisan + "]";
+		return "Korisnik [oznaka=" + oznaka + ", ime=" + ime + ", prezime=" + prezime + "]";
 	}
+
+	
 	
 	
 }

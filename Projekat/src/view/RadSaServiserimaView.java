@@ -2,6 +2,7 @@ package view;
 
 import java.util.ArrayList;
 
+import controller.RadSaServiserimaController;
 import enumi.Pol;
 import enumi.Specijalizacija;
 import javafx.collections.FXCollections;
@@ -46,16 +47,13 @@ public class RadSaServiserimaView  extends Stage {
 	private TextField tfOznaka, tfIme, tfPrezime, tfJMBG, tfAdresa, tfBrojTelefona, tfKorisnickoIme, tfLozinka, tfPlata;
 	private Button dugmeSacuvaj;
 	private ContextMenu meni = new ContextMenu(new MenuItem("Izbrisi"), new MenuItem("Izmeni"));
-	private ObservableList<Serviser> serviseri = FXCollections.observableArrayList();
+	private static ObservableList<Serviser> serviseri = FXCollections.observableArrayList();
 	
-
 	
 	public RadSaServiserimaView() {
 		super();
 		kreirajTabeluServisera();
-		
 		Scene scene = new Scene(kreirajRaspored(),1370,700);
-		
 //		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		this.setScene(scene);
 		this.setResizable(true);
@@ -176,15 +174,14 @@ public class RadSaServiserimaView  extends Stage {
 				kolonaJMBG, kolonaPol, kolonaAdresa, kolonaBrojTelefona, kolonaKorisnickoIme,
 				kolonaLozinka, kolonaSpecijalizacija, kolonaPlata, kolonaOznaka);
 		
-		
 		tabela.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		
 		tabela.setItems(serviseri);
 	}
 	
 	public void popuniTabelu(ArrayList<Serviser> serviseri) {
-		this.serviseri = FXCollections.observableArrayList(serviseri);
-		tabela.setItems(this.serviseri);
+		RadSaServiserimaView.serviseri = FXCollections.observableArrayList(serviseri);
+		tabela.setItems(RadSaServiserimaView.serviseri);
 	}
 	
 	public void resetujPolja() {

@@ -44,11 +44,33 @@ public class AdministratorGlavniMeniView extends Stage {
 		vBox.setSpacing(10);
 	}
 	
+	public void dodajFunkcionalnostDugmetuRadSaAdministratorima(EventHandler<ActionEvent> event) {
+		radSaAdministratorima.setOnAction(event);
+	}
+	
 	public void dodajFunkcionalnostDugmetuRadSaServiserima(EventHandler<ActionEvent> event) {
 		radSaServiserima.setOnAction(event);
 	}
 	
+	public void dodajFunkcionalnostDugmetuRadSaMusterijama(EventHandler<ActionEvent> event) {
+		radSaMusterijama.setOnAction(event);
+	}
 	
+	public void dodajFunkcionalnostDugmetuRadSaServisima(EventHandler<ActionEvent> event) {
+		radSaServisima.setOnAction(event);
+	}
+	
+	public void dodajFunkcionalnostDugmetuRadSaAutomobilima(EventHandler<ActionEvent> event) {
+		radSaAutomobilima.setOnAction(event);
+	}
+	
+	public void dodajFunkcionalnostDugmetuRadSaServisnimKnjizicama(EventHandler<ActionEvent> event) {
+		radSaServisnimKnjizicama.setOnAction(event);
+	}
+	
+	public void dodajFunkcionalnostDugmetuRadSaDelovima(EventHandler<ActionEvent> event) {
+		radSaDelovima.setOnAction(event);
+	}
 }
 
 

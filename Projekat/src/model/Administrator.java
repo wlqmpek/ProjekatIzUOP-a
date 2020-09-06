@@ -6,9 +6,9 @@ public class Administrator extends Korisnik{
 	
 	private double plata;
 	
-	public Administrator(String ime, String prezime, String JMBG, String adresa, String brojTelefona,
+	public Administrator(String ime, String prezime, String JMBG, Pol pol, String adresa, String brojTelefona,
 			String korisnickoIme, String lozinka, double plata) {
-		super(ime, prezime, JMBG, adresa, brojTelefona, korisnickoIme, lozinka);
+		super(ime, prezime, JMBG, pol, adresa, brojTelefona, korisnickoIme, lozinka);
 		this.plata = plata;
 	}
 	
@@ -20,7 +20,6 @@ public class Administrator extends Korisnik{
 		super(oznaka, ime, prezime, JMBG, pol, adresa, brojTelefona, korisnickoIme, lozinka, obrisan);
 		this.plata = plata;
 	}
-
 
 
 	public double getPlata() {

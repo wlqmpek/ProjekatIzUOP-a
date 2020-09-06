@@ -49,9 +49,8 @@ public class ServisnaKnjizica {
 
 	@Override
 	public String toString() {
-		return "ServisnaKnjizica [oznaka=" + oznaka + ", automobil=" + automobil + ", obrisan=" + obrisan + "]";
+		return "ServisnaKnjizica [automobil=" + automobil + "]";
 	}
-
 	
 	
 }

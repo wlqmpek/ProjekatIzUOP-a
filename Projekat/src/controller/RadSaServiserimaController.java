@@ -20,11 +20,8 @@ public class RadSaServiserimaController {
 		this.rssv.popuniTabelu(ServiserController.getNeObrisaniServiseri());
 		dodeliFunkcionalnostDugmicima();
 	}
-	
-	
 
 	private void dodeliFunkcionalnostDugmicima() {
-		
 		rssv.dodeliFunkcionalnostDugmetuSacuvaj(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
@@ -38,25 +35,20 @@ public class RadSaServiserimaController {
 		});
 		
 		rssv.dodeliFunkcionalnostOpcijiIzbrisi(new EventHandler<ActionEvent>() {
-			
 			@Override
 			public void handle(ActionEvent arg0) {
-				
 				ServiserController.izbrisiServisera(rssv.getTabela().getSelectionModel().getSelectedItem());
 				rssv.getTabela().getItems().removeAll(rssv.getTabela().getSelectionModel().getSelectedItem());
-				
 			}
 		});
 		
 		rssv.dodeliFunkcionalnostOpcijiIzmeni(new EventHandler<ActionEvent>() {
-			
 			@Override
 			public void handle(ActionEvent arg0) {
-				
 				prepisiVrednostiUTekstualnaPolja();
-				
 			}
 		});
+		
 		
 	}
 	
@@ -76,8 +68,7 @@ public class RadSaServiserimaController {
 			String korisnickoIme = rssv.getTfKorisnickoIme().getText();
 			String lozinka = rssv.getTfLozinka().getText();
 			Specijalizacija specijalizacija = rssv.getSpecijalizacijaBox().getSelectionModel().getSelectedItem();
-			
-			
+				
 			try {
 				double plata = Double.valueOf(rssv.getTfPlata().getText());
 				noviServiser = new Serviser(ime, prezime, JMBG, pol, adresa, brojTelefona, korisnickoIme, lozinka, specijalizacija, plata);
