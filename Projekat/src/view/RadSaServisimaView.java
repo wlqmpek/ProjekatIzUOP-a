@@ -145,7 +145,10 @@ public class RadSaServisimaView extends Stage {
 	}
 	
 	public void resetujPolja() {
-		
+		servisnaKnjiizcaBox.setPromptText("Servisna Knjizica");
+		serviserBox.setPromptText("Serviser");
+		tfDatum.clear();
+		tfOpis.clear();
 	}
 	
 	public void izbaciPorukuOGresci(String poruka) {
