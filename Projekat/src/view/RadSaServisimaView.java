@@ -56,7 +56,7 @@ public class RadSaServisimaView extends Stage {
 	
 	public RadSaServisimaView() {
 		super();
-		kreirajTabeluServisera();
+		kreirajTabeluSaServisima();
 		Scene scene = new Scene(kreirajRaspored(),1370,700);
 //		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		this.setScene(scene);
@@ -106,7 +106,7 @@ public class RadSaServisimaView extends Stage {
 		return vb;
 	}
 	
-	private void kreirajTabeluServisera() {
+	private void kreirajTabeluSaServisima() {
 		
 		//kreiranje kolona
 		final int SIRINA_KOLONA = 110;

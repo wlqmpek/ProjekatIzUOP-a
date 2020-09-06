@@ -39,6 +39,21 @@ public class ServisnaKnjizicaController {
 		}
 	}
 	
+	public static void sacuvajIzmeneUFajl() {
+		FileWriter fw;
+		try {
+			fw = new FileWriter(file, false);
+			PrintWriter pw = new PrintWriter(fw);
+			for(ServisnaKnjizica servisnaKnjizica : ServisnaKnjizicaController.servisneKnjizice) {
+				pw.append(String.join("|", servisnaKnjizicaUStringArray(servisnaKnjizica)));
+				pw.append("\r\n");
+			}
+			pw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	//cita fajl i upisuje podatke u niz nizova atributa 
 	public static void procitajFajl() {
 		ServisnaKnjizicaController.podaci.clear();
@@ -97,7 +112,6 @@ public class ServisnaKnjizicaController {
 	}
 	
 	public static Automobil nadjiAutomobilPoOznaci(String oznaka) {
-		System.out.println("Nadji aut");
 		return AutomobilController.nadjiAutomobilPoOznaci(oznaka);
 	}
 	
@@ -107,11 +121,7 @@ public class ServisnaKnjizicaController {
 	
 	// treba pozvati metodu iz automobila koja brise automobile a ne oov
 	public static void izbrisiServisnuKnjizicu(ServisnaKnjizica servisnaKnjizica) {
-//		if(servisnaKnjizica == null) {
-//			System.out.println("Molim vas izaberite validnu servisnu knjizicu");
-//		} else {
-//			servisnaKnjizica.setObrisan(true);
-//		}
+		
 		System.out.println("Pogresna metoda pozvana");
 	}
 	

@@ -144,7 +144,7 @@ public class AutomobilController {
 			System.out.println("Molim vas izaberite validan automobil");
 		} else {
 			automobil.setObrisan(true);
-			ServisnaKnjizicaController.izbrisiServisnuKnjizicu(ServisnaKnjizicaController.nadjiServisnuKnjizicuPoOznaci(automobil.getOznaka()));
+			ServisnaKnjizicaController.nadjiServisnuKnjizicuPoOznaci(automobil.getOznaka()).setObrisan(true);
 		}
 	}
 	

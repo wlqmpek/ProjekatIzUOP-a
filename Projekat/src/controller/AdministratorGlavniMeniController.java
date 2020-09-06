@@ -8,9 +8,11 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import view.AdministratorGlavniMeniView;
 import view.RadSaAdministratorimaView;
+import view.RadSaAutomobilimaView;
 import view.RadSaMusterijamaView;
 import view.RadSaServiserimaView;
 import view.RadSaServisimaView;
+import view.RadSaServisnimKnjizicamaView;
 
 public class AdministratorGlavniMeniController {
 	
@@ -53,6 +55,24 @@ public class AdministratorGlavniMeniController {
 				agmv.close();
 				//do ovde sam stigao
 				new RadSaServisimaController(new RadSaServisimaView());
+			}
+		});
+		
+		this.agmv.dodajFunkcionalnostDugmetuRadSaAutomobilima(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+				agmv.close();
+				//do ovde sam stigao
+				new RadSaAutomobilimaController(new RadSaAutomobilimaView());
+			}
+		});
+		
+		this.agmv.dodajFunkcionalnostDugmetuRadSaServisnimKnjizicama(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+				agmv.close();
+				//do ovde sam stigao
+				new RadSaServisnimKnjizicamaController(new RadSaServisnimKnjizicamaView());
 			}
 		});
 	}

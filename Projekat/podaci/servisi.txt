@@ -1,6 +1,6 @@
 71cdbeb1-c96e-4764-96b3-e4eef6739567|6eb7bb37-4f6e-413f-a9ba-22ac2d74d1f5|aa6ffa73-94ae-44d0-8463-181247bf0c38|04/06/2020 11:03|Potrebno je uraditi potpunu rest...|ZAKAZAN|false
 cb4eb96c-2cc5-44b2-9a35-2bea474ea11c|6eb7bb37-4f6e-413f-a9ba-22ac2d74d1f5|aa6ffa73-94ae-44d0-8463-181247bf0c38|04/06/2020 11:03|Potrebno je uraditi potpunu rest...|ZAKAZAN|true
-a74563cc-63ba-43eb-8077-b9035d214405|6eb7bb37-4f6e-413f-a9ba-22ac2d74d1f5|fad0f503-cdaa-49c3-92a5-5c38e856be6d|04/03/1998 11:03|Treba promeniti tecnost za zmigavac|ODRADJEN|false
-0285e5f0-7d10-46c9-9a0c-595a097d1106|e252633f-d8f2-4d2c-bf22-25bdfd9829b1|fad0f503-cdaa-49c3-92a5-5c38e856be6d|01/01/2111 11:11|Ofarbati|ZAKAZAN|false
+a74563cc-63ba-43eb-8077-b9035d214405|6eb7bb37-4f6e-413f-a9ba-22ac2d74d1f5|fad0f503-cdaa-49c3-92a5-5c38e856be6d|04/03/1998 11:03|Treba promeniti tecnost za zmigavac|ODRADJEN|true
+0285e5f0-7d10-46c9-9a0c-595a097d1106|e252633f-d8f2-4d2c-bf22-25bdfd9829b1|fad0f503-cdaa-49c3-92a5-5c38e856be6d|01/01/2111 11:11|Ofarbati|ZAKAZAN|true
 e4788ec7-ca6b-4580-9baf-003d0b5ef43e|bccc7572-10bc-4ad0-99bd-45541b0daa59|f1197d00-e95f-48b1-b601-bf55f54e1c25|11/11/2011 08:45|Zameniti viseci ukras sa retrovizora|ZAKAZAN|false
 2ab74b9c-be69-4985-8ab3-ddaf12a78646|bccc7572-10bc-4ad0-99bd-45541b0daa59|f1197d00-e95f-48b1-b601-bf55f54e1c25|11/11/2011 08:45|Zameniti viseci ukras sa retrovizora|ZAKAZAN|true
