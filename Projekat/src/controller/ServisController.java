@@ -33,7 +33,7 @@ public class ServisController {
 	
 	public static void upisiServisUFajl(Servis servis) {
 		servisi.add(servis);
-		String servisKaoString = String.join("|", servisUStringArray(servis)) + "\n";
+		String servisKaoString = String.join("|", servisUStringArray(servis)) + "\r\n";
 		FileWriter fw;
 		try {
 			fw = new FileWriter(file, true);
@@ -138,9 +138,13 @@ public class ServisController {
 	
 	public static Servis nadjiServisPoOznaci(String oznaka) {
 		Servis trazenServis = null;
-		for(Servis servis : servisi) {
-			if(oznaka.equalsIgnoreCase(servis.getOznaka())) {
-				trazenServis = servis;
+		if(oznaka == null) {
+			//ne radi nista meh
+		} else {
+			for(Servis servis : servisi) {
+				if(oznaka.equalsIgnoreCase(servis.getOznaka())) {
+					trazenServis = servis;
+				}
 			}
 		}
 		return trazenServis;
@@ -182,13 +186,27 @@ public class ServisController {
 		return neObrisaniServisi;
 	}
 	
+	
+	public static ArrayList<Servis> getServiseServisera(Serviser serviser) {
+		ArrayList<Servis> listaTrazenihServisa = new ArrayList<Servis>();
+		
+		for(Servis servis : ServisController.getNeObrisaniServisi()) {
+			if(servis.getServiser().getOznaka().equalsIgnoreCase(serviser.getOznaka()) && servis.getStatus().equals(Status.ZAKAZAN)) {
+				listaTrazenihServisa.add(servis);
+			}
+		}
+		return listaTrazenihServisa;
+	}
+	
+	
 	public static void izbrisiIzUcitanihServisaSaOznakom(String oznaka) {
 		ServisController.servisi.remove(nadjiServisPoOznaci(oznaka));
 	}
 
 
 	public static ArrayList<Servis> getServisi() {
-		return servisi;
+		inicijalizujServise();
+		return ServisController.servisi;
 	}
 
 

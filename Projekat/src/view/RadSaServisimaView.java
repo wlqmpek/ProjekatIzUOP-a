@@ -78,7 +78,7 @@ public class RadSaServisimaView extends Stage {
 		serviserBox = new ComboBox<Serviser>(serviseri);
 		serviserBox.setPromptText("Serviser");
 		serviserBox.setPrefWidth(SIRINA_BOXOVA);
-		statusBox = new ComboBox<Status>(FXCollections.observableArrayList(Status.ODRADJEN, Status.ZAKAZAN));
+		statusBox = new ComboBox<Status>(FXCollections.observableArrayList(Status.values()));
 		statusBox.setPromptText("Status");
 		statusBox.setPrefWidth(SIRINA_BOXOVA);
 		

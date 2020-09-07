@@ -32,7 +32,7 @@ public class AutomobilController {
 	
 	public static void upisiAutomobilUFajl(Automobil automobil) {
 		AutomobilController.automobili.add(automobil);
-		String automobilKaoString = String.join("|", automobilUStringArray(automobil)) + "\n";
+		String automobilKaoString = String.join("|", automobilUStringArray(automobil)) + "\r\n";
 		FileWriter fw;
 		try {
 			fw = new FileWriter(file, true);

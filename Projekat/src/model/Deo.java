@@ -17,13 +17,14 @@ public class Deo {
 	private boolean obrisan;
 	
 	//ovaj konstruktor se koristi za kreiranje novog objekta deo iz aplikacije
-	public Deo(Marka marka, Model model, String naziv, double cena) {
+	public Deo(Marka marka, Model model, String naziv, double cena, Servis servis) {
 		super();
 		this.oznaka = generisiOznaku();
 		this.marka = marka;
 		this.model = model;
 		this.naziv = naziv;
 		this.cena = cena;
+		this.iskoriscenUSevisu = servis;
 		this.obrisan = false;
 	}
 	

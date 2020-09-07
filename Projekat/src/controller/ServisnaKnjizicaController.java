@@ -27,7 +27,7 @@ public class ServisnaKnjizicaController {
 	
 	public static void upisiServisnuKnjizicuUFajl(ServisnaKnjizica servisnaKnjizica) {
 		ServisnaKnjizicaController.servisneKnjizice.add(servisnaKnjizica);
-		String servisnaKnjizicaKaoString = String.join("|", servisnaKnjizicaUStringArray(servisnaKnjizica)) + "\n";	
+		String servisnaKnjizicaKaoString = String.join("|", servisnaKnjizicaUStringArray(servisnaKnjizica)) +  "\r\n";	
 		try {
 			FileWriter fw = new FileWriter(file, true);
 			PrintWriter pw = new PrintWriter(fw);

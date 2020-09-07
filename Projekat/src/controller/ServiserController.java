@@ -28,7 +28,7 @@ public class ServiserController {
 	
 	public static void upisiServiseraUFajl(Serviser serviser) {
 		ServiserController.serviseri.add(serviser);
-		String serviserKaoString = String.join("|", serviserUStringArray(serviser));
+		String serviserKaoString = String.join("|", serviserUStringArray(serviser)) + "\r\n";
 		FileWriter fw;
 		try {
 			fw = new FileWriter(file, true);

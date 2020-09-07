@@ -1,5 +1,5 @@
 package enumi;
 
 public enum Status {
-	ZAKAZAN, ODRADJEN;
+	ZAKAZAN, ODRADJEN, OTKAZAN;
 }

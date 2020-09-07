@@ -28,7 +28,7 @@ public class MusterijaController {
 	
 	public static void upisiMusterijuUFajl(Musterija musterija) {
 		musterije.add(musterija);
-		String musterijaKaoString = String.join("|", musterijaUStringArray(musterija)) + "\n";	
+		String musterijaKaoString = String.join("|", musterijaUStringArray(musterija)) + "\r\n";	
 		try {
 			FileWriter fw = new FileWriter(file, true);
 			PrintWriter pw = new PrintWriter(fw);

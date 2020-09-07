@@ -73,7 +73,7 @@ public class RadSaDelovimaView extends Stage {
 		modelBox = new ComboBox<Model>(FXCollections.observableArrayList(Model.values()));
 		modelBox.setPromptText("Izaberite Model");
 		modelBox.setPrefWidth(SIRINA_BOXOVA);
-		servisBox = new ComboBox<Servis>();
+		servisBox = new ComboBox<Servis>(servisi);
 		servisBox.setPromptText("Izaberite Servis");
 		servisBox.setPrefWidth(SIRINA_BOXOVA);
 		
@@ -121,14 +121,13 @@ public class RadSaDelovimaView extends Stage {
 		kolonaCena.setCellValueFactory(new PropertyValueFactory<Deo, Double>("cena"));
 		kolonaCena.setMinWidth(SIRINA_KOLONA);
 		kolonaIskoriscenUServisu = new TableColumn<Deo, String>("Servis");
-		ovde smisli sta ces ako je servis null
-		kolonaIskoriscenUServisu.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getServiser());
+		kolonaIskoriscenUServisu.setCellValueFactory(cellData -> new SimpleStringProperty(DeoController.vratiOznakuServisa(cellData.getValue())));
 		kolonaIskoriscenUServisu.setMinWidth(SIRINA_KOLONA);
 		
 
 		tabela.getColumns().addAll(kolonaMarka, kolonaModel, kolonaNaziv, kolonaCena, kolonaIskoriscenUServisu, kolonaOznaka);
 		tabela.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);	
-		tabela.setItems(Deoi);
+		tabela.setItems(delovi);
 	}
 	
 	public void popuniTabelu(ArrayList<Deo> delovi) {
@@ -140,6 +139,7 @@ public class RadSaDelovimaView extends Stage {
 		markaBox.setPromptText("Izaberite Marku");
 		modelBox.setPromptText("Izaberite Model");
 		servisBox.setPromptText("Odaberite Servisera");
+		servisBox.setValue(null);
 		tfNaziv.clear();
 		tfCena.clear();
 	}

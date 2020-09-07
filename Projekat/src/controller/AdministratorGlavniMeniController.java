@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import view.AdministratorGlavniMeniView;
 import view.RadSaAdministratorimaView;
 import view.RadSaAutomobilimaView;
+import view.RadSaDelovimaView;
 import view.RadSaMusterijamaView;
 import view.RadSaServiserimaView;
 import view.RadSaServisimaView;
@@ -75,6 +76,16 @@ public class AdministratorGlavniMeniController {
 				new RadSaServisnimKnjizicamaController(new RadSaServisnimKnjizicamaView());
 			}
 		});
+		
+		this.agmv.dodajFunkcionalnostDugmetuRadSaDelovima(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+				agmv.close();
+				//do ovde sam stigao
+				new RadSaDelovimaController(new RadSaDelovimaView());
+			}
+		});
+		
 	}
 
 }

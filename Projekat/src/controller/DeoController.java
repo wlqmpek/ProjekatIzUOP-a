@@ -18,7 +18,6 @@ import model.Servis;
 import model.ServisnaKnjizica;
 
 
-
 public class DeoController {
 	private static File file = new File(".\\podaci\\delovi.txt");
 	public static ArrayList<ArrayList<String>> podaci = new ArrayList<ArrayList<String>>();
@@ -29,8 +28,8 @@ public class DeoController {
 	}
 	
 	public static void upisiDeoUFajl(Deo deo) {
-		delovi.add(deo);
-		String deoKaoString = String.join("|", deoUStringArray(deo)) + "\n";
+		DeoController.delovi.add(deo);
+		String deoKaoString = String.join("|", deoUStringArray(deo));
 		FileWriter fw;
 		try {
 			fw = new FileWriter(file, true);
@@ -43,7 +42,23 @@ public class DeoController {
 		}
 	}
 	
+	public static void sacuvajIzmeneUFajl() {
+		FileWriter fw;
+		try {
+			fw = new FileWriter(file, false);
+			PrintWriter pw = new PrintWriter(fw);
+			for(Deo deo : DeoController.delovi) {
+				pw.append(String.join("|", deoUStringArray(deo)));
+				pw.append("\r\n");
+			}
+			pw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public static void procitajFajl() {
+		DeoController.podaci.clear();
 		try {
 			Scanner sc = new Scanner(file);
 			while(sc.hasNextLine()) {
@@ -57,11 +72,12 @@ public class DeoController {
 	}
 	
 	public static Deo stringUDeo(ArrayList<String> podaci) {
+		System.out.println("Podaci " +podaci);
 		return new Deo(podaci.get(0), Marka.valueOf(podaci.get(1)), Model.valueOf(podaci.get(2)), podaci.get(3), Double.valueOf(podaci.get(4)), podaci.get(5), Boolean.valueOf(podaci.get(6)));
 	}
 	
 	public static ArrayList<String> deoUStringArray(Deo deo) {
-		return new ArrayList<String>(Arrays.asList(deo.getOznaka(), deo.getMarka().toString(), deo.getModel().toString(), deo.getNaziv(), String.valueOf(deo.getCena()), DeoController.vratiOznakuServisa(deo)));
+		return new ArrayList<String>(Arrays.asList(deo.getOznaka(), deo.getMarka().toString(), deo.getModel().toString(), deo.getNaziv(), String.valueOf(deo.getCena()), DeoController.vratiOznakuServisa(deo), String.valueOf(deo.isObrisan())));
 	}
 	
 	public static String vratiOznakuServisa(Deo deo) {
@@ -78,7 +94,7 @@ public class DeoController {
 	
 	public static Deo nadjiDeoPoOznaci(String oznaka) {
 		Deo trazenDeo = null;
-		for(Deo deo : delovi) {
+		for(Deo deo : DeoController.delovi) {
 			if(oznaka.equalsIgnoreCase(deo.getOznaka())) {
 				trazenDeo = deo;
 			}
@@ -88,17 +104,15 @@ public class DeoController {
 	
 	public static void inicijalizujDelove() {
 		System.out.println("Inicijalizacija delova");
-		delovi.clear();
-		podaci.clear();
 		procitajFajl();
 		konvertujSveDelove();
 	}
 	
 	//konvertuje iz niza stringova u niz automobila
 	public static void konvertujSveDelove() {
-		delovi.clear();
-		for (ArrayList<String> deo : podaci) {
-			delovi.add(stringUDeo(deo));
+		DeoController.delovi.clear();
+		for (ArrayList<String> deo : DeoController.podaci) {
+			DeoController.delovi.add(stringUDeo(deo));
 		}
 	}
 	
@@ -108,12 +122,39 @@ public class DeoController {
 		} else {
 			deo.setObrisan(true);
 		}
+		sacuvajIzmeneUFajl();
 	}
 	
 	public static void ispisiSveDelove() {
 		for(Deo deo:delovi) {
 			System.out.println(deo.toString());
 		}
+	}
+	
+	public static ArrayList<Deo> neObrisaniDelovi() {
+		ArrayList<Deo> neObrisaniDelovi = new ArrayList<Deo>();
+		inicijalizujDelove();
+		for(Deo deo : DeoController.delovi) {
+			if(deo.isObrisan() == false) {
+				neObrisaniDelovi.add(deo);
+			}
+		}
+		return neObrisaniDelovi;
+	}
+	
+	public static void izbrisiIzUcitanihDelovaSaOznakom(String oznaka) {
+		DeoController.delovi.remove(nadjiDeoPoOznaci(oznaka));
+	}
+
+
+	public static ArrayList<Deo> getDelovi() {
+		inicijalizujDelove();
+		return DeoController.delovi;
+	}
+
+
+	public static void setServisi(ArrayList<Servis> servisi) {
+		ServisController.servisi = servisi;
 	}
 	
 }
