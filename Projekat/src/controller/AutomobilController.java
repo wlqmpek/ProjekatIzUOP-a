@@ -145,6 +145,8 @@ public class AutomobilController {
 		} else {
 			automobil.setObrisan(true);
 			ServisnaKnjizicaController.nadjiServisnuKnjizicuPoOznaci(automobil.getOznaka()).setObrisan(true);
+			ServisnaKnjizicaController.sacuvajIzmeneUFajl();
+			AutomobilController.sacuvajIzmeneUFajl();
 		}
 	}
 	
