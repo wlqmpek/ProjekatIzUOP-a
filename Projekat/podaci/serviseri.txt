@@ -1,5 +1,5 @@
 fbd373fb-8af1-4ce3-ae74-b435ba65a7c7|Goran|Goranovic|6666666666666|MUSKI|Bulevar Bulevara|060333555|majstorgoran|jasammajstor|false|AUTOELEKTRICAR|36000.69
 aa6ffa73-94ae-44d0-8463-181247bf0c38|Janko|Jankovic|8888888888888|MUSKI|Oslobodilac Slobode|5553330060|majstorjanko|automehanicar|false|AUTOMEHANICAR|220000.0
-0b32fc4c-8f47-4814-9bbc-8b0b66d029b7|Milos|Vlku|1234567890123|MUSKI|Nikole Tesle 56|0603433426|wlqmpe|milosjekralj|true|LIMAR|190000.0
+0b32fc4c-8f47-4814-9bbc-8b0b66d029b7|Milos|Vlku|1234567890123|MUSKI|Nikole Tesle 56|0603433426|wlqmpek|milosjekralj|true|LIMAR|190000.0
 f1197d00-e95f-48b1-b601-bf55f54e1c25|Gordana|Gordanovic|9999999999999|ZENSKI|NeZnanog Junaka|0633381658|gordanathebest|siframijejaka|false|AUTOMEHANICAR|130000.0
 fad0f503-cdaa-49c3-92a5-5c38e856be6d|Natalija|Bajkic|1234567899999|ZENSKI|Sesti Avgust 6|0603589845|darknaty|poopy005637635|false|VULKANIZER|6.0

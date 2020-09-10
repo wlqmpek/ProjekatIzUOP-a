@@ -41,13 +41,14 @@ public class RadSaServisimaView extends Stage {
 	private TableColumn<Servis, String> kolonaDatum;
 	private TableColumn<Servis, String> kolonaOpis;
 	private TableColumn<Servis, Status> kolonaStatus;
+	private TableColumn<Servis, Double> kolonaTroskoviServisa;
 	private TableColumn<Servis, Double> kolonaCena;
 	//comboBoxovi
 	private ComboBox<ServisnaKnjizica> servisnaKnjiizcaBox;
 	private ComboBox<Serviser> serviserBox;
 	private ComboBox<Status> statusBox;
 	//txtFildovi
-	private TextField tfDatum, tfOpis;
+	private TextField tfDatum, tfTroskoviServisa, tfOpis;
 	private Button dugmeSacuvaj;
 	private ContextMenu meni = new ContextMenu(new MenuItem("Izbrisi"), new MenuItem("Izmeni"));
 	private static ObservableList<Servis> servisi = FXCollections.observableArrayList();
@@ -90,11 +91,14 @@ public class RadSaServisimaView extends Stage {
 		tfOpis = new TextField();
 		tfOpis.setPromptText("Opis");
 		tfOpis.setPrefWidth(SIRINA_TEKSTUALNIH);
+		tfTroskoviServisa = new TextField();
+		tfTroskoviServisa.setPromptText("Troskovi Ser.");
+		tfTroskoviServisa.setPrefWidth(SIRINA_TEKSTUALNIH);
 		
 		dugmeSacuvaj = new Button("Sacuvaj");
 		dugmeSacuvaj.setPrefWidth(SIRINA_TEKSTUALNIH);
 		
-		hb1.getChildren().addAll(servisnaKnjiizcaBox, serviserBox, tfDatum, tfOpis, statusBox, dugmeSacuvaj);
+		hb1.getChildren().addAll(servisnaKnjiizcaBox, serviserBox, tfDatum, tfOpis, tfTroskoviServisa, statusBox, dugmeSacuvaj);
 		
 		tabela.setOnMouseClicked(event -> {
 			if (event.getButton() == MouseButton.SECONDARY) {
@@ -125,6 +129,9 @@ public class RadSaServisimaView extends Stage {
 		kolonaOpis = new TableColumn<Servis, String>("Opis");
 		kolonaOpis.setCellValueFactory(new PropertyValueFactory<Servis, String>("opis"));
 		kolonaOpis.setMinWidth(SIRINA_KOLONA);
+		kolonaTroskoviServisa = new TableColumn<Servis, Double>("Troskovi Ser");
+		kolonaTroskoviServisa.setCellValueFactory(new PropertyValueFactory<Servis, Double>("troskoviServisa"));
+		kolonaTroskoviServisa.setMinWidth(SIRINA_KOLONA);
 		kolonaStatus = new TableColumn<Servis, Status>("Status");
 		kolonaStatus.setCellValueFactory(new PropertyValueFactory<Servis, Status>("status"));
 		kolonaStatus.setMinWidth(SIRINA_KOLONA);
@@ -134,7 +141,7 @@ public class RadSaServisimaView extends Stage {
 		kolonaCena.setMinWidth(SIRINA_KOLONA);
 		
 
-		tabela.getColumns().addAll(kolonaServisnaKnjizica, kolonaServiser, kolonaDatum, kolonaOpis, kolonaStatus, kolonaCena, kolonaOznaka);
+		tabela.getColumns().addAll(kolonaServisnaKnjizica, kolonaServiser, kolonaDatum, kolonaOpis, kolonaTroskoviServisa, kolonaStatus, kolonaCena, kolonaOznaka);
 		//tabela.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);	
 		tabela.setItems(servisi);
 	}
@@ -149,6 +156,7 @@ public class RadSaServisimaView extends Stage {
 		serviserBox.setPromptText("Serviser");
 		tfDatum.clear();
 		tfOpis.clear();
+		tfTroskoviServisa.clear();
 	}
 	
 	public void izbaciPorukuOGresci(String poruka) {
@@ -217,6 +225,15 @@ public class RadSaServisimaView extends Stage {
 
 	public static ObservableList<ServisnaKnjizica> getServisneKnjizice() {
 		return servisneKnjizice;
+	}
+	
+	
+	public TextField getTfTroskoviServisa() {
+		return tfTroskoviServisa;
+	}
+
+	public void setTfTroskoviServisa(TextField tfTroskoviServisa) {
+		this.tfTroskoviServisa = tfTroskoviServisa;
 	}
 
 	public static void setServisneKnjizice(ObservableList<ServisnaKnjizica> servisneKnjizice) {

@@ -72,10 +72,11 @@ public class RadSaServisimaController {
 			Serviser serviser = rssv.getServiserBox().getSelectionModel().getSelectedItem();
 			String datum = rssv.getTfDatum().getText();
 			String opis = rssv.getTfOpis().getText();
+			Double troskoviServisa = Double.valueOf(rssv.getTfTroskoviServisa().getText());
 			Status status = rssv.getStatusBox().getSelectionModel().getSelectedItem();
 				
 			try {
-				noviServis = new Servis(servisnaKnjizica, serviser, sdf.parse(datum), opis, status);
+				noviServis = new Servis(servisnaKnjizica, serviser, sdf.parse(datum), opis,troskoviServisa, status);
 				rssv.getTabela().getItems().add(noviServis);
 				ServisController.upisiServisUFajl(noviServis);
 				rssv.resetujPolja();
@@ -90,11 +91,12 @@ public class RadSaServisimaController {
 			Serviser serviser = rssv.getServiserBox().getSelectionModel().getSelectedItem();
 			String datum = rssv.getTfDatum().getText();
 			String opis = rssv.getTfOpis().getText();
+			Double troskoviServisa = Double.valueOf(rssv.getTfTroskoviServisa().getText());
 			Status status = rssv.getStatusBox().getSelectionModel().getSelectedItem();
 				
 			
 			try {
-				noviServis = new Servis(tempServis.getOznaka(), servisnaKnjizica.getOznaka(), serviser.getOznaka(), datum, opis, status, false);
+				noviServis = new Servis(tempServis.getOznaka(), servisnaKnjizica.getOznaka(), serviser.getOznaka(), datum, opis, troskoviServisa, status, false);
 				ServisController.izbrisiIzUcitanihServisaSaOznakom(tempServis.getOznaka());
 				rssv.getTabela().getItems().add(noviServis);
 				ServisController.upisiServisUFajl(noviServis);

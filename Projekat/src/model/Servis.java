@@ -17,18 +17,20 @@ public class Servis {
 	private Serviser serviser;
 	private Date datum;
 	private String opis;
+	private Double troskoviServisa;
 	private Status status;
 	private boolean obrisan;
 	private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
 	
 	//koristi se da odmah kreiramo servis
-	public Servis(ServisnaKnjizica servisnaKnjizica, Serviser serviser, Date datum, String opis, Status status) {
+	public Servis(ServisnaKnjizica servisnaKnjizica, Serviser serviser, Date datum, String opis, Double troskoviServisa, Status status) {
 		super();
 		this.oznaka = generisiOznaku();
 		this.servisnaKnjizica = servisnaKnjizica;
 		this.serviser = serviser;
 		this.datum = datum;
 		setOpis(opis);
+		setTroskoviServisa(troskoviServisa);
 		this.status = status;
 		this.obrisan = false;
 	}
@@ -53,13 +55,14 @@ public class Servis {
 	}
 	
 	//kreiraj servis iz fajla
-	public Servis(String oznaka, String servisnaKnjizica, String serviser, String datum, String opis, Status status, boolean obrisan) {
+	public Servis(String oznaka, String servisnaKnjizica, String serviser, String datum, String opis, Double troskoviServisa, Status status, boolean obrisan) {
 		super();
 		this.oznaka = oznaka;
 		this.servisnaKnjizica = ServisnaKnjizicaController.nadjiServisnuKnjizicuPoOznaci(servisnaKnjizica);
 		this.serviser = ServiserController.nadjiServiseraPoOznaci(serviser);
 		this.setDatum(datum);
 		this.opis = opis;
+		setTroskoviServisa(troskoviServisa);
 		this.status = status;
 		this.obrisan = obrisan;
 	}
@@ -134,6 +137,22 @@ public class Servis {
 		}
 	}
 
+
+	
+	
+	public Double getTroskoviServisa() {
+		return troskoviServisa;
+	}
+
+	public void setTroskoviServisa(Double troskoviServisa) {
+		if(troskoviServisa == null) {
+			this.troskoviServisa = null;
+		} else if(troskoviServisa < 0) {
+			throw new IllegalArgumentException("Cena troskova ne sme biti manja od 0");
+		} else {
+			this.troskoviServisa = troskoviServisa;
+		}
+	}
 
 	public Status getStatus() {
 		return status;

@@ -80,11 +80,11 @@ public class ServisController {
 	
 	//paziiiiiiiii
 	public static Servis stringUServis(ArrayList<String> podaci) {
-		return new Servis(konvertujStringNull(podaci.get(0)), konvertujStringNull(podaci.get(1)), konvertujStringNull(podaci.get(2)), konvertujStringNull(podaci.get(3)), konvertujStringNull(podaci.get(4)), Status.valueOf(konvertujStringNull(podaci.get(5))), Boolean.valueOf(konvertujStringNull(podaci.get(6))));
+		return new Servis(konvertujStringNull(podaci.get(0)), konvertujStringNull(podaci.get(1)), konvertujStringNull(podaci.get(2)), konvertujStringNull(podaci.get(3)), konvertujStringNull(podaci.get(4)), proveraNullDouble(podaci.get(5)) , Status.valueOf(konvertujStringNull(podaci.get(6))), Boolean.valueOf(konvertujStringNull(podaci.get(7))));
 	}
 	
 	public static ArrayList<String> servisUStringArray(Servis servis) {
-		return new ArrayList<String>(Arrays.asList(servis.getOznaka(), servis.getServisnaKnjizica().getOznaka(), vratiOznakuServiseraServisa(servis), vratiDatumServisa(servis), servis.getOpis(), vratiStatusServisa(servis), String.valueOf(servis.isObrisan())));
+		return new ArrayList<String>(Arrays.asList(servis.getOznaka(), servis.getServisnaKnjizica().getOznaka(), vratiOznakuServiseraServisa(servis), vratiDatumServisa(servis), servis.getOpis(), String.valueOf(servis.getTroskoviServisa()), vratiStatusServisa(servis), String.valueOf(servis.isObrisan())));
 	}
 	
 	
@@ -133,14 +133,24 @@ public class ServisController {
 		return new SimpleDoubleProperty(cenaServisa);
 	}
 	
+	public static Double proveraNullDouble(String str) {
+		Double d = null;
+		if(str == null) {
+			d = null;
+		} else if(str.equalsIgnoreCase("null")) {
+			d = null;
+		} else {
+			d = Double.valueOf(str);
+		}
+		return d;
+	}
+	
 	
 	public static String vratiOznakuAutomobilaServisa(Servis servis) {
 		String oznakaAutomobila = null;
-		
 		if(servis.getServisnaKnjizica() != null) {
 			oznakaAutomobila = servis.getServisnaKnjizica().getOznaka();
 		}
-		
 		return oznakaAutomobila;
 	}
 	
@@ -198,7 +208,7 @@ public class ServisController {
 	
 	public static boolean servisImaNullVrednosti(Servis servis) {
 		boolean nullVrednosti = true; 
-		if(servis.getOznaka() != null && servis.getServisnaKnjizica() != null && servis.getServiser() != null && servis.getDatum() != null && servis.getOpis() != null && servis.getStatus() != null) {
+		if(servis.getOznaka() != null && servis.getServisnaKnjizica() != null && servis.getServiser() != null && servis.getDatum() != null && servis.getOpis() != null && servis.getTroskoviServisa() != null && servis.getStatus() != null) {
 			nullVrednosti = false;
 		}
 		return nullVrednosti;
@@ -209,8 +219,10 @@ public class ServisController {
 		ArrayList<Servis> listaTrazenihServisa = new ArrayList<Servis>();
 		
 		for(Servis servis : ServisController.getNeObrisaniServisi()) {
-			if(servis.getServiser().getOznaka().equalsIgnoreCase(serviser.getOznaka())) {
-				listaTrazenihServisa.add(servis);
+			if(servis.getServiser() != null) {
+				if(servis.getServiser().getOznaka().equalsIgnoreCase(serviser.getOznaka())) {
+					listaTrazenihServisa.add(servis);
+				}
 			}
 		}
 		return listaTrazenihServisa;
@@ -238,6 +250,14 @@ public class ServisController {
 			statusServisa = servis.getStatus().toString();
 		}
 		return statusServisa;
+	}
+	
+	public static String vratiTroskoveServisa(Servis servis) {
+		String troskoviServisa = null;
+		if(servis.getStatus() != null) {
+			troskoviServisa = servis.getTroskoviServisa().toString();
+		}
+		return troskoviServisa;
 	}
 	
 	public static void izbrisiIzUcitanihServisaSaOznakom(String oznaka) {

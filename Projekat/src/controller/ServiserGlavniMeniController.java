@@ -12,14 +12,6 @@ public class ServiserGlavniMeniController {
 	
 	public ServiserGlavniMeniController(Stage primaryStage, Serviser serviser) {
 		this.sgmv = ((ServiserGlavniMeniView)primaryStage);
-		this.sgmv.dodajFunkcionalnost(new EventHandler<ActionEvent>() {
-			
-			@Override
-			public void handle(ActionEvent arg0) {
-				
-				
-				
-			}
-		});
+		this.sgmv.popuniTabelu(ServisController.getServiseServisera(serviser));
 	}
 }
