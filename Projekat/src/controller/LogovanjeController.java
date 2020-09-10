@@ -6,7 +6,8 @@ import javafx.event.EventHandler;
 import javafx.stage.Stage;
 import view.AdministratorGlavniMeniView;
 import view.LogovanjeView;
-import view.ServiserGlavniMeni;
+import view.MusterijaGlavniMeniView;
+import view.ServiserGlavniMeniView;
 import model.Administrator;
 import model.Korisnik;
 import model.Musterija;
@@ -27,15 +28,11 @@ public class LogovanjeController {
 
 			@Override
 			public void handle(ActionEvent arg0) {
-				
 				Korisnik korisnik = null;
-				
 				korisnik = ulogujSe();
-				
 				if(korisnik != null) {
 					
 					if(korisnik instanceof Administrator) {
-						
 						logovanjeView.primaryStage.close();
 						logovanjeView.primaryStage = new AdministratorGlavniMeniView();
 						new AdministratorGlavniMeniController(logovanjeView.primaryStage);
@@ -43,12 +40,16 @@ public class LogovanjeController {
 						
 					} else if(korisnik instanceof Serviser) {
 						
-						
-						
-						System.out.println("Serviser");
+						logovanjeView.primaryStage.close();
+						logovanjeView.primaryStage = new ServiserGlavniMeniView();
+						new ServiserGlavniMeniController(logovanjeView.primaryStage, (Serviser)korisnik);
 						
 					} else if(korisnik instanceof Musterija) {
-						System.out.println("Musterija");
+						
+						logovanjeView.primaryStage.close();
+						logovanjeView.primaryStage = new MusterijaGlavniMeniView();
+						new MusterijaGlavniMeniController(logovanjeView.primaryStage, (Musterija)korisnik);
+						
 					}
 					
 				} else {

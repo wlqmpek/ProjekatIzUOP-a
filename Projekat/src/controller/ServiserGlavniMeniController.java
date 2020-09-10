@@ -3,19 +3,21 @@ package controller;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
+import model.Serviser;
 import view.AdministratorGlavniMeniView;
-import view.ServiserGlavniMeni;
+import view.ServiserGlavniMeniView;
 
 public class ServiserGlavniMeniController {
-	public ServiserGlavniMeni sgm;
+	public ServiserGlavniMeniView sgmv;
 	
-	public ServiserGlavniMeniController(Stage primaryStage) {
-		this.sgm = ((ServiserGlavniMeni)primaryStage);
-		this.sgm.dodajFunkcionalnost(new EventHandler<ActionEvent>() {
+	public ServiserGlavniMeniController(Stage primaryStage, Serviser serviser) {
+		this.sgmv = ((ServiserGlavniMeniView)primaryStage);
+		this.sgmv.dodajFunkcionalnost(new EventHandler<ActionEvent>() {
 			
 			@Override
 			public void handle(ActionEvent arg0) {
-				System.out.println("Boo!");
+				
+				
 				
 			}
 		});

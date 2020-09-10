@@ -117,7 +117,7 @@ public class RadSaServisimaView extends Stage {
 		kolonaServisnaKnjizica.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getServisnaKnjizica().getOznaka()));
 		kolonaServisnaKnjizica.setMinWidth(SIRINA_KOLONA);
 		kolonaServiser = new TableColumn<Servis, String>("Oznaka Servisera");
-		kolonaServiser.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getServiser().getOznaka()));
+		kolonaServiser.setCellValueFactory(cellData -> new SimpleStringProperty(ServisController.vratiOznakuServiseraServisa(cellData.getValue())));
 		kolonaServiser.setMinWidth(SIRINA_KOLONA);
 		kolonaDatum = new TableColumn<Servis, String>("Datum");
 		kolonaDatum.setCellValueFactory(new PropertyValueFactory<Servis, String>("datum"));
@@ -135,7 +135,7 @@ public class RadSaServisimaView extends Stage {
 		
 
 		tabela.getColumns().addAll(kolonaServisnaKnjizica, kolonaServiser, kolonaDatum, kolonaOpis, kolonaStatus, kolonaCena, kolonaOznaka);
-		tabela.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);	
+		//tabela.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);	
 		tabela.setItems(servisi);
 	}
 	

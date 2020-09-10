@@ -10,7 +10,6 @@ import controller.ServiserController;
 import controller.ServisnaKnjizicaController;
 import enumi.Status;
 
-
 public class Servis {
 	
 	private String oznaka;
@@ -29,8 +28,27 @@ public class Servis {
 		this.servisnaKnjizica = servisnaKnjizica;
 		this.serviser = serviser;
 		this.datum = datum;
-		this.opis = opis;
+		setOpis(opis);
 		this.status = status;
+		this.obrisan = false;
+	}
+	
+	//kad musterija kreira servis
+	public Servis(ServisnaKnjizica servisnaKnjizica, String opis) {
+		super();
+		this.oznaka = generisiOznaku();
+		this.servisnaKnjizica = servisnaKnjizica;
+		this.opis = opis;
+		this.obrisan = false;
+		this.status = Status.ZAKAZAN;
+	}
+	
+	//kad ucitavamo musterijin serviss?
+	public Servis(String oznaka, ServisnaKnjizica servisnaKnjizica, String opis) {
+		super();
+		this.oznaka = oznaka;
+		this.servisnaKnjizica = servisnaKnjizica;
+		this.opis = opis;
 		this.obrisan = false;
 	}
 	
@@ -79,14 +97,26 @@ public class Servis {
 	}
 
 	public String getDatum() {
-		return sdf.format(datum);
+		if (datum == null) {
+			return String.valueOf(datum);
+		} else {
+			return sdf.format(datum);
+		}
+		
 	}
 
 	public void setDatum(String datum) {
-		try {
-			this.datum = sdf.parse(datum);
-		} catch (Exception e) {
-			System.out.println("Datum nije validan!");
+		System.out.println("DATUM: " +datum);
+		if(datum == null) {
+			this.datum = null;
+		} else if (datum.equalsIgnoreCase("null")) {
+			this.datum = null;
+		} else {
+			try {
+				this.datum = sdf.parse(datum);
+			} catch (Exception e) {
+				System.out.println("Datum nije validan!");
+			}
 		}
 	}
 
@@ -95,7 +125,13 @@ public class Servis {
 	}
 
 	public void setOpis(String opis) {
-		this.opis = opis;
+		if(opis == null) {
+			throw new NullPointerException("Opis ne sme biti null!");
+		} else if(opis.length() == 0) {
+			throw new IllegalArgumentException("Opis ne sme biti prazan string!");
+		} else {
+			this.opis = opis;
+		}
 	}
 
 
@@ -121,8 +157,5 @@ public class Servis {
 				+ ", datum=" + datum + ", opis=" + opis + ", status=" + status + ", obrisan=" + obrisan + "]";
 	}
 
-	
-		
-	
 	
 }

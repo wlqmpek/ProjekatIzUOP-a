@@ -27,9 +27,9 @@ public class Automobil {
 		this.vlasnik = vlasnik;
 		this.marka = marka;
 		this.model = model;
-		this.godinaProizvodnje = godinaProizvodnje;
-		this.zapreminaMotora = zapreminaMotora;
-		this.snagaMotora = snagaMotora;
+		setGodinaProizvodnje(godinaProizvodnje);
+		setZapreminaMotora(zapreminaMotora);
+		setSnagaMotora(snagaMotora);
 		this.gorivo = gorivo;
 		this.obrisan = false;
 	}
@@ -42,9 +42,9 @@ public class Automobil {
 		this.vlasnik = vlasnik;
 		this.marka = marka;
 		this.model = model;
-		this.godinaProizvodnje = godinaProizvodnje;
-		this.zapreminaMotora = zapreminaMotora;
-		this.snagaMotora = snagaMotora;
+		setGodinaProizvodnje(godinaProizvodnje);
+		setZapreminaMotora(zapreminaMotora);
+		setSnagaMotora(snagaMotora);
 		this.gorivo = gorivo;
 		this.obrisan = obrisan;
 	}
@@ -57,9 +57,9 @@ public class Automobil {
 		this.vlasnik = AutomobilController.nadjiVlasnika(vlasnik);
 		this.marka = marka;
 		this.model = model;
-		this.godinaProizvodnje = godinaProizvodnje;
-		this.zapreminaMotora = zapreminaMotora;
-		this.snagaMotora = snagaMotora;
+		setGodinaProizvodnje(godinaProizvodnje);
+		setZapreminaMotora(zapreminaMotora);
+		setSnagaMotora(snagaMotora);
 		this.gorivo = gorivo;
 		this.obrisan = obrisan;
 	}
@@ -74,9 +74,9 @@ public class Automobil {
 		this.vlasnik = AutomobilController.nadjiVlasnika(vlasnik);
 		this.marka = marka;
 		this.model = model;
-		this.godinaProizvodnje = godinaProizvodnje;
-		this.zapreminaMotora = zapreminaMotora;
-		this.snagaMotora = snagaMotora;
+		setGodinaProizvodnje(godinaProizvodnje);
+		setZapreminaMotora(zapreminaMotora);
+		setSnagaMotora(snagaMotora);
 		this.gorivo = gorivo;
 		this.obrisan = obrisan;
 	}
@@ -120,7 +120,11 @@ public class Automobil {
 	}
 
 	public void setGodinaProizvodnje(short godinaProizvodnje) {
-		this.godinaProizvodnje = godinaProizvodnje;
+		if (godinaProizvodnje <= 1880) {
+			throw new IllegalArgumentException("Uneta godina proizvodnje mora biti veca od 1880");
+		} else {
+			this.godinaProizvodnje = godinaProizvodnje;
+		}
 	}
 
 	public short getZapreminaMotora() {
@@ -128,7 +132,11 @@ public class Automobil {
 	}
 
 	public void setZapreminaMotora(short zapreminaMotora) {
-		this.zapreminaMotora = zapreminaMotora;
+		if (zapreminaMotora <= 0) {
+			throw new IllegalArgumentException("Uneta zapremina motora mora biti veca od 0");
+		} else {
+			this.zapreminaMotora = zapreminaMotora;
+		}
 	}
 
 	public short getSnagaMotora() {
@@ -136,7 +144,11 @@ public class Automobil {
 	}
 
 	public void setSnagaMotora(short snagaMotora) {
-		this.snagaMotora = snagaMotora;
+		if (snagaMotora <= 0) {
+			throw new IllegalArgumentException("Uneta snaga motora mora biti veca od 0");
+		} else {
+			this.snagaMotora = snagaMotora;
+		}
 	}
 
 	public Gorivo getGorivo() {
@@ -146,8 +158,6 @@ public class Automobil {
 	public void setGorivo(Gorivo gorivo) {
 		this.gorivo = gorivo;
 	}
-	
-
 
 	public boolean isObrisan() {
 		return obrisan;

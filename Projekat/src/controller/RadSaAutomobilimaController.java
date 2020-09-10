@@ -55,9 +55,8 @@ public class RadSaAutomobilimaController {
 				prepisiVrednostiUTekstualnaPolja();
 			}
 		});
-		
-		
 	}
+	
 	
 	//uzima vrednosti iz tekstualnih polja i kreira servisera
 	private void pokupiIzPoljaIKreirajAutomobil() {
@@ -107,9 +106,9 @@ public class RadSaAutomobilimaController {
 				tempAutomobil = null;
 				
 			} catch (NumberFormatException e) {
-				e.printStackTrace();
+				rsav.izbaciPorukuOGresci(e.getMessage());
 			} catch (Exception e) {
-				e.printStackTrace();
+				rsav.izbaciPorukuOGresci(e.getMessage());
 			}
 		}
 		

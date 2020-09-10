@@ -80,11 +80,11 @@ public class ServisController {
 	
 	//paziiiiiiiii
 	public static Servis stringUServis(ArrayList<String> podaci) {
-		return new Servis(podaci.get(0), podaci.get(1), podaci.get(2), podaci.get(3), podaci.get(4), Status.valueOf(podaci.get(5)), Boolean.valueOf(podaci.get(6)));
+		return new Servis(konvertujStringNull(podaci.get(0)), konvertujStringNull(podaci.get(1)), konvertujStringNull(podaci.get(2)), konvertujStringNull(podaci.get(3)), konvertujStringNull(podaci.get(4)), Status.valueOf(konvertujStringNull(podaci.get(5))), Boolean.valueOf(konvertujStringNull(podaci.get(6))));
 	}
 	
 	public static ArrayList<String> servisUStringArray(Servis servis) {
-		return new ArrayList<String>(Arrays.asList(servis.getOznaka(), servis.getServisnaKnjizica().getOznaka(), servis.getServiser().getOznaka(), servis.getDatum().toString(), servis.getOpis(), servis.getStatus().toString(), String.valueOf(servis.isObrisan())));
+		return new ArrayList<String>(Arrays.asList(servis.getOznaka(), servis.getServisnaKnjizica().getOznaka(), vratiOznakuServiseraServisa(servis), vratiDatumServisa(servis), servis.getOpis(), vratiStatusServisa(servis), String.valueOf(servis.isObrisan())));
 	}
 	
 	
@@ -96,6 +96,16 @@ public class ServisController {
 		}
 	}
 	
+	public static String konvertujStringNull(String string) {
+		String konvertovanString = null;
+		if(string == null || string.equalsIgnoreCase("null")) {
+			konvertovanString = null;
+		} else {
+			konvertovanString = string;
+		}
+		
+		return konvertovanString;
+	}
 	
 	public static ArrayList<Deo> korisceniDelovi(Servis servis) {
 		ArrayList<Deo> listaTrazenihDelova = new ArrayList<Deo>();
@@ -186,18 +196,49 @@ public class ServisController {
 		return neObrisaniServisi;
 	}
 	
+	public static boolean servisImaNullVrednosti(Servis servis) {
+		boolean nullVrednosti = true; 
+		if(servis.getOznaka() != null && servis.getServisnaKnjizica() != null && servis.getServiser() != null && servis.getDatum() != null && servis.getOpis() != null && servis.getStatus() != null) {
+			nullVrednosti = false;
+		}
+		return nullVrednosti;
+	}
+	
 	
 	public static ArrayList<Servis> getServiseServisera(Serviser serviser) {
 		ArrayList<Servis> listaTrazenihServisa = new ArrayList<Servis>();
 		
 		for(Servis servis : ServisController.getNeObrisaniServisi()) {
-			if(servis.getServiser().getOznaka().equalsIgnoreCase(serviser.getOznaka()) && servis.getStatus().equals(Status.ZAKAZAN)) {
+			if(servis.getServiser().getOznaka().equalsIgnoreCase(serviser.getOznaka())) {
 				listaTrazenihServisa.add(servis);
 			}
 		}
 		return listaTrazenihServisa;
 	}
 	
+	public static String vratiOznakuServiseraServisa(Servis servis) {
+		String oznakaServisera = null;
+		if(servis.getServiser() != null) {
+			oznakaServisera = servis.getServiser().getOznaka();
+		}
+		return oznakaServisera;
+	}
+	
+	public static String vratiDatumServisa(Servis servis) {
+		String datumServisa = null;
+		if(servis.getDatum() != null) {
+			datumServisa = servis.getDatum().toString();
+		}
+		return datumServisa;
+	}
+	
+	public static String vratiStatusServisa(Servis servis) {
+		String statusServisa = null;
+		if(servis.getStatus() != null) {
+			statusServisa = servis.getStatus().toString();
+		}
+		return statusServisa;
+	}
 	
 	public static void izbrisiIzUcitanihServisaSaOznakom(String oznaka) {
 		ServisController.servisi.remove(nadjiServisPoOznaci(oznaka));

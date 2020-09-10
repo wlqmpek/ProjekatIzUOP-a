@@ -138,11 +138,18 @@ public class ServiserController {
 	
 	public static Serviser nadjiServiseraPoOznaci(String oznaka) {
 		Serviser trazenServiser = null;
-		for(Serviser serviser : ServiserController.serviseri) {
-			if(oznaka.equalsIgnoreCase(serviser.getOznaka())) {
-				trazenServiser = serviser;
+		if(oznaka == null) {
+			trazenServiser = null;
+		} else if (oznaka.equalsIgnoreCase("null")) {
+			trazenServiser = null;
+		} else {
+			for(Serviser serviser : ServiserController.serviseri) {
+				if(oznaka.equalsIgnoreCase(serviser.getOznaka())) {
+					trazenServiser = serviser;
+				}
 			}
 		}
+		
 		return trazenServiser;
 	}
 	

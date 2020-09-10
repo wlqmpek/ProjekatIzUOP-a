@@ -14,14 +14,14 @@ public class Musterija extends Korisnik {
 	public Musterija(String oznaka, String ime, String prezime, String JMBG, Pol pol, String adresa,
 			String brojTelefona, String korisnickoIme, String lozinka, byte brojPoena, boolean obrisan) {
 		super(oznaka, ime, prezime, JMBG, pol, adresa, brojTelefona, korisnickoIme, lozinka, obrisan);
-		this.brojPoena = brojPoena;
+		setBrojPoena(brojPoena);
 	}
 	
 
 	public Musterija(String ime, String prezime, String JMBG, Pol pol, String adresa,
 			String brojTelefona, String korisnickoIme, String lozinka,  byte brojPoena, boolean obrisan) {
 		super(ime, prezime, JMBG, pol, adresa, brojTelefona, korisnickoIme, lozinka, obrisan);
-		this.brojPoena = brojPoena;
+		setBrojPoena(brojPoena);
 	}
 
 
@@ -31,8 +31,10 @@ public class Musterija extends Korisnik {
 	}
 
 	public void setBrojPoena(byte brojPoena) {
-		if (brojPoena > 10) {
-			throw new IllegalArgumentException("Uneta vrednost mora biti <= 10");
+		if (brojPoena > 10 || brojPoena < 0) {
+			throw new IllegalArgumentException("Uneta vrednost poena biti <= 10 kao i >= 0");
+		} else {
+			this.brojPoena = brojPoena;
 		}
 	}
 	

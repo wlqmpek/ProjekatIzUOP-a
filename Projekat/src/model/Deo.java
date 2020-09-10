@@ -23,7 +23,7 @@ public class Deo {
 		this.marka = marka;
 		this.model = model;
 		this.naziv = naziv;
-		this.cena = cena;
+		setCena(cena);
 		this.iskoriscenUSevisu = servis;
 		this.obrisan = false;
 	}
@@ -35,7 +35,7 @@ public class Deo {
 		this.marka = marka;
 		this.model = model;
 		this.naziv = naziv;
-		this.cena = cena;
+		setCena(cena);
 		this.iskoriscenUSevisu = DeoController.nadjiServis(iskoriscenUServisu);
 		this.obrisan = obrisan;
 	}
@@ -86,7 +86,11 @@ public class Deo {
 
 
 	public void setCena(double cena) {
-		this.cena = cena;
+		if (cena <= 0) {
+			throw new IllegalArgumentException("Uneta c mora biti veca od 0");
+		} else {
+			this.cena = cena;
+		}
 	}
 
 	

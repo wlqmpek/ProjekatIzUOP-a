@@ -8,7 +8,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
-
 import enumi.Gorivo;
 import enumi.Marka;
 import enumi.Model;
@@ -17,7 +16,6 @@ import model.Automobil;
 import model.Musterija;
 import model.Serviser;
 import model.ServisnaKnjizica;
-import view.AutomobilView;
 
 public class AutomobilController {
 	
@@ -118,9 +116,7 @@ public class AutomobilController {
 				sviAutomobiliVlasnika.add(auto);
 			}
 		}	
-		if (sviAutomobiliVlasnika.size() == 0) {
-			sviAutomobiliVlasnika = null;
-		}
+		
 		return sviAutomobiliVlasnika;
 	}
 	

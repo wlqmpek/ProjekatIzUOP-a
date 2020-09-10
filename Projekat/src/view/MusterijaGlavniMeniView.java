@@ -15,6 +15,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -26,13 +27,10 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.Automobil;
 import model.Musterija;
-import model.Servis;
 
-public class RadSaAutomobilimaView extends Stage {
-	
+public class MusterijaGlavniMeniView extends Stage {
 	private TableView<Automobil> tabela = new TableView<Automobil>();
 	private TableColumn<Automobil, String> kolonaOznaka;
-	private TableColumn<Automobil, String> kolonaVlasnik;
 	private TableColumn<Automobil, Marka> kolonaMarka;
 	private TableColumn<Automobil, Model> kolonaModel;
 	private TableColumn<Automobil, Short> kolonaGodina;
@@ -40,19 +38,13 @@ public class RadSaAutomobilimaView extends Stage {
 	private TableColumn<Automobil, Short> kolonaSnaga;
 	private TableColumn<Automobil, Gorivo> kolonaGorivo;
 	
-	private ComboBox<Musterija> vlasnikBox;
-	private ComboBox<Marka> markaBox;
-	private ComboBox<Model> modelBox;
-	private ComboBox<Gorivo> gorivoBox;
-	
 	private Button dugmeSacuvaj;
-	
-	private TextField tfGodinaProizvodnje, tfZapreminaMotora, tfSnagaMotora;
-	private ContextMenu meni = new ContextMenu(new MenuItem("Izbrisi"), new MenuItem("Izmeni"));
+	private TextField tfKratakOpis;
+	private Button dugmeOznaka, dugmeMarka, dugmeModel, dugmeGodina, dugmeZapremina, dugmeSnaga, dugmeGorivo;
 	private static ObservableList<Automobil> automobili = FXCollections.observableArrayList();
-	private static ObservableList<Musterija> vlasnici = FXCollections.observableArrayList();
+	private ContextMenu meni = new ContextMenu(new MenuItem("Zakazi Servis"));
 	
-	public RadSaAutomobilimaView() {
+	public MusterijaGlavniMeniView() {
 		super();
 		kreirajTabeluAutomobila();
 		Scene scene = new Scene(kreirajRaspored(),1370,700);
@@ -61,16 +53,14 @@ public class RadSaAutomobilimaView extends Stage {
 		this.setResizable(true);
 		this.show();
 	}
-
+	
+	
 	private void kreirajTabeluAutomobila() {
 		
 		final int SIRINA_KOLONA = 110;
 		kolonaOznaka = new TableColumn<Automobil, String>("Oznaka Automobila");
 		kolonaOznaka.setCellValueFactory(new PropertyValueFactory<Automobil, String>("oznaka"));
 		kolonaOznaka.setPrefWidth(SIRINA_KOLONA);
-		kolonaVlasnik = new TableColumn<Automobil, String>("Oznaka Vlasnika");
-		kolonaVlasnik.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getVlasnik().getOznaka()));
-		kolonaVlasnik.setPrefWidth(SIRINA_KOLONA);
 		kolonaMarka = new TableColumn<Automobil, Marka>("Marka");
 		kolonaMarka.setCellValueFactory(new PropertyValueFactory<Automobil, Marka>("marka"));
 		kolonaMarka.setPrefWidth(SIRINA_KOLONA);
@@ -90,7 +80,7 @@ public class RadSaAutomobilimaView extends Stage {
 		kolonaGorivo.setCellValueFactory(new PropertyValueFactory<Automobil, Gorivo>("gorivo"));
 		kolonaGorivo.setPrefWidth(SIRINA_KOLONA);
 		
-		tabela.getColumns().addAll(kolonaVlasnik, kolonaMarka, kolonaModel, kolonaGodina, kolonaZapremina, kolonaSnaga, kolonaGorivo);
+		tabela.getColumns().addAll(kolonaMarka, kolonaModel, kolonaGodina, kolonaZapremina, kolonaSnaga, kolonaGorivo);
 		tabela.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);	
 		tabela.setItems(automobili);
 	}
@@ -100,35 +90,29 @@ public class RadSaAutomobilimaView extends Stage {
 		HBox hb1 = new HBox();
 		HBox hb2 = new HBox();
 		
-		//kreiranje boxova
+		//kreiranje dugmeta
 		final int SIRINA = 110;
-		vlasnikBox = new ComboBox<Musterija>(vlasnici);
-		vlasnikBox.setPromptText("Izaberi Vlasnika");
-		vlasnikBox.setPrefWidth(SIRINA);
-		markaBox = new ComboBox<Marka>(FXCollections.observableArrayList(Marka.values()));
-		markaBox.setPromptText("Izaberi Marku");
-		markaBox.setPrefWidth(SIRINA);
-		modelBox = new ComboBox<Model>(FXCollections.observableArrayList(Model.values()));
-		modelBox.setPromptText("Izaberi Model");
-		modelBox.setPrefWidth(SIRINA);
-		gorivoBox = new ComboBox<Gorivo>(FXCollections.observableArrayList(Gorivo.values()));
-		gorivoBox.setPromptText("Izaberi Gorivo");
-		gorivoBox.setPrefWidth(SIRINA);
-		
-		tfGodinaProizvodnje = new TextField();
-		tfGodinaProizvodnje.setPromptText("Godina Pr.");
-		tfGodinaProizvodnje.setPrefWidth(SIRINA);
-		tfZapreminaMotora = new TextField();
-		tfZapreminaMotora.setPromptText("Zapremina");
-		tfZapreminaMotora.setPrefWidth(SIRINA);
-		tfSnagaMotora = new TextField();
-		tfSnagaMotora.setPromptText("Snaga");
-		tfSnagaMotora.setPrefWidth(SIRINA);
-		
 		dugmeSacuvaj = new Button("Sacuvaj");
 		dugmeSacuvaj.setPrefWidth(SIRINA);
+		dugmeOznaka = new Button("Oznaka");
+		dugmeOznaka.setPrefWidth(SIRINA);
+		dugmeMarka = new Button("Marka");
+		dugmeMarka.setPrefWidth(SIRINA);
+		dugmeModel = new Button("Model");
+		dugmeModel.setPrefWidth(SIRINA);
+		dugmeGodina = new Button("Godina");
+		dugmeGodina.setPrefWidth(SIRINA);
+		dugmeZapremina = new Button("Zapremina");
+		dugmeZapremina.setPrefWidth(SIRINA);
+		dugmeSnaga = new Button("Snaga");
+		dugmeSnaga.setPrefWidth(SIRINA);
+		dugmeGorivo = new Button("Gorivo");
+		dugmeGorivo.setPrefWidth(SIRINA);
+		tfKratakOpis = new TextField("Kratak opis");
+		tfKratakOpis.setEditable(false);
+		tfKratakOpis.setPrefWidth(SIRINA);
 		
-		hb1.getChildren().addAll(vlasnikBox, markaBox, modelBox, getTfGodinaProizvodnje(), tfZapreminaMotora, tfSnagaMotora, gorivoBox, dugmeSacuvaj);
+		hb1.getChildren().addAll(dugmeMarka, dugmeModel, dugmeGodina, dugmeZapremina, dugmeSnaga, dugmeGorivo, tfKratakOpis, dugmeSacuvaj);
 		
 		tabela.setOnMouseClicked(event -> {
 			if (event.getButton() == MouseButton.SECONDARY) {
@@ -141,32 +125,31 @@ public class RadSaAutomobilimaView extends Stage {
 	}
 	
 	public void popuniTabelu(ArrayList<Automobil> automobili) {
-		RadSaAutomobilimaView.automobili = FXCollections.observableArrayList(automobili);
-		tabela.setItems(RadSaAutomobilimaView.automobili);
+		MusterijaGlavniMeniView.automobili = FXCollections.observableArrayList(automobili);
+		tabela.setItems(MusterijaGlavniMeniView.automobili);
 	}
 	
 	public void resetujPolja() {
-		vlasnikBox.setPromptText("Izaberi Vlasnika");
-		vlasnikBox.setPromptText("Izaberi Vlasnika");
-		markaBox.setPromptText("Izaberi Vlasnika");
-		modelBox.setPromptText("Izaberi Vlasnika");
-		gorivoBox.setPromptText("Izaberi Vlasnika");
-		tfGodinaProizvodnje.clear();
-		tfZapreminaMotora.clear();
-		tfSnagaMotora.clear();
+		dugmeOznaka.setText("Oznaka");
+		dugmeMarka.setText("Marka");
+		dugmeModel.setText("Model");
+		dugmeGodina.setText("Godina");
+		dugmeZapremina.setText("Zapremina");
+		dugmeSnaga.setText("Snaga");
+		dugmeGodina.setText("Gorivo");
+		tfKratakOpis.setText("Kratak opis");
+		tfKratakOpis.setPromptText("Kratak opis");
+		tfKratakOpis.setEditable(false);
 	}
 	
 	public void izbaciPorukuOGresci(String poruka) {
 		new Alert(Alert.AlertType.ERROR, poruka).showAndWait();
 	}
 	
-	public void dodeliFunkcionalnostOpcijiIzbrisi(EventHandler<ActionEvent> event) {
+	public void dodeliFunkcionalnostOpcijiZakaziServis(EventHandler<ActionEvent> event) {
 		meni.getItems().get(0).setOnAction(event);
 	}
 	
-	public void dodeliFunkcionalnostOpcijiIzmeni(EventHandler<ActionEvent> event) {
-		meni.getItems().get(1).setOnAction(event);
-	}
 	
 	public void dodeliFunkcionalnostDugmetuSacuvaj(EventHandler<ActionEvent> event) {
 		dugmeSacuvaj.setOnAction(event);
@@ -180,68 +163,84 @@ public class RadSaAutomobilimaView extends Stage {
 		this.tabela = tabela;
 	}
 
-	public ComboBox<Musterija> getVlasnikBox() {
-		return vlasnikBox;
+	public TextField getTfKratakOpis() {
+		return tfKratakOpis;
 	}
 
-	public void setVlasnikBox(ComboBox<Musterija> vlasnikBox) {
-		this.vlasnikBox = vlasnikBox;
+	public void setTfKratakOpis(TextField tfKratakOpis) {
+		this.tfKratakOpis = tfKratakOpis;
 	}
 
-	public ComboBox<Marka> getMarkaBox() {
-		return markaBox;
+	public ContextMenu getMeni() {
+		return meni;
 	}
 
-	public void setMarkaBox(ComboBox<Marka> markaBox) {
-		this.markaBox = markaBox;
+	public void setMeni(ContextMenu meni) {
+		this.meni = meni;
 	}
 
-	public ComboBox<Model> getModelBox() {
-		return modelBox;
+	public Button getDugmeSacuvaj() {
+		return dugmeSacuvaj;
 	}
 
-	public void setModelBox(ComboBox<Model> modelBox) {
-		this.modelBox = modelBox;
+	public void setDugmeSacuvaj(Button dugmeSacuvaj) {
+		this.dugmeSacuvaj = dugmeSacuvaj;
 	}
 
-	public ComboBox<Gorivo> getGorivoBox() {
-		return gorivoBox;
+	public Button getDugmeOznaka() {
+		return dugmeOznaka;
 	}
 
-	public void setGorivoBox(ComboBox<Gorivo> gorivoBox) {
-		this.gorivoBox = gorivoBox;
+	public void setDugmeOznaka(Button dugmeOznaka) {
+		this.dugmeOznaka = dugmeOznaka;
 	}
 
-	public TextField getTfGodinaProizvodnje() {
-		return tfGodinaProizvodnje;
+	public Button getDugmeMarka() {
+		return dugmeMarka;
 	}
 
-	public void setTfGodinaProizvodnje(TextField tfGodinaProizvodnje) {
-		this.tfGodinaProizvodnje = tfGodinaProizvodnje;
+	public void setDugmeMarka(Button dugmeMarka) {
+		this.dugmeMarka = dugmeMarka;
 	}
 
-	public TextField getTfZapreminaMotora() {
-		return tfZapreminaMotora;
+	public Button getDugmeModel() {
+		return dugmeModel;
 	}
 
-	public void setTfZapreminaMotora(TextField tfZapreminaMotora) {
-		this.tfZapreminaMotora = tfZapreminaMotora;
+	public void setDugmeModel(Button dugmeModel) {
+		this.dugmeModel = dugmeModel;
 	}
 
-	public TextField getTfSnagaMotora() {
-		return tfSnagaMotora;
+	public Button getDugmeGodina() {
+		return dugmeGodina;
 	}
 
-	public void setTfSnagaMotora(TextField tfSnagaMotora) {
-		this.tfSnagaMotora = tfSnagaMotora;
+	public void setDugmeGodina(Button dugmeGodina) {
+		this.dugmeGodina = dugmeGodina;
 	}
 
-	public static ObservableList<Musterija> getVlasnici() {
-		return vlasnici;
+	public Button getDugmeZapremina() {
+		return dugmeZapremina;
 	}
 
-	public static void setVlasnici(ObservableList<Musterija> vlasnici) {
-		RadSaAutomobilimaView.vlasnici = vlasnici;
+	public void setDugmeZapremina(Button dugmeZapremina) {
+		this.dugmeZapremina = dugmeZapremina;
+	}
+
+	public Button getDugmeSnaga() {
+		return dugmeSnaga;
+	}
+
+	public void setDugmeSnaga(Button dugmeSnaga) {
+		this.dugmeSnaga = dugmeSnaga;
+	}
+
+	public Button getDugmeGorivo() {
+		return dugmeGorivo;
+	}
+
+	public void setDugmeGorivo(Button dugmeGorivo) {
+		this.dugmeGorivo = dugmeGorivo;
 	}
 	
 	

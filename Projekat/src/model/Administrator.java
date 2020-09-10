@@ -27,7 +27,11 @@ public class Administrator extends Korisnik{
 	}
 
 	public void setPlata(double plata) {
-		this.plata = plata;
+		if (plata <= 0) {
+			throw new IllegalArgumentException("Uneta vrednost plate mora biti veca od 0");
+		} else {
+			this.plata = plata;
+		}
 	}
 
 	@Override
