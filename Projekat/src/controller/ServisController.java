@@ -217,7 +217,6 @@ public class ServisController {
 	
 	public static ArrayList<Servis> getServiseServisera(Serviser serviser) {
 		ArrayList<Servis> listaTrazenihServisa = new ArrayList<Servis>();
-		
 		for(Servis servis : ServisController.getNeObrisaniServisi()) {
 			if(servis.getServiser() != null) {
 				if(servis.getServiser().getOznaka().equalsIgnoreCase(serviser.getOznaka())) {

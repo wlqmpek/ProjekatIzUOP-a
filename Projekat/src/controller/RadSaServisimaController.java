@@ -41,7 +41,7 @@ public class RadSaServisimaController {
 					e.printStackTrace();
 				}
 			}
-		});
+	});
 		
 		rssv.dodeliFunkcionalnostOpcijiIzbrisi(new EventHandler<ActionEvent>() {
 			@Override

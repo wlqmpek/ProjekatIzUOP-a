@@ -42,8 +42,8 @@ public class ServiserGlavniMeniView extends Stage{
 	private ComboBox<Status> statusBox;
 	//txtFildovi
 	private TextField tfDatum, tfOpis;
-	private Button dugmeSacuvaj;
-	private ContextMenu meni = new ContextMenu(new MenuItem("Izbrisi"), new MenuItem("Izmeni"));
+	private Button dugmeSacuvaj, dugmeTroskoviServisa, dugmeCenaServisa;
+	private ContextMenu meni = new ContextMenu(new MenuItem("Izmeni"), new MenuItem("Dodaj Novi"), new MenuItem("Izaberi delove"));
 	private static ObservableList<Servis> servisi = FXCollections.observableArrayList();
 	private static ObservableList<ServisnaKnjizica> servisneKnjizice = FXCollections.observableArrayList();
 	
@@ -81,11 +81,15 @@ public class ServiserGlavniMeniView extends Stage{
 		tfOpis = new TextField();
 		tfOpis.setPromptText("Opis");
 		tfOpis.setPrefWidth(SIRINA_TEKSTUALNIH);
+		dugmeTroskoviServisa = new Button("Troskovi ser.");
+		dugmeTroskoviServisa.setPrefWidth(SIRINA_TEKSTUALNIH);
+		dugmeCenaServisa = new Button("Cena ser.");
+		dugmeCenaServisa.setPrefWidth(SIRINA_TEKSTUALNIH);
 		
 		dugmeSacuvaj = new Button("Sacuvaj");
 		dugmeSacuvaj.setPrefWidth(SIRINA_TEKSTUALNIH);
 		
-		hb1.getChildren().addAll(servisnaKnjiizcaBox, tfDatum, tfOpis, statusBox, dugmeSacuvaj);
+		hb1.getChildren().addAll(servisnaKnjiizcaBox, tfDatum, tfOpis, statusBox, dugmeTroskoviServisa, dugmeCenaServisa, dugmeSacuvaj);
 		
 		tabela.setOnMouseClicked(event -> {
 			if (event.getButton() == MouseButton.SECONDARY) {
@@ -117,14 +121,14 @@ public class ServiserGlavniMeniView extends Stage{
 		kolonaStatus.setCellValueFactory(new PropertyValueFactory<Servis, Status>("status"));
 		kolonaStatus.setMinWidth(SIRINA_KOLONA);
 		//ovde obrati paznju
-		kolonaCenaServisa = new TableColumn<Servis, Double>("Cena");
+		kolonaCenaServisa = new TableColumn<Servis, Double>("Cena ser.");
 		kolonaCenaServisa.setCellValueFactory(cellData -> ServisController.cenaServisa(cellData.getValue()).asObject());
 		kolonaCenaServisa.setMinWidth(SIRINA_KOLONA);
-		kolonaTroskoviServisa = new TableColumn<Servis, Double>("Cena");
+		kolonaTroskoviServisa = new TableColumn<Servis, Double>("Troskovi ser.");
 		kolonaTroskoviServisa.setCellValueFactory(cellData -> ServisController.cenaServisa(cellData.getValue()).asObject());
 		kolonaTroskoviServisa.setMinWidth(SIRINA_KOLONA);
 		
-		tabela.getColumns().addAll(kolonaServisnaKnjizica, kolonaDatum, kolonaOpis, kolonaStatus, kolonaCenaServisa, kolonaTroskoviServisa, kolonaOznaka);
+		tabela.getColumns().addAll(kolonaServisnaKnjizica, kolonaDatum, kolonaOpis, kolonaStatus, kolonaTroskoviServisa, kolonaCenaServisa, kolonaOznaka);
 		//tabela.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);	
 		tabela.setItems(servisi);
 	}
@@ -144,6 +148,88 @@ public class ServiserGlavniMeniView extends Stage{
 	public void popuniTabelu(ArrayList<Servis> servisi) {
 		ServiserGlavniMeniView.servisi = FXCollections.observableArrayList(servisi);
 		tabela.setItems(ServiserGlavniMeniView.servisi);
+	}
+	
+	public void dodeliFunkcionalnostOpcijiIzmeni(EventHandler<ActionEvent> event) {
+		meni.getItems().get(0).setOnAction(event);
+	}
+	
+	public void dodeliFunkcionalnostOpcijiDodajNovi(EventHandler<ActionEvent> event) {
+		meni.getItems().get(1).setOnAction(event);
+	}
+	
+	public void dodeliFunkcionalnostOpcijiDodajDelove(EventHandler<ActionEvent> event) {
+		meni.getItems().get(2).setOnAction(event);
+	}
+	
+	public void dodeliFunkcionalnostDugmetuSacuvaj(EventHandler<ActionEvent> event) {
+		dugmeSacuvaj.setOnAction(event);
+	}
+	
+	public ComboBox<ServisnaKnjizica> getServisnaKnjiizcaBox() {
+		return servisnaKnjiizcaBox;
+	}
+
+	public void setServisnaKnjiizcaBox(ComboBox<ServisnaKnjizica> servisnaKnjiizcaBox) {
+		this.servisnaKnjiizcaBox = servisnaKnjiizcaBox;
+	}
+
+	public ComboBox<Status> getStatusBox() {
+		return statusBox;
+	}
+
+	public void setStatusBox(ComboBox<Status> statusBox) {
+		this.statusBox = statusBox;
+	}
+
+	public TextField getTfDatum() {
+		return tfDatum;
+	}
+
+	public void setTfDatum(TextField tfDatum) {
+		this.tfDatum = tfDatum;
+	}
+
+	public TextField getTfOpis() {
+		return tfOpis;
+	}
+
+	public void setTfOpis(TextField tfOpis) {
+		this.tfOpis = tfOpis;
+	}
+
+	public static ObservableList<ServisnaKnjizica> getServisneKnjizice() {
+		return servisneKnjizice;
+	}
+	
+	
+	
+	public Button getDugmeTroskoviServisa() {
+		return dugmeTroskoviServisa;
+	}
+
+	public void setDugmeTroskoviServisa(Button dugmeTroskoviServisa) {
+		this.dugmeTroskoviServisa = dugmeTroskoviServisa;
+	}
+
+	public Button getDugmeCenaServisa() {
+		return dugmeCenaServisa;
+	}
+
+	public void setDugmeCenaServisa(Button dugmeCenaServisa) {
+		this.dugmeCenaServisa = dugmeCenaServisa;
+	}
+
+	public static void setServisneKnjizice(ObservableList<ServisnaKnjizica> servisneKnjizice) {
+		ServiserGlavniMeniView.servisneKnjizice = servisneKnjizice;
+	}
+
+	public TableView<Servis> getTabela() {
+		return tabela;
+	}
+
+	public void setTabela(TableView<Servis> tabela) {
+		this.tabela = tabela;
 	}
 	
 	
