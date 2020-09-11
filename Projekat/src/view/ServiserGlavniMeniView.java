@@ -43,7 +43,7 @@ public class ServiserGlavniMeniView extends Stage{
 	//txtFildovi
 	private TextField tfDatum, tfOpis;
 	private Button dugmeSacuvaj, dugmeCenaDelova, dugmeTroskoviUsluge;
-	private ContextMenu meni = new ContextMenu(new MenuItem("Izmeni"), new MenuItem("Izaberi delove"));
+	private ContextMenu meni = new ContextMenu(new MenuItem("Izmeni"), new MenuItem("Izaberi delove"), new MenuItem("Zavrsi Servis"));
 	private static ObservableList<Servis> servisi = FXCollections.observableArrayList();
 	private static ObservableList<ServisnaKnjizica> servisneKnjizice = FXCollections.observableArrayList();
 	
@@ -167,6 +167,9 @@ public class ServiserGlavniMeniView extends Stage{
 		meni.getItems().get(1).setOnAction(event);
 	}
 	
+	public void dodeliFunkcionalnostOpcijiZavrsi(EventHandler<ActionEvent> event) {
+		meni.getItems().get(2).setOnAction(event);
+	}
 	
 	public void dodeliFunkcionalnostDugmetuSacuvaj(EventHandler<ActionEvent> event) {
 		dugmeSacuvaj.setOnAction(event);

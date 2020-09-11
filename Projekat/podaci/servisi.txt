@@ -7,4 +7,4 @@ b17dc40b-94e9-4642-bb27-34649c26e8cf|e252633f-d8f2-4d2c-bf22-25bdfd9829b1|null|n
 13169b6f-ad0b-43ad-9de3-c01a09413d9d|6eb7bb37-4f6e-413f-a9ba-22ac2d74d1f5|null|null|Mimi|null|ZAKAZAN|false
 71cdbeb1-c96e-4764-96b3-e4eef6739567|6eb7bb37-4f6e-413f-a9ba-22ac2d74d1f5|aa6ffa73-94ae-44d0-8463-181247bf0c38|04/06/2020 11:03|Potrebno je uraditi potpunu rest...|222.01|ZAKAZAN|false
 77431689-66ee-4c70-af43-c8a3493ed78f|bccc7572-10bc-4ad0-99bd-45541b0daa59|fbd373fb-8af1-4ce3-ae74-b435ba65a7c7|23/11/2022 05:33|Mercede|null|OTKAZAN|false
-76767533-e9a7-4997-8d11-4885f3cd815a|33ba97f8-71e7-4e26-a6c0-36dd225e7871|fbd373fb-8af1-4ce3-ae74-b435ba65a7c7|15/10/2020 11:30|Tera|null|ZAKAZAN|false
+76767533-e9a7-4997-8d11-4885f3cd815a|33ba97f8-71e7-4e26-a6c0-36dd225e7871|fbd373fb-8af1-4ce3-ae74-b435ba65a7c7|15/10/2020 11:30|Teraa|null|ZAKAZAN|false

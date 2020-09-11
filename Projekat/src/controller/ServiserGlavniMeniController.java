@@ -7,6 +7,7 @@ import enumi.Status;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import model.Deo;
 import model.Servis;
@@ -24,6 +25,7 @@ public class ServiserGlavniMeniController {
 	private Serviser ulogovanServiser;
 	private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
 	private PopupTabelaDelovaView pp = new PopupTabelaDelovaView();
+	
 	private Servis selekServ;
 	
 	public ServiserGlavniMeniController(Stage primaryStage, Serviser serviser) {
@@ -49,7 +51,11 @@ public class ServiserGlavniMeniController {
 		sgmv.dodeliFunkcionalnostOpcijiIzmeni(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
-				prepisiSvaPolja();
+				if(sgmv.getTabela().getSelectionModel().getSelectedItem().getStatus() == Status.ZAKAZAN) {
+					prepisiSvaPolja();
+				} else {
+					sgmv.izbaciPorukuOGresci("Za odabrani servis ne mozete izvrsiti opciju Izmeni!");
+				}
 			}
 		});
 		
@@ -57,14 +63,29 @@ public class ServiserGlavniMeniController {
 		sgmv.dodeliFunkcionalnostOpcijiDodajDelove(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
+				if(sgmv.getTabela().getSelectionModel().getSelectedItem().getStatus() == Status.ZAKAZAN) {
+					selekServ = sgmv.getTabela().getSelectionModel().getSelectedItem();
+					System.out.println("Selek " +selekServ);
+					pp.show(sgmv);
+					pp.popuniTabelu(DeoController.neIskorisceniDelovi());
+					dodajFunkcPP();
+				} else {
+					sgmv.izbaciPorukuOGresci("Za odabrani servis ne mozete izvrsiti opciju Dodaj delove!");
+				}
 				
-				
-				
-//				pp.show(sgmv);
-//				pp.popuniTabelu(DeoController.neIskorisceniDelovi());
-//				dodajFunkcPP();
-//				sgmv.popuniTabelu(ServisController.getServiseServisera(ulogovanServiser));
-//				selekServ = null;
+			}
+		});
+		
+		sgmv.dodeliFunkcionalnostOpcijiZavrsi(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+				if(sgmv.getTabela().getSelectionModel().getSelectedItem().getStatus() == Status.ZAKAZAN) {
+					
+					
+					
+				} else {
+					sgmv.izbaciPorukuOGresci("Za odabrani servis ne mozete izvrsiti opciju Zavrsi Servis!");
+				}
 			}
 		});
 	}
@@ -83,7 +104,7 @@ public class ServiserGlavniMeniController {
 				
 				DeoController.dodajDeloveServisu(new ArrayList<Deo>(pp.getTabela().getSelectionModel().getSelectedItems()), selekServ);
 				pp.hide();
-				
+				sgmv.popuniTabelu(ServisController.getServiseServisera(ulogovanServiser));
 			}
 		});
 	}
