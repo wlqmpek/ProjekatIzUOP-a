@@ -8,6 +8,8 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 import model.Deo;
 import model.Servis;
@@ -80,9 +82,18 @@ public class ServiserGlavniMeniController {
 			@Override
 			public void handle(ActionEvent arg0) {
 				if(sgmv.getTabela().getSelectionModel().getSelectedItem().getStatus() == Status.ZAKAZAN) {
-					
-					
-					
+					selekServ = sgmv.getTabela().getSelectionModel().getSelectedItem();
+					prepisiSvaPolja();
+					sgmv.getTfTroskoviUsluge().setDisable(false);
+					sgmv.getTfOpis().setDisable(true);
+					sgmv.getTfDatum().setDisable(true);
+					Alert al = new Alert(AlertType.WARNING, "Zelite li da iskoristite poene?",  ButtonType.YES, ButtonType.NO);
+					al.showAndWait();
+					if(al.getResult() == ButtonType.YES) {
+						//nisam stigao
+					} else {
+						//nisam stigao
+					}
 				} else {
 					sgmv.izbaciPorukuOGresci("Za odabrani servis ne mozete izvrsiti opciju Zavrsi Servis!");
 				}
@@ -118,8 +129,8 @@ public class ServiserGlavniMeniController {
 		sgmv.getTfOpis().setText(tempServis.getOpis());
 		sgmv.getStatusBox().setValue(tempServis.getStatus());
 		sgmv.getStatusBox().setDisable(true);
-		sgmv.getDugmeTroskoviUsluge().setText(String.valueOf(tempServis.getTroskoviUsluge()));
-		sgmv.getDugmeTroskoviUsluge().setDisable(true);
+		sgmv.getTfTroskoviUsluge().setText(String.valueOf(tempServis.getTroskoviUsluge()));
+		sgmv.getTfTroskoviUsluge().setDisable(true);
 		sgmv.getDugmeCenaDelova().setText(String.valueOf(ServisController.cenaDelova(tempServis).doubleValue()));
 		sgmv.getDugmeCenaDelova().setDisable(true);
 		izmena = true;
@@ -127,7 +138,7 @@ public class ServiserGlavniMeniController {
 	
 	private void enable() {
 		sgmv.getDugmeCenaDelova().setDisable(false);
-		sgmv.getDugmeTroskoviUsluge().setDisable(false);
+		sgmv.getTfTroskoviUsluge().setDisable(true);
 		sgmv.getServisnaKnjiizcaBox().setDisable(false);
 		sgmv.getTfDatum().setEditable(true);
 	}
@@ -141,7 +152,7 @@ public class ServiserGlavniMeniController {
 			
 			String datum = sgmv.getTfDatum().getText();
 			String opis = sgmv.getTfOpis().getText();
-			Double troskoviUsluge = ServisController.troskoviVratiDouble(sgmv.getDugmeTroskoviUsluge().getText());
+			Double troskoviUsluge = ServisController.troskoviVratiDouble(sgmv.getTfTroskoviUsluge().getText());
 			Status status = sgmv.getStatusBox().getSelectionModel().getSelectedItem();
 				
 			try {
@@ -159,7 +170,7 @@ public class ServiserGlavniMeniController {
 			ServisnaKnjizica servisnaKnjizica = sgmv.getServisnaKnjiizcaBox().getSelectionModel().getSelectedItem();
 			String datum = sgmv.getTfDatum().getText();
 			String opis = sgmv.getTfOpis().getText();
-			Double troskoviUsluge = ServisController.proveraNullDouble(sgmv.getDugmeTroskoviUsluge().getText());
+			Double troskoviUsluge = ServisController.proveraNullDouble(sgmv.getTfTroskoviUsluge().getText());
 			Status status = sgmv.getStatusBox().getSelectionModel().getSelectedItem();
 			
 			

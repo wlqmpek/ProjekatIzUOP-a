@@ -41,8 +41,8 @@ public class ServiserGlavniMeniView extends Stage{
 	private ComboBox<ServisnaKnjizica> servisnaKnjiizcaBox;
 	private ComboBox<Status> statusBox;
 	//txtFildovi
-	private TextField tfDatum, tfOpis;
-	private Button dugmeSacuvaj, dugmeCenaDelova, dugmeTroskoviUsluge;
+	private TextField tfDatum, tfOpis, tfTroskoviUsluge;
+	private Button dugmeSacuvaj, dugmeCenaDelova;
 	private ContextMenu meni = new ContextMenu(new MenuItem("Izmeni"), new MenuItem("Izaberi delove"), new MenuItem("Zavrsi Servis"));
 	private static ObservableList<Servis> servisi = FXCollections.observableArrayList();
 	private static ObservableList<ServisnaKnjizica> servisneKnjizice = FXCollections.observableArrayList();
@@ -82,13 +82,14 @@ public class ServiserGlavniMeniView extends Stage{
 		tfOpis.setPrefWidth(SIRINA_TEKSTUALNIH);
 		dugmeCenaDelova = new Button("Cena delova");
 		dugmeCenaDelova.setPrefWidth(SIRINA_TEKSTUALNIH);
-		dugmeTroskoviUsluge = new Button("Troskovi Usluge");
-		dugmeTroskoviUsluge.setPrefWidth(SIRINA_TEKSTUALNIH);
+		tfTroskoviUsluge = new TextField();
+		tfTroskoviUsluge.setPromptText("Troskovi Usluge");
+		tfTroskoviUsluge.setPrefWidth(SIRINA_TEKSTUALNIH);
 		
 		dugmeSacuvaj = new Button("Sacuvaj");
 		dugmeSacuvaj.setPrefWidth(SIRINA_TEKSTUALNIH);
 		
-		hb1.getChildren().addAll(servisnaKnjiizcaBox, tfDatum, tfOpis, statusBox, dugmeCenaDelova, dugmeTroskoviUsluge, dugmeSacuvaj);
+		hb1.getChildren().addAll(servisnaKnjiizcaBox, tfDatum, tfOpis, statusBox, dugmeCenaDelova, tfTroskoviUsluge, dugmeSacuvaj);
 		
 		tabela.setOnMouseClicked(event -> {
 			if (event.getButton() == MouseButton.SECONDARY) {
@@ -123,7 +124,7 @@ public class ServiserGlavniMeniView extends Stage{
 		kolonaCenaDelova = new TableColumn<Servis, Double>("Cena Delova");
 		kolonaCenaDelova.setCellValueFactory(cellData -> ServisController.cenaDelova(cellData.getValue()).asObject());
 		kolonaCenaDelova.setMinWidth(SIRINA_KOLONA);
-		kolonaTroskoviUsluge = new TableColumn<Servis, Double>("Troskovi Usluge.");
+		kolonaTroskoviUsluge = new TableColumn<Servis, Double>("Troskovi Usluge");
 		kolonaTroskoviUsluge.setCellValueFactory(new PropertyValueFactory<Servis, Double>("troskoviUsluge"));
 		kolonaTroskoviUsluge.setMinWidth(SIRINA_KOLONA);
 		
@@ -228,12 +229,12 @@ public class ServiserGlavniMeniView extends Stage{
 		this.dugmeCenaDelova = dugmeCenaDelova;
 	}
 
-	public Button getDugmeTroskoviUsluge() {
-		return dugmeTroskoviUsluge;
+	public TextField getTfTroskoviUsluge() {
+		return tfTroskoviUsluge;
 	}
 
-	public void setDugmeTroskoviUsluge(Button dugmeTroskoviUsluge) {
-		this.dugmeTroskoviUsluge = dugmeTroskoviUsluge;
+	public void setDugmeTroskoviUsluge(TextField tfTroskoviUsluge) {
+		this.tfTroskoviUsluge = tfTroskoviUsluge;
 	}
 
 	public static void setServisneKnjizice(ObservableList<ServisnaKnjizica> servisneKnjizice) {

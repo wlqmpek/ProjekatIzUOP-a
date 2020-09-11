@@ -2,10 +2,8 @@ package view;
 
 import java.util.ArrayList;
 
-import controller.DeoController;
 import enumi.Marka;
 import enumi.Model;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;

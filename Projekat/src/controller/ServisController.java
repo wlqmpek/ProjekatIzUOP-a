@@ -157,6 +157,10 @@ public class ServisController {
 		return d;
 	}
 	
+	public static Double smanjiTroskoveZaProcenat(Double troskovi, Double procenat) {
+		return troskovi - (troskovi / 100) * procenat;
+	}
+	
 	public static String vratiOznakuAutomobilaServisa(Servis servis) {
 		String oznakaAutomobila = null;
 		if(servis.getServisnaKnjizica() != null) {
