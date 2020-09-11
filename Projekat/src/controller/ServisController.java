@@ -84,7 +84,7 @@ public class ServisController {
 	}
 	
 	public static ArrayList<String> servisUStringArray(Servis servis) {
-		return new ArrayList<String>(Arrays.asList(servis.getOznaka(), servis.getServisnaKnjizica().getOznaka(), vratiOznakuServiseraServisa(servis), vratiDatumServisa(servis), servis.getOpis(), String.valueOf(servis.getTroskoviServisa()), vratiStatusServisa(servis), String.valueOf(servis.isObrisan())));
+		return new ArrayList<String>(Arrays.asList(servis.getOznaka(), servis.getServisnaKnjizica().getOznaka(), vratiOznakuServiseraServisa(servis), vratiDatumServisa(servis), servis.getOpis(), String.valueOf(servis.getTroskoviUsluge()), vratiStatusServisa(servis), String.valueOf(servis.isObrisan())));
 	}
 	
 	
@@ -123,7 +123,7 @@ public class ServisController {
 		return listaTrazenihDelova;
 	}
 	
-	public static SimpleDoubleProperty cenaServisa(Servis servis) {
+	public static SimpleDoubleProperty cenaDelova(Servis servis) {
 		Double cenaServisa = 0.0;
 		System.out.println("Kor " + korisceniDelovi(servis));
 		for(Deo deo : korisceniDelovi(servis)) {
@@ -145,6 +145,17 @@ public class ServisController {
 		return d;
 	}
 	
+	public static Double troskoviVratiDouble(String str) {
+		Double d = null;
+		
+		if(str.equalsIgnoreCase("Troskovi Usluge")) {
+			d = proveraNullDouble("null");
+		} else {
+			d = proveraNullDouble(str);
+		}
+		
+		return d;
+	}
 	
 	public static String vratiOznakuAutomobilaServisa(Servis servis) {
 		String oznakaAutomobila = null;
@@ -208,7 +219,7 @@ public class ServisController {
 	
 	public static boolean servisImaNullVrednosti(Servis servis) {
 		boolean nullVrednosti = true; 
-		if(servis.getOznaka() != null && servis.getServisnaKnjizica() != null && servis.getServiser() != null && servis.getDatum() != null && servis.getOpis() != null && servis.getTroskoviServisa() != null && servis.getStatus() != null) {
+		if(servis.getOznaka() != null && servis.getServisnaKnjizica() != null && servis.getServiser() != null && servis.getDatum() != null && servis.getOpis() != null && servis.getTroskoviUsluge() != null && servis.getStatus() != null) {
 			nullVrednosti = false;
 		}
 		return nullVrednosti;
@@ -251,12 +262,12 @@ public class ServisController {
 		return statusServisa;
 	}
 	
-	public static String vratiTroskoveServisa(Servis servis) {
-		String troskoviServisa = null;
+	public static String vratiTroskoveUsluge(Servis servis) {
+		String troskoviUsluge = null;
 		if(servis.getStatus() != null) {
-			troskoviServisa = servis.getTroskoviServisa().toString();
+			troskoviUsluge = servis.getTroskoviUsluge().toString();
 		}
-		return troskoviServisa;
+		return troskoviUsluge;
 	}
 	
 	public static void izbrisiIzUcitanihServisaSaOznakom(String oznaka) {

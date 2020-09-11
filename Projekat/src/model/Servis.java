@@ -17,20 +17,20 @@ public class Servis {
 	private Serviser serviser;
 	private Date datum;
 	private String opis;
-	private Double troskoviServisa;
+	private Double troskoviUsluge;
 	private Status status;
 	private boolean obrisan;
 	private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
 	
 	//koristi se da odmah kreiramo servis
-	public Servis(ServisnaKnjizica servisnaKnjizica, Serviser serviser, Date datum, String opis, Double troskoviServisa, Status status) {
+	public Servis(ServisnaKnjizica servisnaKnjizica, Serviser serviser, Date datum, String opis, Double troskoviUsluge, Status status) {
 		super();
 		this.oznaka = generisiOznaku();
 		this.servisnaKnjizica = servisnaKnjizica;
 		this.serviser = serviser;
 		this.datum = datum;
 		setOpis(opis);
-		setTroskoviServisa(troskoviServisa);
+		setTroskoviUsluge(troskoviUsluge);
 		this.status = status;
 		this.obrisan = false;
 	}
@@ -55,14 +55,14 @@ public class Servis {
 	}
 	
 	//kreiraj servis iz fajla
-	public Servis(String oznaka, String servisnaKnjizica, String serviser, String datum, String opis, Double troskoviServisa, Status status, boolean obrisan) {
+	public Servis(String oznaka, String servisnaKnjizica, String serviser, String datum, String opis, Double troskoviUsluge, Status status, boolean obrisan) {
 		super();
 		this.oznaka = oznaka;
 		this.servisnaKnjizica = ServisnaKnjizicaController.nadjiServisnuKnjizicuPoOznaci(servisnaKnjizica);
 		this.serviser = ServiserController.nadjiServiseraPoOznaci(serviser);
 		this.setDatum(datum);
 		this.opis = opis;
-		setTroskoviServisa(troskoviServisa);
+		setTroskoviUsluge(troskoviUsluge);
 		this.status = status;
 		this.obrisan = obrisan;
 	}
@@ -100,12 +100,16 @@ public class Servis {
 	}
 
 	public String getDatum() {
+		String dat = null;
 		if (datum == null) {
-			return String.valueOf(datum);
+			dat = null;
+		} else if(datum.equals("null")) {
+			dat = null;
 		} else {
-			return sdf.format(datum);
+			dat = sdf.format(datum);
 		}
 		
+		return dat;
 	}
 
 	public void setDatum(String datum) {
@@ -140,17 +144,17 @@ public class Servis {
 
 	
 	
-	public Double getTroskoviServisa() {
-		return troskoviServisa;
+	public Double getTroskoviUsluge() {
+		return troskoviUsluge;
 	}
 
-	public void setTroskoviServisa(Double troskoviServisa) {
-		if(troskoviServisa == null) {
-			this.troskoviServisa = null;
-		} else if(troskoviServisa < 0) {
-			throw new IllegalArgumentException("Cena troskova ne sme biti manja od 0");
+	public void setTroskoviUsluge(Double troskoviUsluge) {
+		if(troskoviUsluge == null) {
+			this.troskoviUsluge = null;
+		} else if(troskoviUsluge < 0) {
+			throw new IllegalArgumentException("Troskovi usluge ne sme biti manja od 0");
 		} else {
-			this.troskoviServisa = troskoviServisa;
+			this.troskoviUsluge = troskoviUsluge;
 		}
 	}
 

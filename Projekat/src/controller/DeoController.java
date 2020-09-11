@@ -29,7 +29,7 @@ public class DeoController {
 	
 	public static void upisiDeoUFajl(Deo deo) {
 		DeoController.delovi.add(deo);
-		String deoKaoString = String.join("|", deoUStringArray(deo));
+		String deoKaoString = String.join("|", deoUStringArray(deo)) + "\r\n";
 		FileWriter fw;
 		try {
 			fw = new FileWriter(file, true);
@@ -71,8 +71,16 @@ public class DeoController {
 		}
 	}
 	
+	public static void dodajDeloveServisu(ArrayList<Deo> delovi, Servis servis) {
+		System.out.println("Deo + Sevis " + delovi + " " + servis);
+		for(Deo d1 : delovi) {
+			DeoController.nadjiDeoPoOznaci(d1.getOznaka()).setIskoriscenUSevisu(servis);
+		}
+		DeoController.sacuvajIzmeneUFajl();
+		DeoController.inicijalizujDelove();
+	}
+	
 	public static Deo stringUDeo(ArrayList<String> podaci) {
-		System.out.println("Podaci " +podaci);
 		return new Deo(podaci.get(0), Marka.valueOf(podaci.get(1)), Model.valueOf(podaci.get(2)), podaci.get(3), Double.valueOf(podaci.get(4)), podaci.get(5), Boolean.valueOf(podaci.get(6)));
 	}
 	
@@ -140,6 +148,16 @@ public class DeoController {
 			}
 		}
 		return neObrisaniDelovi;
+	}
+	
+	public static ArrayList<Deo> neIskorisceniDelovi() {
+		ArrayList<Deo> neIskorisceniDelovi = new ArrayList<Deo>();
+		for(Deo deo : DeoController.neObrisaniDelovi()) {
+			if(deo.getIskoriscenUSevisu() == null) {
+				neIskorisceniDelovi.add(deo);
+			}
+		}
+		return neIskorisceniDelovi;
 	}
 	
 	public static void izbrisiIzUcitanihDelovaSaOznakom(String oznaka) {

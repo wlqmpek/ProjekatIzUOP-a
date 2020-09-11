@@ -1,3 +1,5 @@
 9ab8248b-4a1f-49e5-852a-7e6e65fb2014|TESLA|MODEL_S|Radar|21000.33|71cdbeb1-c96e-4764-96b3-e4eef6739567|false
-c7c6569c-d574-4b21-a768-cc9e5b7bc0bc|BMW|MODEL_X|Volan|1000.33|null|false
+c7c6569c-d574-4b21-a768-cc9e5b7bc0bc|BMW|MODEL_X|Volan|1000.33|77431689-66ee-4c70-af43-c8a3493ed78f|false
 82d1a159-a4d5-4f6b-bfa1-ea28aa1105f1|VOLVO|GOLF|Gusenice|200.33|a74563cc-63ba-43eb-8077-b9035d214405|false
+117dd41e-c5dc-439f-ba63-dd12f3eb060b|TESLA|MODEL_S|Modulator|330.0|null|false
+e9b417e5-36e1-45e2-8209-6a01ccf5d340|TESLA|I3|Torpedo|22.11|null|false

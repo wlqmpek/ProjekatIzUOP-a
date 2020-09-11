@@ -25,7 +25,16 @@ public class AutomobilController {
 	
 	
 	static {
-		inicijalizujAutomobile();
+		try {
+			inicijalizujAutomobile();
+			System.out.println("Zavrsena inicijalizacija auta");
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public static void upisiAutomobilUFajl(Automobil automobil) {
@@ -75,7 +84,7 @@ public class AutomobilController {
 		}
 	}
 	
-	public static Automobil stringUAutomobil(ArrayList<String> podaci) {
+	public static Automobil stringUAutomobil(ArrayList<String> podaci) throws NumberFormatException, Exception {
 		System.out.println("Podaci auta " + podaci);
 		return new Automobil(podaci.get(0), podaci.get(1), Marka.valueOf(podaci.get(2)), Model.valueOf(podaci.get(3)), Short.valueOf(podaci.get(4)), Short.valueOf(podaci.get(5)), Short.valueOf(podaci.get(6)), Gorivo.valueOf(podaci.get(7)), Boolean.valueOf(podaci.get(8)));
 	}
@@ -89,7 +98,7 @@ public class AutomobilController {
 	}
 	
 	//konvertuje iz niza stringova u niz automobila
-	public static void konvertujSveAutomobile() {
+	public static void konvertujSveAutomobile() throws NumberFormatException, Exception {
 		AutomobilController.automobili.clear();
 		for (ArrayList<String> auto : AutomobilController.podaci) {
 			System.out.println("Konvertujemo auto " + auto);
@@ -102,7 +111,7 @@ public class AutomobilController {
 		return MusterijaController.nadjiMusterijuPoOznaci(oznaka);
 	}
 	
-	public static void inicijalizujAutomobile() {
+	public static void inicijalizujAutomobile() throws NumberFormatException, Exception {
 		System.out.println("Inicijalizacija automobila");
 		procitajFajl();
 		System.out.println("hooho" +AutomobilController.podaci);
@@ -147,7 +156,8 @@ public class AutomobilController {
 	}
 	
 	public static Automobil nadjiAutomobilPoOznaci(String oznaka) {
-		System.out.println("Trazimo auto po oznaci");
+		System.out.println("Trazimo auto po oznaci " + oznaka);
+		System.out.println(AutomobilController.automobili);
 		Automobil trazenAutomobil = null;
 		for(Automobil automobil : AutomobilController.automobili) {
 			System.out.println("Uporedjujemo " + oznaka + " sa " + automobil.getOznaka());
@@ -155,6 +165,7 @@ public class AutomobilController {
 				trazenAutomobil = automobil;
 			}
 		}
+		System.out.println("Nadjen auto " + trazenAutomobil);
 		return trazenAutomobil;
 	}
 	
@@ -162,7 +173,7 @@ public class AutomobilController {
 		return ServisnaKnjizicaController.servisnaKnjizicaAutomobila(automobil);
 	}
 	
-	public static ArrayList<Automobil> getNeObrisaniAutomobili() {
+	public static ArrayList<Automobil> getNeObrisaniAutomobili() throws NumberFormatException, Exception {
 		ArrayList<Automobil> neObrisaniAutomobili = new ArrayList<Automobil>();
 		inicijalizujAutomobile();
 		for(Automobil auto : AutomobilController.automobili) {
@@ -177,7 +188,7 @@ public class AutomobilController {
 		AutomobilController.automobili.remove(nadjiAutomobilPoOznaci(oznaka));
 	}
 
-	public static ArrayList<Automobil> getAutomobili() {
+	public static ArrayList<Automobil> getAutomobili() throws NumberFormatException, Exception {
 		inicijalizujAutomobile();
 		return AutomobilController.automobili;
 	}

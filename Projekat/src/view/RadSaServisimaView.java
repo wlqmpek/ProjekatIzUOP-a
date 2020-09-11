@@ -129,15 +129,15 @@ public class RadSaServisimaView extends Stage {
 		kolonaOpis = new TableColumn<Servis, String>("Opis");
 		kolonaOpis.setCellValueFactory(new PropertyValueFactory<Servis, String>("opis"));
 		kolonaOpis.setMinWidth(SIRINA_KOLONA);
-		kolonaTroskoviServisa = new TableColumn<Servis, Double>("Troskovi Ser");
-		kolonaTroskoviServisa.setCellValueFactory(new PropertyValueFactory<Servis, Double>("troskoviServisa"));
+		kolonaTroskoviServisa = new TableColumn<Servis, Double>("Troskovi Usuge");
+		kolonaTroskoviServisa.setCellValueFactory(new PropertyValueFactory<Servis, Double>("troskoviUsluge"));
 		kolonaTroskoviServisa.setMinWidth(SIRINA_KOLONA);
 		kolonaStatus = new TableColumn<Servis, Status>("Status");
 		kolonaStatus.setCellValueFactory(new PropertyValueFactory<Servis, Status>("status"));
 		kolonaStatus.setMinWidth(SIRINA_KOLONA);
 		//ovde obrati paznju
-		kolonaCena = new TableColumn<Servis, Double>("Cena");
-		kolonaCena.setCellValueFactory(cellData -> ServisController.cenaServisa(cellData.getValue()).asObject());
+		kolonaCena = new TableColumn<Servis, Double>("Cena Delova");
+		kolonaCena.setCellValueFactory(cellData -> ServisController.cenaDelova(cellData.getValue()).asObject());
 		kolonaCena.setMinWidth(SIRINA_KOLONA);
 		
 

@@ -21,7 +21,7 @@ public class Automobil {
 	private boolean obrisan;
 	
 	public Automobil(Musterija vlasnik, Marka marka, Model model, short godinaProizvodnje,
-			short zapreminaMotora, short snagaMotora, Gorivo gorivo) {
+			short zapreminaMotora, short snagaMotora, Gorivo gorivo) throws Exception {
 		super();
 		this.oznaka = generisiOznaku();
 		this.vlasnik = vlasnik;
@@ -30,13 +30,14 @@ public class Automobil {
 		setGodinaProizvodnje(godinaProizvodnje);
 		setZapreminaMotora(zapreminaMotora);
 		setSnagaMotora(snagaMotora);
-		this.gorivo = gorivo;
+		setGorivo(gorivo);
 		this.obrisan = false;
+		ServisnaKnjizicaController.servisnaKnjizicaAutomobila(this);
 	}
 	
 	//koristi se da odmah dodamo vlasnika
 	public Automobil(String oznaka, Musterija vlasnik, Marka marka, Model model, short godinaProizvodnje,
-			short zapreminaMotora, short snagaMotora, Gorivo gorivo, boolean obrisan) {
+			short zapreminaMotora, short snagaMotora, Gorivo gorivo, boolean obrisan) throws Exception {
 		super();
 		this.oznaka = oznaka;
 		this.vlasnik = vlasnik;
@@ -46,12 +47,14 @@ public class Automobil {
 		setZapreminaMotora(zapreminaMotora);
 		setSnagaMotora(snagaMotora);
 		this.gorivo = gorivo;
+		setGorivo(gorivo);
 		this.obrisan = obrisan;
+		ServisnaKnjizicaController.servisnaKnjizicaAutomobila(this);
 	}
 	
 	//koristi se kod iscitavanja iz fajla Note: promeni za oznaku
 	public Automobil(String oznaka, String vlasnik, Marka marka, Model model, short godinaProizvodnje,
-			short zapreminaMotora, short snagaMotora, Gorivo gorivo, boolean obrisan) {
+			short zapreminaMotora, short snagaMotora, Gorivo gorivo, boolean obrisan) throws Exception {
 		super();
 		this.oznaka = oznaka;
 		this.vlasnik = AutomobilController.nadjiVlasnika(vlasnik);
@@ -60,7 +63,7 @@ public class Automobil {
 		setGodinaProizvodnje(godinaProizvodnje);
 		setZapreminaMotora(zapreminaMotora);
 		setSnagaMotora(snagaMotora);
-		this.gorivo = gorivo;
+		setGorivo(gorivo);
 		this.obrisan = obrisan;
 	}
 	
@@ -68,7 +71,7 @@ public class Automobil {
 	
 
 	public Automobil(String vlasnik, Marka marka, Model model, short godinaProizvodnje,
-			short zapreminaMotora, short snagaMotora, Gorivo gorivo, boolean obrisan) {
+			short zapreminaMotora, short snagaMotora, Gorivo gorivo, boolean obrisan) throws Exception {
 		super();
 		this.oznaka = generisiOznaku();
 		this.vlasnik = AutomobilController.nadjiVlasnika(vlasnik);
@@ -77,8 +80,9 @@ public class Automobil {
 		setGodinaProizvodnje(godinaProizvodnje);
 		setZapreminaMotora(zapreminaMotora);
 		setSnagaMotora(snagaMotora);
-		this.gorivo = gorivo;
+		setGorivo(gorivo);
 		this.obrisan = obrisan;
+		ServisnaKnjizicaController.servisnaKnjizicaAutomobila(this);
 	}
 
 	public String getOznaka() {
@@ -155,8 +159,12 @@ public class Automobil {
 		return gorivo;
 	}
 
-	public void setGorivo(Gorivo gorivo) {
-		this.gorivo = gorivo;
+	public void setGorivo(Gorivo gorivo) throws Exception {
+		if(gorivo == null) {
+			throw new Exception("Odaberite vrednost za gorivo");
+		} else {
+			this.gorivo = gorivo;
+		}
 	}
 
 	public boolean isObrisan() {

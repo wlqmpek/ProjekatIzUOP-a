@@ -64,7 +64,15 @@ public class AdministratorGlavniMeniController {
 			public void handle(ActionEvent arg0) {
 				agmv.close();
 				//do ovde sam stigao
-				new RadSaAutomobilimaController(new RadSaAutomobilimaView());
+				try {
+					new RadSaAutomobilimaController(new RadSaAutomobilimaView());
+				} catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 		

@@ -21,7 +21,7 @@ public class RadSaAutomobilimaController {
 	private boolean izmena = false;
 	private Automobil tempAutomobil;
 	
-	public RadSaAutomobilimaController(Stage primaryStage) {
+	public RadSaAutomobilimaController(Stage primaryStage) throws NumberFormatException, Exception {
 		this.rsav = ((RadSaAutomobilimaView)primaryStage);
 		this.rsav.popuniTabelu(AutomobilController.getNeObrisaniAutomobili());
 		RadSaAutomobilimaView.getVlasnici().addAll(FXCollections.observableArrayList(MusterijaController.getNeObrisaniMusterije()));

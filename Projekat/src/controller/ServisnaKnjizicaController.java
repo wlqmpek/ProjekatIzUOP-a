@@ -70,6 +70,7 @@ public class ServisnaKnjizicaController {
 	}
 	
 	public static ServisnaKnjizica stringUServisnuKnjizicu(ArrayList<String> podaci) {
+		System.out.println("Podaci servisne " +podaci);
 		return new ServisnaKnjizica(podaci.get(0));
 	}
 	
