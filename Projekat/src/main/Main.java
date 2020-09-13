@@ -14,4 +14,7 @@ public class Main extends Application {
 		lv.start(arg0);
 	}
 
+	public static void main(String[] args) {
+		launch(args);
+	}
 }

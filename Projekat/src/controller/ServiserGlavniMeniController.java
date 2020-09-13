@@ -27,8 +27,8 @@ public class ServiserGlavniMeniController {
 	private Serviser ulogovanServiser;
 	private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
 	private PopupTabelaDelovaView pp = new PopupTabelaDelovaView();
-	
 	private Servis selekServ;
+	
 	
 	public ServiserGlavniMeniController(Stage primaryStage, Serviser serviser) {
 		this.ulogovanServiser = serviser;
@@ -74,7 +74,6 @@ public class ServiserGlavniMeniController {
 				} else {
 					sgmv.izbaciPorukuOGresci("Za odabrani servis ne mozete izvrsiti opciju Dodaj delove!");
 				}
-				
 			}
 		});
 		
@@ -87,12 +86,14 @@ public class ServiserGlavniMeniController {
 					sgmv.getTfTroskoviUsluge().setDisable(false);
 					sgmv.getTfOpis().setDisable(true);
 					sgmv.getTfDatum().setDisable(true);
-					Alert al = new Alert(AlertType.WARNING, "Zelite li da iskoristite poene?",  ButtonType.YES, ButtonType.NO);
+					Alert al = new Alert(AlertType.WARNING, "Zelite li musterija zeli da iskoristi poene?",  ButtonType.YES, ButtonType.NO);
 					al.showAndWait();
 					if(al.getResult() == ButtonType.YES) {
+						prikaziRacunMusteriji();
+					} else if (al.getResult() == ButtonType.NO){
 						//nisam stigao
 					} else {
-						//nisam stigao
+						
 					}
 				} else {
 					sgmv.izbaciPorukuOGresci("Za odabrani servis ne mozete izvrsiti opciju Zavrsi Servis!");
@@ -100,6 +101,8 @@ public class ServiserGlavniMeniController {
 			}
 		});
 	}
+	
+	private 
 	
 	private void dodajFunkcPP() {
 		pp.getDugmeOtkazi().setOnAction(new EventHandler<ActionEvent>() {
