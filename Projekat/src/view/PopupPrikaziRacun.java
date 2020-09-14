@@ -8,9 +8,11 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -25,15 +27,19 @@ public class PopupPrikaziRacun extends Popup{
 	private TableColumn<Deo, Model> kolonaModel;
 	private TableColumn<Deo, String> kolonaNaziv;
 	private TableColumn<Deo, Double> kolonaCena;
-	private double cenaDelova;
-	private double cenaUsluge;
-	private double ukupo;
+	private TextField tfCenaDelova, tfCenaUsluge, tfUkupno;
+	private final Label labelaPlus = new Label("+");
+	private final Label labelaJednako = new Label("=");
+	private double cenaDelova, cenaUsluge, ukupno;
+	
 	private Button dugmeZavrsi;
 	
-	public PopupPrikaziRacun(ArrayList<Deo> deloviUServisu) {
+	public PopupPrikaziRacun(ArrayList<Deo> deloviUServisu, Double cenaDelova, Double cenaUsluge, Double ukupno) {
 		
+		this.cenaDelova = cenaDelova;
+		this.cenaUsluge = cenaUsluge;
+		this.ukupno = ukupno;
 		kreirajTabeluSaDelovima(deloviUServisu);
-		kreirajRaspored();
 		this.getContent().addAll(kreirajRaspored());
 		
 	}
@@ -67,12 +73,18 @@ public class PopupPrikaziRacun extends Popup{
 	
 	private VBox kreirajRaspored() {
 		VBox vb = new VBox();
+		HBox hb = new HBox();
 		dugmeZavrsi = new Button("Zavrsi");
-		vb.getChildren().addAll(tabela, dugmeZavrsi);
+		tfCenaDelova = new TextField(String.valueOf(this.cenaDelova));
+		tfCenaUsluge = new TextField(String.valueOf(this.cenaUsluge));
+		tfUkupno = new TextField(String.valueOf(this.ukupno));
+		hb.getChildren().addAll(tfCenaDelova, labelaPlus, tfCenaUsluge, labelaJednako, tfUkupno, dugmeZavrsi);
+		
+		vb.getChildren().addAll(tabela, hb);
 		return vb;
 	}
 	
-	private void dodeliFunkcionalnostDugmetuZavrsi(EventHandler<ActionEvent> eh) {
+	public void dodeliFunkcionalnostDugmetuZavrsi(EventHandler<ActionEvent> eh) {
 		dugmeZavrsi.setOnAction(eh);
 	}
 	

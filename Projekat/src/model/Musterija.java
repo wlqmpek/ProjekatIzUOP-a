@@ -31,8 +31,10 @@ public class Musterija extends Korisnik {
 	}
 
 	public void setBrojPoena(byte brojPoena) {
-		if (brojPoena > 10 || brojPoena < 0) {
-			throw new IllegalArgumentException("Uneta vrednost poena biti <= 10 kao i >= 0");
+		if(brojPoena < 0) {
+			throw new IllegalArgumentException("Minimalan broj poena je 0");
+		} else if(brojPoena > 10) {
+			this.brojPoena = 10;
 		} else {
 			this.brojPoena = brojPoena;
 		}

@@ -122,7 +122,7 @@ public class Servis {
 			try {
 				this.datum = sdf.parse(datum);
 			} catch (Exception e) {
-				System.out.println("Datum nije validan!");
+				throw new IllegalArgumentException("Format datuma nije validan!");
 			}
 		}
 	}

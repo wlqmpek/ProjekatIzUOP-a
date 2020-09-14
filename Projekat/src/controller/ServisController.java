@@ -139,6 +139,8 @@ public class ServisController {
 			d = null;
 		} else if(str.equalsIgnoreCase("null")) {
 			d = null;
+		} else if(str.isEmpty()) {
+			d = null;
 		} else {
 			d = Double.valueOf(str);
 		}
@@ -158,7 +160,14 @@ public class ServisController {
 	}
 	
 	public static Double smanjiTroskoveZaProcenat(Double troskovi, Double procenat) {
-		return troskovi - (troskovi / 100) * procenat;
+		if(procenat == 0) {
+			return troskovi;
+		} else if(troskovi == 0) {
+			return 0.0;
+		} else {
+			return troskovi - (troskovi / 100) * procenat;
+		}
+		
 	}
 	
 	public static String vratiOznakuAutomobilaServisa(Servis servis) {
@@ -185,6 +194,15 @@ public class ServisController {
 		return trazenServis;
 	}
 	
+	public static double vratiDoubleVrednost(String vrednost) {
+		if(vrednost == null) {
+			throw new IllegalArgumentException("Uneta vrednost ne sme biti " + vrednost);
+		} else if(vrednost.equalsIgnoreCase("Null")) {
+			throw new IllegalArgumentException("Uneta vrednost ne sme biti " + vrednost);
+		} else {
+			return Double.valueOf(vrednost);
+		}
+	}
 	
 	public static void inicijalizujServise() {
 		System.out.println("Inicijalizacija servisa");

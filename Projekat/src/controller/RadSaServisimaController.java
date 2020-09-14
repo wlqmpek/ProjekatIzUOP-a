@@ -70,12 +70,12 @@ public class RadSaServisimaController {
 		if(izmena == false) {
 			ServisnaKnjizica servisnaKnjizica = rssv.getServisnaKnjiizcaBox().getSelectionModel().getSelectedItem();
 			Serviser serviser = rssv.getServiserBox().getSelectionModel().getSelectedItem();
-			String datum = rssv.getTfDatum().getText();
-			String opis = rssv.getTfOpis().getText();
-			Double troskoviServisa = Double.valueOf(rssv.getTfTroskoviServisa().getText());
 			Status status = rssv.getStatusBox().getSelectionModel().getSelectedItem();
 				
 			try {
+				String datum = rssv.getTfDatum().getText();
+				String opis = rssv.getTfOpis().getText();
+				Double troskoviServisa = ServisController.troskoviVratiDouble(rssv.getTfTroskoviServisa().getText());
 				noviServis = new Servis(servisnaKnjizica, serviser, sdf.parse(datum), opis,troskoviServisa, status);
 				rssv.getTabela().getItems().add(noviServis);
 				ServisController.upisiServisUFajl(noviServis);
@@ -89,13 +89,13 @@ public class RadSaServisimaController {
 		} else {
 			ServisnaKnjizica servisnaKnjizica = rssv.getServisnaKnjiizcaBox().getSelectionModel().getSelectedItem();
 			Serviser serviser = rssv.getServiserBox().getSelectionModel().getSelectedItem();
-			String datum = rssv.getTfDatum().getText();
-			String opis = rssv.getTfOpis().getText();
-			Double troskoviServisa = Double.valueOf(rssv.getTfTroskoviServisa().getText());
+			Double troskoviServisa = ServisController.troskoviVratiDouble(rssv.getTfTroskoviServisa().getText());
 			Status status = rssv.getStatusBox().getSelectionModel().getSelectedItem();
 			
 			
 			try {
+				String opis = rssv.getTfOpis().getText();
+				String datum = rssv.getTfDatum().getText();
 				noviServis = new Servis(tempServis.getOznaka(), servisnaKnjizica.getOznaka(), serviser.getOznaka(), datum, opis, troskoviServisa, status, false);
 				ServisController.izbrisiIzUcitanihServisaSaOznakom(tempServis.getOznaka());
 				
@@ -124,6 +124,7 @@ public class RadSaServisimaController {
 		rssv.getTfDatum().setText(tempServis.getDatum());
 		rssv.getTfOpis().setText(tempServis.getOpis());
 		rssv.getStatusBox().setValue(tempServis.getStatus());
+		rssv.getTfTroskoviServisa().setText(String.valueOf(tempServis.getTroskoviUsluge()));
 		izmena = true;
 	}
 }
