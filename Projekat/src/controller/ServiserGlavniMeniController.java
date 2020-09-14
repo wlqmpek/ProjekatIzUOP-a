@@ -127,7 +127,7 @@ public class ServiserGlavniMeniController {
 		} else {
 			
 			selekMusterija.setBrojPoena((byte)(selekMusterija.getBrojPoena() + 1));
-			System.out.println("Selektovanooo" + sgmv.getTabela().getSelectionModel().getSelectedItem());
+			MusterijaController.sacuvajIzmeneUFajl();
 			
 			double ukupno = Double.valueOf(sgmv.getTfTroskoviUsluge().getText()) + ServisController.cenaDelova(selekServ).doubleValue();
 			System.out.println("Double ukupno" + ukupno);

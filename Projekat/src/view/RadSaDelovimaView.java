@@ -45,7 +45,7 @@ public class RadSaDelovimaView extends Stage {
 	//txtFildovi
 	private TextField tfNaziv, tfCena;
 	private Button dugmeSacuvaj;
-	private ContextMenu meni = new ContextMenu(new MenuItem("Izbrisi"), new MenuItem("Izmeni"));
+	private ContextMenu meni = new ContextMenu(new MenuItem("Izbrisi"), new MenuItem("Izmeni"), new MenuItem("Kreiraj Simetricni"));
 	private static ObservableList<Deo> delovi = FXCollections.observableArrayList();
 	private static ObservableList<Servis> servisi = FXCollections.observableArrayList();
 	
@@ -154,6 +154,10 @@ public class RadSaDelovimaView extends Stage {
 	
 	public void dodeliFunkcionalnostOpcijiIzmeni(EventHandler<ActionEvent> event) {
 		meni.getItems().get(1).setOnAction(event);
+	}
+	
+	public void dodeliFunkcionalnostOpcijiKreirajSimetricni(EventHandler<ActionEvent> event) {
+		meni.getItems().get(2).setOnAction(event);
 	}
 	
 	public void dodeliFunkcionalnostDugmetuSacuvaj(EventHandler<ActionEvent> event) {

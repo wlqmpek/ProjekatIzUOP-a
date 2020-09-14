@@ -57,6 +57,17 @@ public class RadSaDelovimaController {
 			}
 		});
 		
+		rsdv.dodeliFunkcionalnostOpcijiKreirajSimetricni(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+				try {
+					DeoController.kreirajSimetricanDeo(rsdv.getTabela().getSelectionModel().getSelectedItem());
+					rsdv.popuniTabelu(DeoController.neObrisaniDelovi());
+				} catch (Exception e) {
+					rsdv.izbaciPorukuOGresci(e.getMessage());
+				}
+			}
+		});
 		
 	}
 	
@@ -109,9 +120,9 @@ public class RadSaDelovimaController {
 				tempDeo = null;
 				
 			} catch (NumberFormatException e) {
-				e.printStackTrace();
+				rsdv.izbaciPorukuOGresci(e.getMessage());
 			} catch (Exception e) {
-				e.printStackTrace();
+				rsdv.izbaciPorukuOGresci(e.getMessage());
 			}
 		}
 		

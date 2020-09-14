@@ -74,13 +74,11 @@ public class RadSaServisimaView extends Stage {
 		//kreiranje boxova
 		final int SIRINA_BOXOVA = 110;
 		servisnaKnjiizcaBox = new ComboBox<ServisnaKnjizica>(servisneKnjizice);
-		servisnaKnjiizcaBox.setPromptText("Servisna Knjizica");
 		servisnaKnjiizcaBox.setPrefWidth(SIRINA_BOXOVA);
 		serviserBox = new ComboBox<Serviser>(serviseri);
-		serviserBox.setPromptText("Serviser");
 		serviserBox.setPrefWidth(SIRINA_BOXOVA);
 		statusBox = new ComboBox<Status>(FXCollections.observableArrayList(Status.values()));
-		statusBox.setPromptText("Status");
+		statusBox.setValue(Status.ZAKAZAN);
 		statusBox.setPrefWidth(SIRINA_BOXOVA);
 		
 		//kreiranje txt fieldova

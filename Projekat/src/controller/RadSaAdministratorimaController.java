@@ -96,9 +96,9 @@ public class RadSaAdministratorimaController {
 				tempAdministrator = null;
 				
 			} catch (NumberFormatException e) {
-				e.printStackTrace();
+				rsav.izbaciPorukuOGresci(e.getMessage());
 			} catch (Exception e) {
-				e.printStackTrace();
+				rsav.izbaciPorukuOGresci(e.getMessage());
 			}
 		}
 	}

@@ -165,6 +165,7 @@ public class ServisnaKnjizicaController {
 	
 	public static void izbrisiIzUcitanihServisnihKnjizicaSaOznakom(String oznaka) {
 		ServisnaKnjizicaController.servisneKnjizice.remove(nadjiServisnuKnjizicuPoOznaci(oznaka));
+		AutomobilController.automobili.remove(nadjiAutomobilPoOznaci(oznaka));
 	}
 
 	public static ArrayList<ServisnaKnjizica> getServisneKnjizice() {

@@ -26,7 +26,8 @@ public class RadSaServisimaController {
 		this.rssv.popuniTabelu(ServisController.getNeObrisaniServisi());
 		RadSaServisimaView.getServisneKnjizice().addAll(FXCollections.observableArrayList(ServisnaKnjizicaController.getNeObrisaneServisneKnjizice()));
 		RadSaServisimaView.getServiseri().addAll(FXCollections.observableArrayList(ServiserController.getNeObrisaniServiseri()));
-		System.out.println(RadSaServisimaView.getServiseri().size());
+		rssv.getServiserBox().setValue(rssv.getServiseri().get(0));
+		rssv.getServisnaKnjiizcaBox().setValue(rssv.getServisneKnjizice().get(0));
 		dodeliFunkcionalnostDugmicima();
 	}
 
@@ -109,9 +110,9 @@ public class RadSaServisimaController {
 				tempServis = null;
 				
 			} catch (NumberFormatException e) {
-				e.printStackTrace();
+				rssv.izbaciPorukuOGresci(e.getMessage());
 			} catch (Exception e) {
-				e.printStackTrace();
+				rssv.izbaciPorukuOGresci(e.getMessage());
 			}
 		}
 		

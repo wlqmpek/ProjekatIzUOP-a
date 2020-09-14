@@ -67,10 +67,10 @@ public class RadSaAutomobilimaView extends Stage {
 		final int SIRINA_KOLONA = 110;
 		kolonaOznaka = new TableColumn<Automobil, String>("Oznaka Automobila");
 		kolonaOznaka.setCellValueFactory(new PropertyValueFactory<Automobil, String>("oznaka"));
-		kolonaOznaka.setPrefWidth(SIRINA_KOLONA);
+		kolonaOznaka.setPrefWidth(SIRINA_KOLONA + 50);
 		kolonaVlasnik = new TableColumn<Automobil, String>("Oznaka Vlasnika");
 		kolonaVlasnik.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getVlasnik().getOznaka()));
-		kolonaVlasnik.setPrefWidth(SIRINA_KOLONA);
+		kolonaVlasnik.setPrefWidth(SIRINA_KOLONA + 50);
 		kolonaMarka = new TableColumn<Automobil, Marka>("Marka");
 		kolonaMarka.setCellValueFactory(new PropertyValueFactory<Automobil, Marka>("marka"));
 		kolonaMarka.setPrefWidth(SIRINA_KOLONA);
@@ -90,7 +90,7 @@ public class RadSaAutomobilimaView extends Stage {
 		kolonaGorivo.setCellValueFactory(new PropertyValueFactory<Automobil, Gorivo>("gorivo"));
 		kolonaGorivo.setPrefWidth(SIRINA_KOLONA);
 		
-		tabela.getColumns().addAll(kolonaVlasnik, kolonaMarka, kolonaModel, kolonaGodina, kolonaZapremina, kolonaSnaga, kolonaGorivo);
+		tabela.getColumns().addAll(kolonaVlasnik, kolonaMarka, kolonaModel, kolonaGodina, kolonaZapremina, kolonaSnaga, kolonaGorivo, kolonaOznaka);
 		tabela.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);	
 		tabela.setItems(automobili);
 	}
@@ -104,7 +104,7 @@ public class RadSaAutomobilimaView extends Stage {
 		final int SIRINA = 110;
 		vlasnikBox = new ComboBox<Musterija>(vlasnici);
 		vlasnikBox.setPromptText("Izaberi Vlasnika");
-		vlasnikBox.setPrefWidth(SIRINA);
+		vlasnikBox.setPrefWidth(SIRINA + 50);
 		markaBox = new ComboBox<Marka>(FXCollections.observableArrayList(Marka.values()));
 		markaBox.setPromptText("Izaberi Marku");
 		markaBox.setPrefWidth(SIRINA);
@@ -126,7 +126,7 @@ public class RadSaAutomobilimaView extends Stage {
 		tfSnagaMotora.setPrefWidth(SIRINA);
 		
 		dugmeSacuvaj = new Button("Sacuvaj");
-		dugmeSacuvaj.setPrefWidth(SIRINA);
+		dugmeSacuvaj.setPrefWidth(SIRINA + 50);
 		
 		hb1.getChildren().addAll(vlasnikBox, markaBox, modelBox, getTfGodinaProizvodnje(), tfZapreminaMotora, tfSnagaMotora, gorivoBox, dugmeSacuvaj);
 		

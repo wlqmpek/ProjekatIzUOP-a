@@ -104,9 +104,9 @@ public class RadSaMusterijamaController {
 				tempMusterija = null;
 				
 			} catch (NumberFormatException e) {
-				e.printStackTrace();
+				rsmv.izbaciPorukuOGresci(e.getMessage());
 			} catch (Exception e) {
-				e.printStackTrace();
+				rsmv.izbaciPorukuOGresci(e.getMessage());
 			}
 		}
 		

@@ -71,6 +71,25 @@ public class DeoController {
 		}
 	}
 	
+	public static void kreirajSimetricanDeo(Deo deo) throws Exception {
+		Deo simetricanDeo = null;
+		String opis = deo.getNaziv();
+		String simetricanOpis = null;
+		
+		if(opis.contains("Desna strana")) {
+			simetricanOpis = opis.replaceAll("Desna strana", "Leva strana");
+		} else if (opis.contains("Leva strana")) {
+			simetricanOpis = opis.replaceAll("Leva strana", "Desna strana");
+		} else {
+			throw new Exception("Za zeljeni deo se ne moze kreirati simetricni!");
+		}
+		
+		simetricanDeo = new Deo(deo.getMarka(), deo.getModel(), simetricanOpis, deo.getCena(), deo.getIskoriscenUSevisu());
+		upisiDeoUFajl(simetricanDeo);
+		
+		
+	}
+	
 	public static void dodajDeloveServisu(ArrayList<Deo> delovi, Servis servis) {
 		System.out.println("Deo + Sevis " + delovi + " " + servis);
 		for(Deo d1 : delovi) {
