@@ -103,11 +103,11 @@ public class RadSaServiserimaView  extends Stage {
 		//kreiranje combo boxa
 		ObservableList<Pol> listaPolova = FXCollections.observableArrayList(Pol.MUSKI, Pol.ZENSKI);
 		polBox = new ComboBox<>(listaPolova);
-		polBox.setPromptText("Pol");
+		polBox.setValue(Pol.MUSKI);
 		polBox.setPrefWidth(SIRINA_TEKSTUALNIH - 20);
 		ObservableList<Specijalizacija> listaSpecijalizacija = FXCollections.observableArrayList(Specijalizacija.AUTOELEKTRICAR, Specijalizacija.AUTOMEHANICAR, Specijalizacija.LIMAR, Specijalizacija.VULKANIZER);
 		specijalizacijaBox = new ComboBox<>(listaSpecijalizacija);
-		specijalizacijaBox.setPromptText("Specijalizacija");
+		specijalizacijaBox.setValue(Specijalizacija.AUTOELEKTRICAR);
 		specijalizacijaBox.setPrefWidth(SIRINA_TEKSTUALNIH + 10);
 		
 		
@@ -188,12 +188,10 @@ public class RadSaServiserimaView  extends Stage {
 		tfIme.clear();
 		tfPrezime.clear();
 		tfJMBG.clear();
-		polBox.setPromptText("Pol");
 		tfAdresa.clear();
 		tfBrojTelefona.clear();
 		tfKorisnickoIme.clear();
 		tfLozinka.clear();
-		specijalizacijaBox.setPromptText("Specijalizacija");
 		tfPlata.clear();
 	}
 	

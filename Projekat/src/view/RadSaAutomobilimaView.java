@@ -103,16 +103,15 @@ public class RadSaAutomobilimaView extends Stage {
 		//kreiranje boxova
 		final int SIRINA = 110;
 		vlasnikBox = new ComboBox<Musterija>(vlasnici);
-		vlasnikBox.setPromptText("Izaberi Vlasnika");
 		vlasnikBox.setPrefWidth(SIRINA + 50);
 		markaBox = new ComboBox<Marka>(FXCollections.observableArrayList(Marka.values()));
-		markaBox.setPromptText("Izaberi Marku");
+		markaBox.setValue(Marka.TESLA);
 		markaBox.setPrefWidth(SIRINA);
 		modelBox = new ComboBox<Model>(FXCollections.observableArrayList(Model.values()));
-		modelBox.setPromptText("Izaberi Model");
+		modelBox.setValue(Model.MODEL_3);
 		modelBox.setPrefWidth(SIRINA);
 		gorivoBox = new ComboBox<Gorivo>(FXCollections.observableArrayList(Gorivo.values()));
-		gorivoBox.setPromptText("Izaberi Gorivo");
+		gorivoBox.setValue(Gorivo.STRUJA);
 		gorivoBox.setPrefWidth(SIRINA);
 		
 		tfGodinaProizvodnje = new TextField();
@@ -146,11 +145,6 @@ public class RadSaAutomobilimaView extends Stage {
 	}
 	
 	public void resetujPolja() {
-		vlasnikBox.setPromptText("Izaberi Vlasnika");
-		vlasnikBox.setPromptText("Izaberi Vlasnika");
-		markaBox.setPromptText("Izaberi Vlasnika");
-		modelBox.setPromptText("Izaberi Vlasnika");
-		gorivoBox.setPromptText("Izaberi Vlasnika");
 		tfGodinaProizvodnje.clear();
 		tfZapreminaMotora.clear();
 		tfSnagaMotora.clear();

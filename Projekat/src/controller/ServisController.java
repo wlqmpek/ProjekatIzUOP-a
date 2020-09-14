@@ -109,8 +109,6 @@ public class ServisController {
 	
 	public static ArrayList<Deo> korisceniDelovi(Servis servis) {
 		ArrayList<Deo> listaTrazenihDelova = new ArrayList<Deo>();
-		System.out.println("Servis " + servis);
-		System.out.println("Delovi " + DeoController.delovi);
 		for(Deo deo:DeoController.delovi) {
 			if(deo.getIskoriscenUSevisu() != null) {
 				if(deo.getIskoriscenUSevisu().getOznaka().equalsIgnoreCase(servis.getOznaka())) {
@@ -118,14 +116,11 @@ public class ServisController {
 				}
 			}
 		}
-		
-		System.out.printf("Broj delova iskoriscenih u servisu: %s je %d", servis.getOznaka(), listaTrazenihDelova.size());
 		return listaTrazenihDelova;
 	}
 	
 	public static SimpleDoubleProperty cenaDelova(Servis servis) {
 		Double cenaServisa = 0.0;
-		System.out.println("Kor " + korisceniDelovi(servis));
 		for(Deo deo : korisceniDelovi(servis)) {
 			cenaServisa += deo.getCena();
 		}

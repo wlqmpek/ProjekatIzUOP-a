@@ -89,7 +89,6 @@ public class MusterijaController {
 	}
 	
 	public static void inicijalizujMusterije() {
-		System.out.println("Inicijalizacija musterija");
 		MusterijaController.musterije.clear();
 		MusterijaController.podaci.clear();
 		procitajFajl();
@@ -113,7 +112,6 @@ public class MusterijaController {
 				listaTrazenihAutomobila.add(automobil);
 			}
 		}
-		System.out.printf("Broj AUTOMOBILA musteije: %s je %d", musterija.getOznaka(), listaTrazenihAutomobila.size());
 		return listaTrazenihAutomobila;
 	}
 	

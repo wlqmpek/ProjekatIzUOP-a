@@ -95,14 +95,11 @@ public class ServiserController {
 				listaTrazenihServisa.add(servis);
 			}
 		}
-		
-		System.out.printf("Broj servisa servisera: %s je %d", serviser.getOznaka(), listaTrazenihServisa.size());
 		return listaTrazenihServisa;
 	}
 	
 	
 	public static void inicijalizujServisere() {
-		System.out.println("Inicijalizacija servisera");
 		procitajFajl();
 		konvertujSveServisere();
 	}
@@ -179,7 +176,6 @@ public class ServiserController {
 				neObrisaniServiseri.add(ser);
 			}
 		}
-		System.out.println("Neobrisani serviseri " + neObrisaniServiseri);
 		return neObrisaniServiseri;
 	}
 	

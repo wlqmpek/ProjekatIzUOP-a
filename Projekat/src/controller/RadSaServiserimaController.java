@@ -54,10 +54,7 @@ public class RadSaServiserimaController {
 	
 	//uzima vrednosti iz tekstualnih polja i kreira servisera
 	private void pokupiIzPoljaIKreirajServisera() {
-		
 		Serviser noviServiser;
-		System.out.println("Izmena = " + izmena);
-		
 		if(izmena == false) {
 			String ime = rssv.getTfIme().getText();
 			String prezime = rssv.getTfPrezime().getText();

@@ -99,7 +99,7 @@ public class RadSaMusterijamaView extends Stage {
 		//kreiranje combo boxa
 		ObservableList<Pol> listaPolova = FXCollections.observableArrayList(Pol.MUSKI, Pol.ZENSKI);
 		polBox = new ComboBox<>(listaPolova);
-		polBox.setPromptText("Pol");
+		polBox.setValue(Pol.MUSKI);
 		polBox.setPrefWidth(SIRINA_TEKSTUALNIH - 20);
 		ObservableList<Specijalizacija> listaSpecijalizacija = FXCollections.observableArrayList(Specijalizacija.AUTOELEKTRICAR, Specijalizacija.AUTOMEHANICAR, Specijalizacija.LIMAR, Specijalizacija.VULKANIZER);
 		
@@ -171,7 +171,6 @@ public class RadSaMusterijamaView extends Stage {
 		tfIme.clear();
 		tfPrezime.clear();
 		tfJMBG.clear();
-		polBox.setPromptText("Pol");
 		tfAdresa.clear();
 		tfBrojTelefona.clear();
 		tfKorisnickoIme.clear();
@@ -213,6 +212,8 @@ public class RadSaMusterijamaView extends Stage {
 		this.polBox = polBox;
 	}
 
+	
+	
 
 	public TextField getTfOznaka() {
 		return tfOznaka;

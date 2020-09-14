@@ -91,7 +91,6 @@ public class DeoController {
 	}
 	
 	public static void dodajDeloveServisu(ArrayList<Deo> delovi, Servis servis) {
-		System.out.println("Deo + Sevis " + delovi + " " + servis);
 		for(Deo d1 : delovi) {
 			DeoController.nadjiDeoPoOznaci(d1.getOznaka()).setIskoriscenUSevisu(servis);
 		}
@@ -130,7 +129,6 @@ public class DeoController {
 	}
 	
 	public static void inicijalizujDelove() {
-		System.out.println("Inicijalizacija delova");
 		procitajFajl();
 		konvertujSveDelove();
 	}

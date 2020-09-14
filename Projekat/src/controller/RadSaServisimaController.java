@@ -66,7 +66,6 @@ public class RadSaServisimaController {
 	private void pokupiIzPoljaIKreirajServis() {
 		
 		Servis noviServis;
-		System.out.println("Izmena = " + izmena);
 		
 		if(izmena == false) {
 			ServisnaKnjizica servisnaKnjizica = rssv.getServisnaKnjiizcaBox().getSelectionModel().getSelectedItem();

@@ -27,7 +27,6 @@ public class AutomobilController {
 	static {
 		try {
 			inicijalizujAutomobile();
-			System.out.println("Zavrsena inicijalizacija auta");
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -74,7 +73,6 @@ public class AutomobilController {
 			Scanner sc = new Scanner(file);
 			while(sc.hasNextLine()) {
 				String linija = sc.nextLine();
-				System.out.println("Linija " +linija);
 				AutomobilController.podaci.add(new ArrayList<String>(Arrays.asList((linija.split("\\|")))));
 			}
 			sc.close();
@@ -85,7 +83,6 @@ public class AutomobilController {
 	}
 	
 	public static Automobil stringUAutomobil(ArrayList<String> podaci) throws NumberFormatException, Exception {
-		System.out.println("Podaci auta " + podaci);
 		return new Automobil(podaci.get(0), podaci.get(1), Marka.valueOf(podaci.get(2)), Model.valueOf(podaci.get(3)), Short.valueOf(podaci.get(4)), Short.valueOf(podaci.get(5)), Short.valueOf(podaci.get(6)), Gorivo.valueOf(podaci.get(7)), Boolean.valueOf(podaci.get(8)));
 	}
 	
@@ -101,7 +98,6 @@ public class AutomobilController {
 	public static void konvertujSveAutomobile() throws NumberFormatException, Exception {
 		AutomobilController.automobili.clear();
 		for (ArrayList<String> auto : AutomobilController.podaci) {
-			System.out.println("Konvertujemo auto " + auto);
 			AutomobilController.automobili.add(stringUAutomobil(auto));
 		}
 	}
@@ -112,9 +108,7 @@ public class AutomobilController {
 	}
 	
 	public static void inicijalizujAutomobile() throws NumberFormatException, Exception {
-		System.out.println("Inicijalizacija automobila");
 		procitajFajl();
-		System.out.println("hooho" +AutomobilController.podaci);
 		konvertujSveAutomobile();
 	}
 	
@@ -156,16 +150,12 @@ public class AutomobilController {
 	}
 	
 	public static Automobil nadjiAutomobilPoOznaci(String oznaka) {
-		System.out.println("Trazimo auto po oznaci " + oznaka);
-		System.out.println(AutomobilController.automobili);
 		Automobil trazenAutomobil = null;
 		for(Automobil automobil : AutomobilController.automobili) {
-			System.out.println("Uporedjujemo " + oznaka + " sa " + automobil.getOznaka());
 			if(oznaka.equalsIgnoreCase(automobil.getOznaka())) {
 				trazenAutomobil = automobil;
 			}
 		}
-		System.out.println("Nadjen auto " + trazenAutomobil);
 		return trazenAutomobil;
 	}
 	

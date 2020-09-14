@@ -114,7 +114,6 @@ public class ServiserGlavniMeniController {
 			MusterijaController.sacuvajIzmeneUFajl();
 			DeoController.sacuvajIzmeneUFajl();
 			double ukupno = Double.valueOf(sgmv.getTfTroskoviUsluge().getText()) + ServisController.cenaDelova(selekServ).doubleValue();
-			System.out.println("Double ukupno" + ukupno);
 			PopupPrikaziRacun pupr = new PopupPrikaziRacun(ServisController.korisceniDelovi(selekServ), ServisController.cenaDelova(selekServ).doubleValue(), Double.valueOf(sgmv.getTfTroskoviUsluge().getText()), ukupno);
 			pupr.show(sgmv);
 			pupr.dodeliFunkcionalnostDugmetuZavrsi(new EventHandler<ActionEvent>() {
@@ -130,7 +129,6 @@ public class ServiserGlavniMeniController {
 			MusterijaController.sacuvajIzmeneUFajl();
 			
 			double ukupno = Double.valueOf(sgmv.getTfTroskoviUsluge().getText()) + ServisController.cenaDelova(selekServ).doubleValue();
-			System.out.println("Double ukupno" + ukupno);
 			PopupPrikaziRacun pupr = new PopupPrikaziRacun(ServisController.korisceniDelovi(selekServ), ServisController.cenaDelova(selekServ).doubleValue(), Double.valueOf(sgmv.getTfTroskoviUsluge().getText()), ukupno);
 			pupr.show(sgmv);
 			pupr.dodeliFunkcionalnostDugmetuZavrsi(new EventHandler<ActionEvent>() {

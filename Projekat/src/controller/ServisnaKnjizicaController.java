@@ -120,11 +120,6 @@ public class ServisnaKnjizicaController {
 		return AutomobilController.nadjiAutomobilPoOznaci(servisnaKnjizica.getOznaka());
 	}
 	
-	// treba pozvati metodu iz automobila koja brise automobile a ne oov
-	public static void izbrisiServisnuKnjizicu(ServisnaKnjizica servisnaKnjizica) {
-		
-		System.out.println("Pogresna metoda pozvana");
-	}
 	
 	public static void ispisiSveServisneKnjizice() {
 		for(ServisnaKnjizica servisna:servisneKnjizice) {
@@ -144,7 +139,6 @@ public class ServisnaKnjizicaController {
 		nadjenaServisnaKnjizica = nadjiServisnuKnjizicuPoOznaci(automobil.getOznaka());
 		
 		if(nadjenaServisnaKnjizica == null) {
-			System.out.println("Generisemo servisnu knjizicu");
 			nadjenaServisnaKnjizica = generisiServisnuKnjizicuZaAutomobil(automobil);
 		}
 		

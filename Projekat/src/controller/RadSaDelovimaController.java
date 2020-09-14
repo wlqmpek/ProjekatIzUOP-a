@@ -73,10 +73,7 @@ public class RadSaDelovimaController {
 	
 	//uzima vrednosti iz tekstualnih polja i kreira Servisa
 	private void pokupiIzPoljaIKreirajServis() {
-		
 		Deo noviDeo;
-		System.out.println("Izmena = " + izmena);
-		
 		if(izmena == false) {
 			Marka marka = rsdv.getMarkaBox().getSelectionModel().getSelectedItem();
 			Model model = rsdv.getModelBox().getSelectionModel().getSelectedItem();
